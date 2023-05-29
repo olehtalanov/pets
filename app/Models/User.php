@@ -45,10 +45,10 @@ final class User extends Authenticatable implements FilamentUser
 
     /* Relationships */
 
-    public function animals(): HasMany
-    {
-        return $this->hasMany(Animal::class);
-    }
+//    public function animals(): HasMany
+//    {
+//        return $this->hasMany(Animal::class);
+//    }
 
     /* Auth */
 
