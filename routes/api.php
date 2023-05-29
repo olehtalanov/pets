@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\UserController;
 Route::group([
     'as' => 'api.',
 ], static function () {
-    require __DIR__ . '/auth.php';
+    require __DIR__.'/auth.php';
 
     Route::group([
         'middleware' => ['auth:sanctum'],
@@ -18,7 +18,7 @@ Route::group([
 
         Route::group([
             'as' => 'chats.',
-            'prefix' => 'chats'
+            'prefix' => 'chats',
         ], static function () {
             Route::get('', [ChatController::class, 'index'])->name('index');
             Route::get('{chat}', [ChatController::class, 'show'])->name('show');

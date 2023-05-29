@@ -17,6 +17,7 @@ use Spatie\Translatable\HasTranslations;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Animal> $animals
  * @property-read int|null $animals_count
+ *
  * @method static Builder|AnimalType available()
  * @method static Builder|AnimalType newModelQuery()
  * @method static Builder|AnimalType newQuery()
@@ -25,6 +26,7 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|AnimalType whereId($value)
  * @method static Builder|AnimalType whereName($value)
  * @method static Builder|AnimalType whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class AnimalType extends Model
@@ -37,7 +39,7 @@ class AnimalType extends Model
     ];
 
     protected $casts = [
-        'is_visible' => 'boolean'
+        'is_visible' => 'boolean',
     ];
 
     protected $translatable = [

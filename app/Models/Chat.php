@@ -11,9 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Support\Carbon;
-use Talanov\Nanoid\HasNanoId;
-use Talanov\Nanoid\NanoIdOptions;
 
 /**
  * App\Models\Chat
@@ -23,10 +20,12 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property-read int|null $messages_count
  * @property-read \App\Models\User|null $owner
  * @property-read \App\Models\User|null $recipient
+ *
  * @method static Builder|Chat current()
  * @method static Builder|Chat newModelQuery()
  * @method static Builder|Chat newQuery()
  * @method static Builder|Chat query()
+ *
  * @mixin Eloquent
  */
 final class Chat extends Model

@@ -18,6 +18,7 @@ use Spatie\Translatable\HasTranslations;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\AnimalType|null $type
+ *
  * @method static Builder|Breed available()
  * @method static Builder|Breed newModelQuery()
  * @method static Builder|Breed newQuery()
@@ -28,6 +29,7 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|Breed whereName($value)
  * @method static Builder|Breed whereUpdatedAt($value)
  * @method static Builder|Breed whereUuid($value)
+ *
  * @mixin \Eloquent
  */
 class Breed extends Model
@@ -42,7 +44,7 @@ class Breed extends Model
     ];
 
     protected $casts = [
-        'is_visible' => 'boolean'
+        'is_visible' => 'boolean',
     ];
 
     protected $hidden = [

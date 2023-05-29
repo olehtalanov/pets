@@ -33,6 +33,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read int|null $media_count
  * @property-read \App\Models\User $owner
  * @property-read \App\Models\AnimalType|null $type
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Animal newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Animal newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Animal query()
@@ -52,6 +53,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder|Animal whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Animal whereWeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Animal whereWeightUnit($value)
+ *
  * @mixin \Eloquent
  */
 class Animal extends Model implements HasMedia
@@ -74,7 +76,7 @@ class Animal extends Model implements HasMedia
         'metis',
 
         'weight',
-        'weight_unit'
+        'weight_unit',
     ];
 
     protected $casts = [
@@ -98,7 +100,7 @@ class Animal extends Model implements HasMedia
     {
         return $this->belongsTo(AnimalType::class)->withDefault([
             'id' => null,
-            'name' => $this->animal_type_name
+            'name' => $this->animal_type_name,
         ]);
     }
 
@@ -106,7 +108,7 @@ class Animal extends Model implements HasMedia
     {
         return $this->belongsTo(Breed::class)->withDefault([
             'id' => null,
-            'name' => $this->breed_name
+            'name' => $this->breed_name,
         ]);
     }
 

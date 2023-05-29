@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use App\Enums\Chat\MessageTypeEnum;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Message
  *
  * @property-read \App\Models\Chat|null $chat
  * @property-read \App\Models\User $user
+ *
  * @method static Builder|Message newModelQuery()
  * @method static Builder|Message newQuery()
  * @method static Builder|Message query()
+ *
  * @mixin Eloquent
  */
 final class Message extends Model

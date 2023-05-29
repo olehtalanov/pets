@@ -3,5 +3,5 @@
 return [
     'placeholder' => [
         'deleted' => 'Deleted',
-    ]
+    ],
 ];
