@@ -39,7 +39,7 @@ class MediaPathGenerator implements PathGenerator
         $prefix = config('media-library.prefix', '');
 
         if ($prefix !== '') {
-            return $prefix . '/' . $media->uuid;
+            return $prefix.'/'.$media->uuid;
         }
 
         return $media->uuid;
