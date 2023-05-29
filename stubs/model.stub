@@ -14,10 +14,6 @@ class {{ class }} extends Model
         //
     ];
 
-    protected $hidden = [
-        'id',
-    ];
-
     /* Relationships */
 
     /* Scopes */
