@@ -46,7 +46,7 @@ class AnimalRepository
 
     public function update(string $animal, AnimalData $attributes): ItemFullResource
     {
-        Animal::whereUuid($animal)->update($attributes);
+        Animal::whereUuid($animal)->update($attributes->toArray());
 
         return new ItemFullResource(
             Animal::findUOrFail($animal)
