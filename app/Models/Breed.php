@@ -54,10 +54,6 @@ class Breed extends Model
         'is_visible' => 'boolean',
     ];
 
-    protected $hidden = [
-        'animal_type_id',
-    ];
-
     protected $translatable = [
         'name',
     ];

@@ -17,7 +17,7 @@ class DictionaryRepository
         return new static();
     }
 
-    public function all(): array
+    public function list(): array
     {
         return [
             'types' => [

@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
+use Database\Factories\AppealFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Appeal
@@ -15,23 +19,23 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $user_id
  * @property string|null $message
  * @property int|null $rating
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User $user
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read User $user
  *
- * @method static \Database\Factories\AppealFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Appeal newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Appeal newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Appeal query()
- * @method static \Illuminate\Database\Eloquent\Builder|Appeal whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Appeal whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Appeal whereMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Appeal whereRating($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Appeal whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Appeal whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Appeal whereUuid($value)
+ * @method static AppealFactory factory($count = null, $state = [])
+ * @method static Builder|Appeal newModelQuery()
+ * @method static Builder|Appeal newQuery()
+ * @method static Builder|Appeal query()
+ * @method static Builder|Appeal whereCreatedAt($value)
+ * @method static Builder|Appeal whereId($value)
+ * @method static Builder|Appeal whereMessage($value)
+ * @method static Builder|Appeal whereRating($value)
+ * @method static Builder|Appeal whereUpdatedAt($value)
+ * @method static Builder|Appeal whereUserId($value)
+ * @method static Builder|Appeal whereUuid($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Appeal extends Model
 {
@@ -41,10 +45,6 @@ class Appeal extends Model
         'message',
         'rating',
 
-        'user_id',
-    ];
-
-    protected $hidden = [
         'user_id',
     ];
 

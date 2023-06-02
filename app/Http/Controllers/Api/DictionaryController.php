@@ -15,10 +15,14 @@ class DictionaryController extends Controller
      *     path="/dictionaries",
      *     tags={"dictionaries"},
      *     summary="Get list of required dictionaries.",
+     *
      *     @OA\Response(response=200, description="Successful response",
+     *
      *         @OA\JsonContent(
      *             type="array",
+     *
      *             @OA\Items(
+     *
      *               @OA\Property(property="types", type="array", @OA\Items(ref="#/components/schemas/DictionaryTypedResource")),
      *               @OA\Property(property="pins", type="array", @OA\Items(ref="#/components/schemas/DictionaryTypedResource")),
      *             ),
@@ -29,7 +33,7 @@ class DictionaryController extends Controller
     public function index(DictionaryRepository $repository): JsonResponse
     {
         return Response::json(
-            $repository->all()
+            $repository->list()
         );
     }
 }

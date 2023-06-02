@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
+use Database\Factories\ReviewFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Review
@@ -17,26 +21,26 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @property int $pin_id
  * @property string|null $message
  * @property int $rating
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Pin $pin
- * @property-read \App\Models\User|null $reviewable
- * @property-read \App\Models\User $reviewer
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Pin $pin
+ * @property-read User|null $reviewable
+ * @property-read User $reviewer
  *
- * @method static \Database\Factories\ReviewFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Review newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Review newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Review query()
- * @method static \Illuminate\Database\Eloquent\Builder|Review whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Review whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Review whereMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Review wherePinId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Review whereRating($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Review whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Review whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Review whereUuid($value)
+ * @method static ReviewFactory factory($count = null, $state = [])
+ * @method static Builder|Review newModelQuery()
+ * @method static Builder|Review newQuery()
+ * @method static Builder|Review query()
+ * @method static Builder|Review whereCreatedAt($value)
+ * @method static Builder|Review whereId($value)
+ * @method static Builder|Review whereMessage($value)
+ * @method static Builder|Review wherePinId($value)
+ * @method static Builder|Review whereRating($value)
+ * @method static Builder|Review whereUpdatedAt($value)
+ * @method static Builder|Review whereUserId($value)
+ * @method static Builder|Review whereUuid($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Review extends Model
 {
@@ -46,11 +50,6 @@ class Review extends Model
         'message',
         'rating',
 
-        'user_id',
-        'pin_id',
-    ];
-
-    protected $hidden = [
         'user_id',
         'pin_id',
     ];

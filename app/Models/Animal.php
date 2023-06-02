@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\Animal\SexEnum;
+use App\Enums\Animal\WeightUnitEnum;
 use App\Traits\HasUuid;
+use Database\Factories\AnimalFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,13 +36,13 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $weight_unit
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \App\Models\Breed|null $breed
+ * @property-read Breed|null $breed
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read \App\Models\User $owner
- * @property-read \App\Models\AnimalType|null $type
+ * @property-read User $owner
+ * @property-read AnimalType|null $type
  *
- * @method static \Database\Factories\AnimalFactory factory($count = null, $state = [])
+ * @method static AnimalFactory factory($count = null, $state = [])
  * @method static Builder|Animal newModelQuery()
  * @method static Builder|Animal newQuery()
  * @method static Builder|Animal query()
@@ -88,12 +91,8 @@ class Animal extends Model implements HasMedia
     protected $casts = [
         'birth_date' => 'date',
         'metis' => 'boolean',
-    ];
-
-    protected $hidden = [
-        'user_id',
-        'animal_type_id',
-        'breed_id',
+        'sex' => SexEnum::class,
+        'weight_unit' => WeightUnitEnum::class,
     ];
 
     /* Relationships */
@@ -106,16 +105,14 @@ class Animal extends Model implements HasMedia
     public function type(): BelongsTo
     {
         return $this->belongsTo(AnimalType::class)->withDefault([
-            'id' => null,
-            'name' => $this->animal_type_name,
+            'name' => $this->animal_type_name ?? trans('common.placeholder.unknown'),
         ]);
     }
 
     public function breed(): BelongsTo
     {
         return $this->belongsTo(Breed::class)->withDefault([
-            'id' => null,
-            'name' => $this->breed_name,
+            'name' => $this->breed_name ?? trans('common.placeholder.unknown'),
         ]);
     }
 

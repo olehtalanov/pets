@@ -3,12 +3,16 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
+use Database\Factories\CategoryFactory;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Carbon;
 use Spatie\Translatable\HasTranslations;
 
 /**
@@ -19,17 +23,17 @@ use Spatie\Translatable\HasTranslations;
  * @property array $name
  * @property string|null $related_model
  * @property int|null $parent_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Category> $children
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Category> $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Event> $events
+ * @property-read Collection<int, Event> $events
  * @property-read int|null $events_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Event> $notes
+ * @property-read Collection<int, Event> $notes
  * @property-read int|null $notes_count
  * @property-read Category|null $parent
  *
- * @method static \Database\Factories\CategoryFactory factory($count = null, $state = [])
+ * @method static CategoryFactory factory($count = null, $state = [])
  * @method static Builder|Category newModelQuery()
  * @method static Builder|Category newQuery()
  * @method static Builder|Category onlyChildren(string $model)
@@ -43,7 +47,7 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|Category whereUpdatedAt($value)
  * @method static Builder|Category whereUuid($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Category extends Model
 {
@@ -58,10 +62,6 @@ class Category extends Model
 
     protected $translatable = [
         'name',
-    ];
-
-    protected $hidden = [
-        'parent_id',
     ];
 
     /* Relationships */

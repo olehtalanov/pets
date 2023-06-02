@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
+use Database\Factories\PinTypeFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,10 +20,10 @@ use Spatie\Translatable\HasTranslations;
  * @property array $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection<int, \App\Models\Pin> $pins
+ * @property-read Collection<int, Pin> $pins
  * @property-read int|null $pins_count
  *
- * @method static \Database\Factories\PinTypeFactory factory($count = null, $state = [])
+ * @method static PinTypeFactory factory($count = null, $state = [])
  * @method static Builder|PinType newModelQuery()
  * @method static Builder|PinType newQuery()
  * @method static Builder|PinType onlyVisible()
@@ -45,10 +46,6 @@ class PinType extends Model
 
     protected $casts = [
         'is_visible' => 'boolean',
-    ];
-
-    protected $hidden = [
-        'id',
     ];
 
     protected $translatable = [

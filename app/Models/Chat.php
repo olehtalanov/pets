@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Chat
@@ -21,14 +22,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int|null $owner_id
  * @property int|null $recipient_id
  * @property bool $is_archived
- * @property \Illuminate\Support\Carbon|null $last_message_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Message|null $lastMessage
- * @property-read Collection<int, \App\Models\Message> $messages
+ * @property Carbon|null $last_message_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Message|null $lastMessage
+ * @property-read Collection<int, Message> $messages
  * @property-read int|null $messages_count
- * @property-read \App\Models\User|null $owner
- * @property-read \App\Models\User|null $recipient
+ * @property-read User|null $owner
+ * @property-read User|null $recipient
  *
  * @method static Builder|Chat current()
  * @method static Builder|Chat newModelQuery()
@@ -74,14 +75,14 @@ final class Chat extends Model
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class)->withDefault([
-            'name' => trans('common.placeholder.deleted'),
+            'name' => trans('common.placeholder.unknown'),
         ]);
     }
 
     public function recipient(): BelongsTo
     {
         return $this->belongsTo(User::class)->withDefault([
-            'name' => trans('common.placeholder.deleted'),
+            'name' => trans('common.placeholder.unknown'),
         ]);
     }
 

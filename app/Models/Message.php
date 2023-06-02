@@ -6,6 +6,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Message
@@ -15,11 +16,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int|null $user_id
  * @property string $content
  * @property object|null $meta
- * @property \Illuminate\Support\Carbon|null $read_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Chat $chat
- * @property-read \App\Models\User|null $user
+ * @property Carbon|null $read_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Chat $chat
+ * @property-read User|null $user
  *
  * @method static Builder|Message newModelQuery()
  * @method static Builder|Message newQuery()
@@ -55,11 +56,6 @@ final class Message extends Model
         'user:uuid,name',
     ];
 
-    protected $hidden = [
-        'chat_id',
-        'user_id',
-    ];
-
     /* Relationships */
 
     public function chat(): BelongsTo
@@ -70,7 +66,7 @@ final class Message extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withDefault([
-            'name' => trans('common.placeholder.deleted'),
+            'name' => trans('common.placeholder.unknown'),
         ]);
     }
 }
