@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasUuid;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
@@ -62,7 +63,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Animal extends Model implements HasMedia
 {
-    use HasUuid, InteractsWithMedia;
+    use HasFactory, HasUuid, InteractsWithMedia;
 
     protected $fillable = [
         'name',

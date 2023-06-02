@@ -104,6 +104,26 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
         return $this->hasMany(Animal::class);
     }
 
+    public function notes(): HasMany
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    public function events(): HasMany
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    public function pins(): HasMany
+    {
+        return $this->hasMany(Pin::class);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
     /* Auth */
 
     public function canAccessFilament(): bool
@@ -119,11 +139,11 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
             $role = UserRoleEnum::from($role);
         }
 
-        if (! is_array($role)) {
+        if (!is_array($role)) {
             $role = [$role];
         }
 
-        $role = array_map(static fn (mixed $role) => UserRoleEnum::from($role), $role);
+        $role = array_map(static fn(mixed $role) => UserRoleEnum::from($role), $role);
 
         return in_array($this->role, $role, true);
     }

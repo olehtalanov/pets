@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,9 +11,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('pin_types', static function (Blueprint $table) {
+        Schema::create('categories', static function (Blueprint $table) {
             $table->id();
+            $table->uuid()->unique();
             $table->json('name');
+            $table->string('related_model')->nullable();
+            $table->foreignIdFor(Category::class, 'parent_id')
+                ->nullable()
+                ->constrained((new Category())->getTable())
+                ->nullOnDelete();
             $table->timestamps();
         });
     }
@@ -22,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('pin_types');
+        Schema::dropIfExists('categories');
     }
 };
