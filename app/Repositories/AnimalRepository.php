@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Data\Animal\AnimalData;
 use App\Http\Resources\Animal\ItemFullResource;
 use App\Http\Resources\Animal\ListItemResource;
+use App\Models\Animal;
 use Auth;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -41,5 +42,19 @@ class AnimalRepository
         return new ItemFullResource(
             Auth::user()?->animals()->create($attributes->toArray())
         );
+    }
+
+    public function update(string $animal, AnimalData $attributes): ItemFullResource
+    {
+        Animal::whereUuid($animal)->update($attributes);
+
+        return new ItemFullResource(
+            Animal::findUOrFail($animal)
+        );
+    }
+
+    public function destroy(string $animal): void
+    {
+        Animal::whereUuid($animal)->delete();
     }
 }
