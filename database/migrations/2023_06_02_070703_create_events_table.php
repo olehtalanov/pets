@@ -2,13 +2,13 @@
 
 use App\Enums\User\EventRepeatSchemeEnum;
 use App\Models\Animal;
-use App\Models\EventCategory;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */

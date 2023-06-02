@@ -15,6 +15,15 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * App\Models\Chat
  *
+ * @property int $id
+ * @property string $nano_id
+ * @property string $name
+ * @property int|null $owner_id
+ * @property int|null $recipient_id
+ * @property bool $is_archived
+ * @property \Illuminate\Support\Carbon|null $last_message_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Message|null $lastMessage
  * @property-read Collection<int, \App\Models\Message> $messages
  * @property-read int|null $messages_count
@@ -25,6 +34,15 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static Builder|Chat newModelQuery()
  * @method static Builder|Chat newQuery()
  * @method static Builder|Chat query()
+ * @method static Builder|Chat whereCreatedAt($value)
+ * @method static Builder|Chat whereId($value)
+ * @method static Builder|Chat whereIsArchived($value)
+ * @method static Builder|Chat whereLastMessageAt($value)
+ * @method static Builder|Chat whereName($value)
+ * @method static Builder|Chat whereNanoId($value)
+ * @method static Builder|Chat whereOwnerId($value)
+ * @method static Builder|Chat whereRecipientId($value)
+ * @method static Builder|Chat whereUpdatedAt($value)
  *
  * @mixin Eloquent
  */

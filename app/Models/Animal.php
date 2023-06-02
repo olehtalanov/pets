@@ -29,16 +29,17 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $custom_breed_name
  * @property string|null $breed_name
  * @property bool $metis
- * @property float|null $weight
- * @property string|null $weight_unit
+ * @property float $weight
+ * @property string $weight_unit
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Breed|null $breed
+ * @property-read \App\Models\Breed|null $breed
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read User $owner
- * @property-read AnimalType|null $type
+ * @property-read \App\Models\User $owner
+ * @property-read \App\Models\AnimalType|null $type
  *
+ * @method static \Database\Factories\AnimalFactory factory($count = null, $state = [])
  * @method static Builder|Animal newModelQuery()
  * @method static Builder|Animal newQuery()
  * @method static Builder|Animal query()
@@ -90,6 +91,7 @@ class Animal extends Model implements HasMedia
     ];
 
     protected $hidden = [
+        'user_id',
         'animal_type_id',
         'breed_id',
     ];

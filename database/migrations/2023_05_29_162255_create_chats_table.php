@@ -5,14 +5,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('chats', static function (Blueprint $table) {
             $userModel = new User();
 
             $table->id();
-            $table->char('nano_id', 12)->index();
+            $table->string('uuid')->unique();
             $table->string('name');
             $table->foreignIdFor(User::class, 'owner_id')
                 ->nullable()

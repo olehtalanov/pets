@@ -2,12 +2,19 @@
 
 use App\Http\Controllers\Api\AnimalController;
 use App\Http\Controllers\Api\ChatController;
+use App\Http\Controllers\Api\DictionaryController;
 use App\Http\Controllers\Api\UserController;
 
 Route::group([
     'as' => 'api.',
 ], static function () {
     require __DIR__.'/auth.php';
+
+    Route::group([
+        'prefix' => 'dictionaries',
+    ], static function () {
+        Route::get('', [DictionaryController::class, 'index']);
+    });
 
     Route::group([
         'middleware' => ['auth:sanctum'],

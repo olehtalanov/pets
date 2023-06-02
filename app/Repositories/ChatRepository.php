@@ -8,6 +8,11 @@ use App\Models\Chat;
 
 class ChatRepository
 {
+    public static function make(): static
+    {
+        return new static();
+    }
+
     public function recent(): RecentChatCollection
     {
         return new RecentChatCollection(
