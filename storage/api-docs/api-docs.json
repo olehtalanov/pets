@@ -303,6 +303,30 @@
                     }
                 }
             }
+        },
+        "/me": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get user details.",
+                "operationId": "de3936ad40be9d99a380e4fcfcc59871",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/UserFullResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -418,6 +442,45 @@
                         "items": {
                             "$ref": "#/components/schemas/DictionaryTypedResource"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "UserFullResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "avatar": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "thumb": {
+                                    "type": "string"
+                                },
+                                "full": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UserShortResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "avatar": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
