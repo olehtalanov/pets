@@ -9,12 +9,12 @@ return [
     ],
 
     'sex' => [
-        SexEnum::Male->name => 'Male',
-        SexEnum::Female->name => 'Female',
+        SexEnum::Male->value => 'Male',
+        SexEnum::Female->value => 'Female',
     ],
 
     'weight' => [
-        WeightUnitEnum::Kg->name => 'Kg',
-        WeightUnitEnum::Pound->name => 'Pound(s)',
+        WeightUnitEnum::Kg->value => 'Kg',
+        WeightUnitEnum::Pound->value => 'Pound(s)',
     ],
 ];

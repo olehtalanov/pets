@@ -74,8 +74,6 @@ class Animal extends Model implements HasMedia
         'sex',
         'birth_date',
 
-        'user_id',
-
         'animal_type_id',
         'custom_type_name',
 
@@ -86,6 +84,8 @@ class Animal extends Model implements HasMedia
 
         'weight',
         'weight_unit',
+
+        'user_id',
     ];
 
     protected $casts = [

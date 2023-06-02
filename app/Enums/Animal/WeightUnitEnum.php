@@ -2,13 +2,13 @@
 
 namespace App\Enums\Animal;
 
-enum WeightUnitEnum
+enum WeightUnitEnum: string
 {
-    case Kg;
-    case Pound;
+    case Kg = 'kg';
+    case Pound = 'pound';
 
     public function getName(): string
     {
-        return trans('common.weight.'.$this->name);
+        return trans('common.weight.'.$this->value);
     }
 }

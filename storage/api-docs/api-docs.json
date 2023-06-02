@@ -27,6 +27,117 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "animals"
+                ],
+                "summary": "Create new animal.",
+                "operationId": "34e7a0c362b9e5cd0abcd38155cc2c89",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "sex",
+                                    "birth_date",
+                                    "breed_name",
+                                    "weight",
+                                    "weight_unit"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Fluffy"
+                                    },
+                                    "sex": {
+                                        "type": "string",
+                                        "enum": [
+                                            "male",
+                                            "female"
+                                        ],
+                                        "example": "male"
+                                    },
+                                    "birth_date": {
+                                        "type": "string",
+                                        "example": "2021-06-22"
+                                    },
+                                    "animal_type": {
+                                        "type": "string",
+                                        "example": "995037a6-5811-4ace-b1f7-4667517dd6e0",
+                                        "nullable": true
+                                    },
+                                    "custom_animal_type": {
+                                        "type": "string",
+                                        "example": null,
+                                        "nullable": true
+                                    },
+                                    "breed": {
+                                        "type": "string",
+                                        "example": null,
+                                        "nullable": true
+                                    },
+                                    "custom_breed_name": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "breed_name": {
+                                        "type": "string"
+                                    },
+                                    "metis": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "weight": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "2.5"
+                                    },
+                                    "weight_unit": {
+                                        "type": "string",
+                                        "example": "kg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnimalFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animals/{uuid}": {
+            "get": {
+                "tags": [
+                    "animals"
+                ],
+                "summary": "Get animal details.",
+                "operationId": "cde72940ef9ffc4789bb8122dfd7002f",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnimalFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/dictionaries": {
@@ -70,12 +181,15 @@
     },
     "components": {
         "schemas": {
-            "AnimalListItemResource": {
+            "AnimalFullResource": {
                 "properties": {
                     "uuid": {
                         "type": "string"
                     },
                     "name": {
+                        "type": "string"
+                    },
+                    "birth_date": {
                         "type": "string"
                     },
                     "type": {
@@ -89,6 +203,68 @@
                     },
                     "weight": {
                         "type": "string"
+                    },
+                    "avatar": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "thumb": {
+                                    "type": "string"
+                                },
+                                "full": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "activiry": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "notes": {
+                                    "type": "integer"
+                                },
+                                "events": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "AnimalListItemResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "sex": {
+                        "type": "string"
+                    },
+                    "avatar": {
+                        "type": "string"
+                    },
+                    "activiry": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "notes": {
+                                    "type": "integer"
+                                },
+                                "events": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
                     }
                 },
                 "type": "object"

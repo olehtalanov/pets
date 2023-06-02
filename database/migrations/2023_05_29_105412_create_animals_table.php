@@ -41,7 +41,7 @@ return new class extends Migration
             $table->string('breed_name')->nullable();
             $table->boolean('metis')->default(0);
 
-            $table->float('weight');
+            $table->double('weight');
             $table->enum('weight_unit', array_column(WeightUnitEnum::cases(), 'name'));
 
             $table->timestamps();

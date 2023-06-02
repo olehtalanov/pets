@@ -2,13 +2,13 @@
 
 namespace App\Enums\Animal;
 
-enum SexEnum
+enum SexEnum: string
 {
-    case Male;
-    case Female;
+    case Male = 'male';
+    case Female = 'female';
 
     public function getName(): string
     {
-        return trans('common.sex.'.$this->name);
+        return trans('common.sex.'.$this->value);
     }
 }
