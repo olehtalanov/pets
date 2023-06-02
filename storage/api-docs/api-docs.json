@@ -1,0 +1,78 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pets App API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/dictionaries": {
+            "get": {
+                "tags": [
+                    "dictionaries"
+                ],
+                "summary": "Get list of required dictionaries.",
+                "operationId": "4a623f174b667e7f1e5c70cc862d273e",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "types": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/components/schemas/DictionaryTypedResource"
+                                                }
+                                            },
+                                            "pins": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/components/schemas/DictionaryTypedResource"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "DictionaryTypedResource": {
+                "required": [
+                    "uuid",
+                    "name"
+                ],
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "breed": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DictionaryTypedResource"
+                        }
+                    },
+                    "children": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DictionaryTypedResource"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

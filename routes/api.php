@@ -11,9 +11,10 @@ Route::group([
     require __DIR__.'/auth.php';
 
     Route::group([
+        'as' => 'dictionaries.',
         'prefix' => 'dictionaries',
     ], static function () {
-        Route::get('', [DictionaryController::class, 'index']);
+        Route::get('', [DictionaryController::class, 'index'])->name('index');
     });
 
     Route::group([
