@@ -43,6 +43,8 @@ class Breed extends Model
 {
     use HasFactory, HasTranslations, HasUuid;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
         'is_visible',

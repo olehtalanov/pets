@@ -97,4 +97,15 @@ class Category extends Model
     {
         $builder->whereNotNull('parent_id')->where('related_model', $model);
     }
+
+    protected static function booted(): void
+    {
+        parent::booted();
+
+        static::saving(static function (Category $model) {
+            if ($model->parent_id) {
+                $model->related_model = $model->parent->related_model;
+            }
+        });
+    }
 }

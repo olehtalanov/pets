@@ -23,8 +23,8 @@ return new class extends Migration
                 ->nullable()
                 ->constrained((new PinType())->getTable())
                 ->nullOnDelete();
-            $table->double('latitude', 10, 8);
-            $table->double('longitude', 11, 8);
+            $table->float('latitude', 10, 8);
+            $table->float('longitude', 11, 8);
             $table->timestamps();
         });
     }

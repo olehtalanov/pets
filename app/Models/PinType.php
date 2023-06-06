@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 use Spatie\Translatable\HasTranslations;
 
@@ -39,6 +40,8 @@ class PinType extends Model
 {
     use HasFactory, HasUuid, HasTranslations;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
         'is_visible',
@@ -56,7 +59,12 @@ class PinType extends Model
 
     public function pins(): HasMany
     {
-        return $this->hasMany(Pin::class);
+        return $this->hasMany(Pin::class, 'type_id');
+    }
+
+    public function users(): HasManyThrough
+    {
+        return $this->hasManyThrough(User::class, Pin::class, 'type_id', 'id', 'id', 'type_id');
     }
 
     /* Scopes */

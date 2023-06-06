@@ -154,8 +154,6 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
             $role = [$role];
         }
 
-        $role = array_map(static fn (mixed $role) => UserRoleEnum::from($role), $role);
-
         return in_array($this->role, $role, true);
     }
 

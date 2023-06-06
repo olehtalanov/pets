@@ -63,7 +63,7 @@ class Review extends Model
 
     public function reviewable(): HasOneThrough
     {
-        return $this->hasOneThrough(User::class, Pin::class);
+        return $this->hasOneThrough(User::class, Pin::class, 'user_id', 'id', 'id', 'user_id');
     }
 
     public function pin(): BelongsTo

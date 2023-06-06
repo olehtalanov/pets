@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('pin_types', static function (Blueprint $table) {
             $table->id();
-            $table->string('uuid')->unique();
+            $table->uuid()->unique();
             $table->json('name');
             $table->boolean('is_visible')->default(1);
-            $table->timestamps();
         });
     }
 

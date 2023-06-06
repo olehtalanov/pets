@@ -13,7 +13,7 @@ return new class extends Migration
             $userModel = new User();
 
             $table->id();
-            $table->string('uuid')->unique();
+            $table->uuid()->unique();
             $table->string('name');
             $table->foreignIdFor(User::class, 'owner_id')
                 ->nullable()

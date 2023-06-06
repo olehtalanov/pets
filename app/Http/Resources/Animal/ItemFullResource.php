@@ -32,6 +32,8 @@ class ItemFullResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
+        $media = $this->getFirstMedia('avatar');
+
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
@@ -41,8 +43,8 @@ class ItemFullResource extends JsonResource
             'sex' => $this->sex->getName(),
             'weight' => "$this->weight {$this->weight_unit->getName()}",
             'avatar' => [
-                'thumb' => $this->getFirstMedia('avatar')->getFullUrl('thumb'),
-                'full' => $this->getFirstMedia('avatar')->getFullUrl(),
+                'thumb' => $media->getFullUrl('thumb'),
+                'full' => $media->getFullUrl(),
             ],
             'activity' => [
                 'notes' => $this->notes_count,
