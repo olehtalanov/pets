@@ -5,13 +5,13 @@
         "version": "1.0"
     },
     "paths": {
-        "/animals": {
+        "/api/animals": {
             "get": {
                 "tags": [
                     "animals"
                 ],
                 "summary": "Get list of user animals.",
-                "operationId": "9a489950fd27cd9c56fd59b937d0f501",
+                "operationId": "33ea37fa99c2d039345ee028491a5fda",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -33,7 +33,7 @@
                     "animals"
                 ],
                 "summary": "Create new animal.",
-                "operationId": "34e7a0c362b9e5cd0abcd38155cc2c89",
+                "operationId": "d2201701adacfd22417c6637db81b633",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -119,13 +119,13 @@
                 }
             }
         },
-        "/animals/{uuid}": {
+        "/api/animals/{uuid}": {
             "get": {
                 "tags": [
                     "animals"
                 ],
                 "summary": "Get animal details.",
-                "operationId": "cde72940ef9ffc4789bb8122dfd7002f",
+                "operationId": "283398fd9008666083b94ffe0cc55e79",
                 "parameters": [
                     {
                         "name": "uuid",
@@ -152,7 +152,7 @@
                     "animals"
                 ],
                 "summary": "Delete an animal.",
-                "operationId": "426a2ff683c8a6be61090b69100e0d4c",
+                "operationId": "a5cab3bbd8b70f62c1f1ed660a3ca927",
                 "parameters": [
                     {
                         "name": "uuid",
@@ -172,7 +172,7 @@
                     "animals"
                 ],
                 "summary": "Update existing animal.",
-                "operationId": "8585b5906140142af63219bf7ec4a67f",
+                "operationId": "95650581bc570bfeb2c0f683b3854fc2",
                 "parameters": [
                     {
                         "name": "uuid",
@@ -266,13 +266,13 @@
                 }
             }
         },
-        "/dictionaries": {
+        "/api/dictionaries": {
             "get": {
                 "tags": [
                     "dictionaries"
                 ],
                 "summary": "Get list of required dictionaries.",
-                "operationId": "4a623f174b667e7f1e5c70cc862d273e",
+                "operationId": "d054aa8a0daf6fd98b427a00b66ff895",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -304,13 +304,13 @@
                 }
             }
         },
-        "/me": {
+        "/api/me": {
             "get": {
                 "tags": [
                     "users"
                 ],
                 "summary": "Get user details.",
-                "operationId": "de3936ad40be9d99a380e4fcfcc59871",
+                "operationId": "bfe1d8ee397d4e8589fee09919f74751",
                 "responses": {
                     "200": {
                         "description": "Successful response",

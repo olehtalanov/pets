@@ -20,7 +20,7 @@ class AnimalController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/animals",
+     *     path="/api/animals",
      *     tags={"animals"},
      *     summary="Get list of user animals.",
      *
@@ -43,7 +43,7 @@ class AnimalController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/animals/{uuid}",
+     *     path="/api/animals/{uuid}",
      *     tags={"animals"},
      *     summary="Get animal details.",
      *
@@ -66,7 +66,7 @@ class AnimalController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/animals",
+     *     path="/api/animals",
      *     tags={"animals"},
      *     summary="Create new animal.",
      *
@@ -109,7 +109,7 @@ class AnimalController extends Controller
 
     /**
      * @OA\Patch(
-     *     path="/animals/{uuid}",
+     *     path="/api/animals/{uuid}",
      *     tags={"animals"},
      *     summary="Update existing animal.",
      *
@@ -155,7 +155,7 @@ class AnimalController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/animals/{uuid}",
+     *     path="/api/animals/{uuid}",
      *     tags={"animals"},
      *     summary="Delete an animal.",
      *

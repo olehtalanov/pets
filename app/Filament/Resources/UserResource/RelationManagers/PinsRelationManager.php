@@ -39,11 +39,11 @@ class PinsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('type.name')
                     ->label(trans('admin.fields.pin_type')),
                 Tables\Columns\TextColumn::make('coordinates')
-                    ->getStateUsing(fn(Pin $record) => "$record->latitude@$record->longitude"),
+                    ->getStateUsing(fn (Pin $record) => "$record->latitude@$record->longitude"),
                 Tables\Columns\TextColumn::make('reviews_avg_rating')
                     ->label(trans('admin.fields.rating'))
                     ->avg('reviews', 'rating')
-                    ->formatStateUsing(fn(float $state) => number_format($state, 2))
+                    ->formatStateUsing(fn (float $state) => number_format($state, 2)),
             ])
             ->filters([
                 //
