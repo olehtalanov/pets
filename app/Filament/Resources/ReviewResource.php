@@ -50,7 +50,7 @@ class ReviewResource extends Resource
             ->schema([
                 Forms\Components\Select::make('user_id')
                     ->label(trans('admin.fields.reviewer'))
-                    ->relationship('reviewer', 'name')
+                    ->relationship('reviewer', 'name', fn (Builder $query) => $query->select(['users.*', DB::raw('CONCAT(first_name, last_name) as name')]))
                     ->required(),
                 Forms\Components\Select::make('pin_id')
                     ->required()
@@ -61,7 +61,7 @@ class ReviewResource extends Resource
                         $query
                             ->select([
                                 'pins.*',
-                                DB::raw('concat(pins.latitude, "@", pins.longitude, " (", users.name, ")") as name'),
+                                DB::raw('concat(pins.latitude, "@", pins.longitude, " (", users.first_name, " ", users.last_name, ")") as name'),
                             ])
                             ->leftJoin('users', static function (JoinClause $join) {
                                 $join->on('pins.user_id', '=', 'users.id');

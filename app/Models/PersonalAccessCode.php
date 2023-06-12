@@ -10,12 +10,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * App\Models\PersonalAccessCode
  *
- * @property-read User $user
+ * @property int $id
+ * @property int $user_id
+ * @property string $code
+ * @property \Illuminate\Support\Carbon $valid_until
+ * @property-read \App\Models\User $user
  *
  * @method static Builder|PersonalAccessCode active()
  * @method static Builder|PersonalAccessCode newModelQuery()
  * @method static Builder|PersonalAccessCode newQuery()
  * @method static Builder|PersonalAccessCode query()
+ * @method static Builder|PersonalAccessCode whereCode($value)
+ * @method static Builder|PersonalAccessCode whereId($value)
+ * @method static Builder|PersonalAccessCode whereUserId($value)
+ * @method static Builder|PersonalAccessCode whereValidUntil($value)
  *
  * @mixin Eloquent
  */

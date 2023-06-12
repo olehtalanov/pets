@@ -46,12 +46,17 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('first_name')
+                    ->required()
+                    ->maxLength(50),
+                Forms\Components\TextInput::make('last_name')
                     ->required()
                     ->maxLength(50),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->maxLength(100),
+                Forms\Components\TextInput::make('phone')
+                    ->tel(),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\Select::make('role')
                     ->required()
@@ -72,7 +77,8 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')
+                    ->formatStateUsing(fn (User $record) => "$record->first_name $record->last_name"),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('email_verified_at')->dateTime(),
                 Tables\Columns\TextColumn::make('role')->enum(trans('admin.roles')),

@@ -31,7 +31,7 @@ class ReviewsRelationManager extends RelationManager
                         $query
                             ->select([
                                 'pins.*',
-                                DB::raw('concat(pins.latitude, "@", pins.longitude, " (", users.name, ")") as name'),
+                                DB::raw('concat(pins.latitude, "@", pins.longitude, " (", users.first_name, users.last_name, ")") as name'),
                             ])
                             ->leftJoin('users', static function (JoinClause $join) {
                                 $join->on('pins.user_id', '=', 'users.id');
@@ -41,13 +41,14 @@ class ReviewsRelationManager extends RelationManager
                         return Pin::with('user')
                             ->select([
                                 'pins.id as pid',
-                                DB::raw('concat(pins.latitude, "@", pins.longitude, " (", users.name, ")") as name'),
+                                DB::raw('concat(pins.latitude, "@", pins.longitude, " (", users.first_name, users.last_name, ")") as name'),
                             ])
                             ->leftJoin('users', static function (JoinClause $join) use ($livewire) {
                                 $join->on('pins.user_id', '=', 'users.id')
                                     ->where('users.id', '!=', $livewire->ownerRecord->getKey());
                             })
-                            ->where('users.name', 'like', "%$search%")
+                            ->where('users.first_name', 'like', "%$search%")
+                            ->orWhere('users.last_name', 'like', "%$search%")
                             ->limit(10)
                             ->pluck('name', 'pid');
                     })
