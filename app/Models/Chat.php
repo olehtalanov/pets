@@ -17,7 +17,7 @@ use Illuminate\Support\Carbon;
  * App\Models\Chat
  *
  * @property int $id
- * @property string $nano_id
+ * @property string $uuid
  * @property string $name
  * @property int|null $owner_id
  * @property int|null $recipient_id
@@ -25,11 +25,11 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $last_message_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Message|null $lastMessage
- * @property-read Collection<int, Message> $messages
+ * @property-read \App\Models\Message|null $lastMessage
+ * @property-read Collection<int, \App\Models\Message> $messages
  * @property-read int|null $messages_count
- * @property-read User|null $owner
- * @property-read User|null $recipient
+ * @property-read \App\Models\User|null $owner
+ * @property-read \App\Models\User|null $recipient
  *
  * @method static Builder|Chat current()
  * @method static Builder|Chat newModelQuery()
@@ -40,10 +40,10 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Chat whereIsArchived($value)
  * @method static Builder|Chat whereLastMessageAt($value)
  * @method static Builder|Chat whereName($value)
- * @method static Builder|Chat whereNanoId($value)
  * @method static Builder|Chat whereOwnerId($value)
  * @method static Builder|Chat whereRecipientId($value)
  * @method static Builder|Chat whereUpdatedAt($value)
+ * @method static Builder|Chat whereUuid($value)
  *
  * @mixin Eloquent
  */

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Enums\User\EventRepeatSchemeEnum;
 use App\Traits\HasUuid;
-use Database\Factories\EventFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,11 +27,11 @@ use Illuminate\Support\Carbon;
  * @property bool $all_day
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Animal $animal
- * @property-read Category|null $category
- * @property-read User $user
+ * @property-read \App\Models\Animal $animal
+ * @property-read \App\Models\Category|null $category
+ * @property-read \App\Models\User $user
  *
- * @method static EventFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\EventFactory factory($count = null, $state = [])
  * @method static Builder|Event newModelQuery()
  * @method static Builder|Event newQuery()
  * @method static Builder|Event query()

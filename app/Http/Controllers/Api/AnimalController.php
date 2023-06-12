@@ -21,7 +21,7 @@ class AnimalController extends Controller
     /**
      * @OA\Get(
      *     path="/api/animals",
-     *     tags={"animals"},
+     *     tags={"Animals"},
      *     summary="Get list of user animals.",
      *
      *     @OA\Response(response=200, description="Successful response",
@@ -44,7 +44,7 @@ class AnimalController extends Controller
     /**
      * @OA\Get(
      *     path="/api/animals/{uuid}",
-     *     tags={"animals"},
+     *     tags={"Animals"},
      *     summary="Get animal details.",
      *
      *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
@@ -67,7 +67,7 @@ class AnimalController extends Controller
     /**
      * @OA\Post(
      *     path="/api/animals",
-     *     tags={"animals"},
+     *     tags={"Animals"},
      *     summary="Create new animal.",
      *
      *     @OA\RequestBody(
@@ -110,7 +110,7 @@ class AnimalController extends Controller
     /**
      * @OA\Patch(
      *     path="/api/animals/{uuid}",
-     *     tags={"animals"},
+     *     tags={"Animals"},
      *     summary="Update existing animal.",
      *
      *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
@@ -137,9 +137,7 @@ class AnimalController extends Controller
      *
      *     @OA\Response(response=200, description="Successful response",
      *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/AnimalFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/AnimalFullResource")
      *     )
      * )
      */
@@ -156,7 +154,7 @@ class AnimalController extends Controller
     /**
      * @OA\Delete(
      *     path="/api/animals/{uuid}",
-     *     tags={"animals"},
+     *     tags={"Animals"},
      *     summary="Delete an animal.",
      *
      *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),

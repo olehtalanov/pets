@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Enums\Animal\SexEnum;
 use App\Enums\Animal\WeightUnitEnum;
 use App\Traits\HasUuid;
-use Database\Factories\AnimalFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,7 +23,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $uuid
  * @property int $user_id
  * @property string $name
- * @property string $sex
+ * @property SexEnum $sex
  * @property Carbon $birth_date
  * @property int|null $animal_type_id
  * @property string|null $custom_type_name
@@ -33,16 +32,16 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $breed_name
  * @property bool $metis
  * @property float $weight
- * @property string $weight_unit
+ * @property WeightUnitEnum $weight_unit
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Breed|null $breed
+ * @property-read \App\Models\Breed|null $breed
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read User $owner
- * @property-read AnimalType|null $type
+ * @property-read \App\Models\User $owner
+ * @property-read \App\Models\AnimalType|null $type
  *
- * @method static AnimalFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\AnimalFactory factory($count = null, $state = [])
  * @method static Builder|Animal newModelQuery()
  * @method static Builder|Animal newQuery()
  * @method static Builder|Animal query()

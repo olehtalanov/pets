@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
-use Database\Factories\PinTypeFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -11,28 +10,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Support\Carbon;
 use Spatie\Translatable\HasTranslations;
 
 /**
  * App\Models\PinType
  *
  * @property int $id
+ * @property string $uuid
  * @property array $name
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Pin> $pins
+ * @property bool $is_visible
+ * @property-read Collection<int, \App\Models\Pin> $pins
  * @property-read int|null $pins_count
+ * @property-read Collection<int, \App\Models\User> $users
+ * @property-read int|null $users_count
  *
- * @method static PinTypeFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\PinTypeFactory factory($count = null, $state = [])
  * @method static Builder|PinType newModelQuery()
  * @method static Builder|PinType newQuery()
  * @method static Builder|PinType onlyVisible()
  * @method static Builder|PinType query()
- * @method static Builder|PinType whereCreatedAt($value)
  * @method static Builder|PinType whereId($value)
+ * @method static Builder|PinType whereIsVisible($value)
  * @method static Builder|PinType whereName($value)
- * @method static Builder|PinType whereUpdatedAt($value)
+ * @method static Builder|PinType whereUuid($value)
  *
  * @mixin Eloquent
  */

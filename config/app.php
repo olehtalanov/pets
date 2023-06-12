@@ -189,4 +189,8 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'auth' => [
+        'code_valid_minutes' => 10,
+    ],
+
 ];

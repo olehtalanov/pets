@@ -13,7 +13,7 @@ class DictionaryController extends Controller
     /**
      * @OA\Get(
      *     path="/api/dictionaries",
-     *     tags={"dictionaries"},
+     *     tags={"Dictionaries"},
      *     summary="Get list of required dictionaries.",
      *
      *     @OA\Response(response=200, description="Successful response",

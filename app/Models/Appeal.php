@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
-use Database\Factories\AppealFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,9 +20,9 @@ use Illuminate\Support\Carbon;
  * @property int|null $rating
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read User $user
+ * @property-read \App\Models\User $user
  *
- * @method static AppealFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\AppealFactory factory($count = null, $state = [])
  * @method static Builder|Appeal newModelQuery()
  * @method static Builder|Appeal newQuery()
  * @method static Builder|Appeal query()

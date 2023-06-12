@@ -19,6 +19,6 @@ class MediaFileNamer extends FileNamer
 
     protected function getFileName(string $fileName): string
     {
-        return md5(substr(pathinfo($fileName, PATHINFO_FILENAME), 0, 32));
+        return pathinfo($fileName, PATHINFO_FILENAME);
     }
 }

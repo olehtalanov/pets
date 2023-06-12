@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
-use Database\Factories\PinFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,9 +22,12 @@ use Illuminate\Support\Carbon;
  * @property float $longitude
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read PinType|null $type
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Review> $reviews
+ * @property-read int|null $reviews_count
+ * @property-read \App\Models\PinType|null $type
+ * @property-read \App\Models\User $user
  *
- * @method static PinFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\PinFactory factory($count = null, $state = [])
  * @method static Builder|Pin newModelQuery()
  * @method static Builder|Pin newQuery()
  * @method static Builder|Pin query()

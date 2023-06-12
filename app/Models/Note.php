@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
-use Database\Factories\NoteFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,11 +22,11 @@ use Illuminate\Support\Carbon;
  * @property string|null $description
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Animal $animal
- * @property-read Category|null $category
- * @property-read User $user
+ * @property-read \App\Models\Animal $animal
+ * @property-read \App\Models\Category|null $category
+ * @property-read \App\Models\User $user
  *
- * @method static NoteFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\NoteFactory factory($count = null, $state = [])
  * @method static Builder|Note newModelQuery()
  * @method static Builder|Note newQuery()
  * @method static Builder|Note query()

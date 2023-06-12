@@ -9,9 +9,11 @@ use Database\Factories\UserFactory;
 use Eloquent;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -19,10 +21,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\FileAdder;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * App\Models\User
@@ -41,6 +46,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read PersonalAccessCode|null $accessCodes
  * @property-read Collection<int, Animal> $animals
  * @property-read int|null $animals_count
  * @property-read Collection<int, Event> $events
@@ -81,12 +87,16 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 final class User extends Authenticatable implements FilamentUser, HasMedia
 {
-    use HasApiTokens, HasUuid, HasFactory, Notifiable, InteractsWithMedia;
+    use HasApiTokens, HasUuid, HasFactory, Notifiable;
+    use InteractsWithMedia {
+        InteractsWithMedia::addMedia as parentAddMedia;
+    }
 
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
-        'password',
+        'phone',
         'role',
 
         'provider',
@@ -135,6 +145,11 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
         return $this->hasMany(Review::class);
     }
 
+    public function accessCodes(): HasOne
+    {
+        return $this->hasOne(PersonalAccessCode::class)->latestOfMany();
+    }
+
     /* Auth */
 
     public function canAccessFilament(): bool
@@ -142,12 +157,10 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
         return $this->hasRole(UserRoleEnum::Admin);
     }
 
-    /* Helpers */
-
     public function hasRole(array|string|UserRoleEnum $role): bool
     {
         if (is_string($role)) {
-            $role = UserRoleEnum::from($role);
+            $role = UserRoleEnum::tryFrom($role);
         }
 
         if (! is_array($role)) {
@@ -157,19 +170,41 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
         return in_array($this->role, $role, true);
     }
 
+    /* Accessors & Mutators */
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => "$this->first_name $this->last_name"
+        );
+    }
+
+    protected function phone(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value): string => "+$value",
+            set: static fn ($value) => preg_replace('/\D/', '', $value)
+        );
+    }
+
     /* Media */
+
+    public function addMedia(string|UploadedFile $file): FileAdder
+    {
+        return $this->parentAddMedia($file)->usingFileName($file->hashName());
+    }
 
     public function registerMediaCollections(): void
     {
         $this
             ->addMediaCollection('avatar')
-            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/heif'])
             ->singleFile()
             ->registerMediaConversions(function (Media $media) {
                 $this
                     ->addMediaConversion('thumb')
-                    ->width(120)
-                    ->height(120);
+                    ->fit(Manipulations::FIT_CROP, 80, 80)
+                    ->width(80)
+                    ->height(80);
             });
     }
 }

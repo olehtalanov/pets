@@ -20,7 +20,7 @@ class MediaPathGenerator implements PathGenerator
      */
     public function getPathForConversions(Media $media): string
     {
-        return $this->getBasePath($media).'/c/';
+        return $this->getBasePath($media).'/';
     }
 
     /*
@@ -39,9 +39,9 @@ class MediaPathGenerator implements PathGenerator
         $prefix = config('media-library.prefix', '');
 
         if ($prefix !== '') {
-            return $prefix.'/'.$media->uuid;
+            return $prefix.'/'.md5($media->uuid);
         }
 
-        return $media->uuid;
+        return md5($media->uuid);
     }
 }

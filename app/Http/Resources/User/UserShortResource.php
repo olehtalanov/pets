@@ -22,7 +22,7 @@ class UserShortResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
-            'avatar' => $this->getFirstMedia('avatar')->getFullUrl('thumb'),
+            'avatar' => $this->getFirstMedia('avatar')?->getFullUrl('thumb'),
         ];
     }
 }

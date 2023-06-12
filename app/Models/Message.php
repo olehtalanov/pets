@@ -19,8 +19,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $read_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Chat $chat
- * @property-read User|null $user
+ * @property-read \App\Models\Chat $chat
+ * @property-read \App\Models\User|null $user
  *
  * @method static Builder|Message newModelQuery()
  * @method static Builder|Message newQuery()
