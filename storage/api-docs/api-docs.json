@@ -377,12 +377,12 @@
             }
         },
         "/api/profile/avatar": {
-            "patch": {
+            "post": {
                 "tags": [
                     "Profile"
                 ],
                 "summary": "Update user avatar.",
-                "operationId": "f7397e7318f61add0df78df2a9ac54de",
+                "operationId": "5fbcb521732cc847837906195ddc8390",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -431,7 +431,7 @@
                     "Auth"
                 ],
                 "summary": "Get auth code.",
-                "operationId": "257081a926aa9f90fb39e5c2b1034460",
+                "operationId": "aabbafa823c500650fa2d7d5767377aa",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -464,7 +464,7 @@
                     "Auth"
                 ],
                 "summary": "Authenticate user.",
-                "operationId": "ee8d85227df277ac41a8cd8f10558fd9",
+                "operationId": "20be90132d4a62e09d891319a5fd32dc",
                 "requestBody": {
                     "required": true,
                     "content": {
