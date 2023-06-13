@@ -266,6 +266,63 @@
                 }
             }
         },
+        "/api/animals/{uuid}/avatar": {
+            "post": {
+                "tags": [
+                    "Animals"
+                ],
+                "summary": "Update user avatar.",
+                "operationId": "6fd3ad843b1ff5f21982c468a745a903",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "avatar": {
+                                                "description": "Animal avatar",
+                                                "type": "string",
+                                                "format": "binary"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "thumb": {
+                                            "type": "string"
+                                        },
+                                        "full": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/dictionaries": {
             "get": {
                 "tags": [
@@ -550,10 +607,12 @@
                         "items": {
                             "properties": {
                                 "thumb": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "nullable": true
                                 },
                                 "full": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "nullable": true
                                 }
                             },
                             "type": "object"
@@ -587,11 +646,15 @@
                     "type": {
                         "type": "string"
                     },
+                    "breed": {
+                        "type": "string"
+                    },
                     "sex": {
                         "type": "string"
                     },
                     "avatar": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": true
                     },
                     "activiry": {
                         "type": "array",

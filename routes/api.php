@@ -11,16 +11,17 @@ Route::group([
     require __DIR__.'/auth.php';
 
     Route::group([
-        'as' => 'dictionaries.',
-        'prefix' => 'dictionaries',
-    ], static function () {
-        Route::get('', [DictionaryController::class, 'index'])->name('index');
-    });
-
-    Route::group([
         'middleware' => ['auth:sanctum'],
     ], static function () {
+        Route::group([
+            'as' => 'dictionaries.',
+            'prefix' => 'dictionaries',
+        ], static function () {
+            Route::get('', [DictionaryController::class, 'index'])->name('index');
+        });
+
         Route::apiResource('animals', AnimalController::class);
+        Route::post('animals/{animal}/avatar', [AnimalController::class, 'avatar'])->name('animals.avatar');
 
         Route::group([
             'as' => 'profile.',

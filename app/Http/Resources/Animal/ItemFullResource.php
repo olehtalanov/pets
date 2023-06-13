@@ -19,8 +19,8 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="sex", type="string"),
  *     @OA\Property(property="weight", type="string"),
  *     @OA\Property(property="avatar", type="array", @OA\Items(
- *         @OA\Property(property="thumb", type="string"),
- *         @OA\Property(property="full", type="string"),
+ *         @OA\Property(property="thumb", type="string", nullable=true),
+ *         @OA\Property(property="full", type="string", nullable=true),
  *     )),
  *     @OA\Property(property="activiry", type="array", @OA\Items(
  *         @OA\Property(property="notes", type="integer"),
@@ -37,14 +37,14 @@ class ItemFullResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
-            'birth_date' => $this->birth_date?->toLocalDate(),
+            'birth_date' => $this->birth_date->toDateString(),
             'type' => $this->type->name,
             'breed' => $this->breed->name,
             'sex' => $this->sex->getName(),
             'weight' => "$this->weight {$this->weight_unit->getName()}",
             'avatar' => [
-                'thumb' => $media->getFullUrl('thumb'),
-                'full' => $media->getFullUrl(),
+                'thumb' => $media?->getFullUrl('thumb'),
+                'full' => $media?->getFullUrl(),
             ],
             'activity' => [
                 'notes' => $this->notes_count,

@@ -24,7 +24,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('name');
-            $table->enum('sex', array_column(SexEnum::cases(), 'name'));
+            $table->enum('sex', array_column(SexEnum::cases(), 'value'));
             $table->date('birth_date');
 
             $table->foreignIdFor(AnimalType::class)
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->boolean('metis')->default(0);
 
             $table->double('weight');
-            $table->enum('weight_unit', array_column(WeightUnitEnum::cases(), 'name'));
+            $table->enum('weight_unit', array_column(WeightUnitEnum::cases(), 'value'));
 
             $table->timestamps();
         });

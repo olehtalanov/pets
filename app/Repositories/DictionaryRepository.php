@@ -17,6 +17,9 @@ class DictionaryRepository
         return new static();
     }
 
+    /**
+     * @return array[]
+     */
     public function list(): array
     {
         return [

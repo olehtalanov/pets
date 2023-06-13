@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Data\User\ProfileData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\AvatarRequest;
 use App\Http\Requests\User\ProfileRequest;
 use App\Http\Resources\User\UserResource;
+use App\Repositories\ProfileRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
 use Response;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProfileController extends Controller
 {
+    public function __construct(
+        private readonly ProfileRepository $profileRepository
+    ) {
+        //
+    }
+
     /**
      * @OA\Get(
      *     path="/api/profile",
@@ -66,10 +73,12 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request): JsonResponse
     {
-        tap($request->user())->update($request->validated());
+        $user = $this->profileRepository->update(
+            ProfileData::from($request->validated())
+        );
 
         return Response::json(
-            new UserResource($request->user())
+            new UserResource($user)
         );
     }
 
@@ -113,10 +122,7 @@ class ProfileController extends Controller
      */
     public function avatar(AvatarRequest $request): JsonResponse
     {
-        /** @var Media $media */
-        $media = $request->user()
-            ->addMedia($request->file('avatar'))
-            ->toMediaCollection('avatar');
+        $media = $this->profileRepository->avatar($request->file('avatar'));
 
         return Response::json([
             'thumb' => $media->getFullUrl('thumb'),

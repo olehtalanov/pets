@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\User\UserRoleEnum;
 use App\Traits\HasUuid;
+use App\Traits\UseMedia;
 use Database\Factories\UserFactory;
 use Eloquent;
 use Filament\Models\Contracts\FilamentUser;
@@ -23,11 +24,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\FileAdder;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * App\Models\User
@@ -91,16 +89,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 final class User extends Authenticatable implements FilamentUser, HasMedia
 {
-    use HasApiTokens, HasUuid, HasFactory, Notifiable;
-    use InteractsWithMedia {
-        InteractsWithMedia::addMedia as parentAddMedia;
-    }
+    use HasApiTokens, HasUuid, HasFactory, Notifiable, UseMedia;
 
     protected $fillable = [
         'first_name',
         'last_name',
         'email',
         'password',
+        'device_id',
         'phone',
         'role',
 
@@ -193,11 +189,6 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
     }
 
     /* Media */
-
-    public function addMedia(string|UploadedFile $file): FileAdder
-    {
-        return $this->parentAddMedia($file)->usingFileName($file->hashName());
-    }
 
     public function registerMediaCollections(): void
     {

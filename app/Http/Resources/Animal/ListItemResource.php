@@ -14,8 +14,9 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="uuid", type="string"),
  *     @OA\Property(property="name", type="string"),
  *     @OA\Property(property="type", type="string"),
+ *     @OA\Property(property="breed", type="string"),
  *     @OA\Property(property="sex", type="string"),
- *     @OA\Property(property="avatar", type="string"),
+ *     @OA\Property(property="avatar", type="string", nullable=true),
  *     @OA\Property(property="activiry", type="array", @OA\Items(
  *         @OA\Property(property="notes", type="integer"),
  *         @OA\Property(property="events", type="integer"),
@@ -30,8 +31,9 @@ class ListItemResource extends JsonResource
             'uuid' => $this->uuid,
             'name' => $this->name,
             'type' => $this->type->name,
+            'breed' => $this->breed->name,
             'sex' => $this->sex->getName(),
-            'avatar' => $this->getFirstMedia('avatar')->getFullUrl('thumb'),
+            'avatar' => $this->getFirstMedia('avatar')?->getFullUrl('thumb'),
             'activity' => [
                 'notes' => $this->notes_count,
                 'events' => $this->events_count,

@@ -5,14 +5,17 @@ namespace App\Models;
 use App\Enums\Animal\SexEnum;
 use App\Enums\Animal\WeightUnitEnum;
 use App\Traits\HasUuid;
+use App\Traits\UseMedia;
+use Database\Factories\AnimalFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -35,13 +38,13 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property WeightUnitEnum $weight_unit
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \App\Models\Breed|null $breed
+ * @property-read Breed|null $breed
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read \App\Models\User $owner
- * @property-read \App\Models\AnimalType|null $type
+ * @property-read User $owner
+ * @property-read AnimalType|null $type
  *
- * @method static \Database\Factories\AnimalFactory factory($count = null, $state = [])
+ * @method static AnimalFactory factory($count = null, $state = [])
  * @method static Builder|Animal newModelQuery()
  * @method static Builder|Animal newQuery()
  * @method static Builder|Animal query()
@@ -66,7 +69,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Animal extends Model implements HasMedia
 {
-    use HasFactory, HasUuid, InteractsWithMedia;
+    use HasFactory, HasUuid, UseMedia;
 
     protected $fillable = [
         'name',
@@ -101,17 +104,27 @@ class Animal extends Model implements HasMedia
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function notes(): HasMany
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    public function events(): HasMany
+    {
+        return $this->hasMany(Event::class);
+    }
+
     public function type(): BelongsTo
     {
-        return $this->belongsTo(AnimalType::class)->withDefault([
-            'name' => $this->animal_type_name ?? trans('common.placeholder.unknown'),
+        return $this->belongsTo(AnimalType::class, 'animal_type_id')->withDefault([
+            'name' => $this->custom_type_name ?? trans('common.placeholder.unknown'),
         ]);
     }
 
     public function breed(): BelongsTo
     {
         return $this->belongsTo(Breed::class)->withDefault([
-            'name' => $this->breed_name ?? trans('common.placeholder.unknown'),
+            'name' => $this->custom_breed_name ?? trans('common.placeholder.unknown'),
         ]);
     }
 
@@ -124,10 +137,13 @@ class Animal extends Model implements HasMedia
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/heif'])
             ->singleFile()
             ->registerMediaConversions(function (Media $media) {
+                $thumb = 200;
+
                 $this
                     ->addMediaConversion('thumb')
-                    ->width(120)
-                    ->height(120);
+                    ->fit(Manipulations::FIT_CROP, $thumb, $thumb)
+                    ->width($thumb)
+                    ->height($thumb);
             });
     }
 }

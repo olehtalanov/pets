@@ -8,6 +8,10 @@ use App\Http\Resources\Animal\ListItemResource;
 use App\Models\Animal;
 use Auth;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AnimalRepository
 {
@@ -20,7 +24,7 @@ class AnimalRepository
     {
         return ListItemResource::collection(
             Auth::user()?->animals()
-                ->with(['type'])
+                ->with(['type', 'breed'])
                 ->withCount(['notes', 'events'])
                 ->get()
         );
@@ -29,8 +33,7 @@ class AnimalRepository
     public function one(string $animal): ItemFullResource
     {
         return new ItemFullResource(
-            Auth::user()?->animals()
-                ->whereUuid($animal)
+            Animal::whereUuid($animal)
                 ->with(['type', 'breed'])
                 ->withCount(['notes', 'events'])
                 ->firstOrFail()
@@ -51,6 +54,18 @@ class AnimalRepository
         return new ItemFullResource(
             Animal::findUOrFail($animal)
         );
+    }
+
+    /**
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function avatar(string $animal, UploadedFile $file): ?Media
+    {
+        return Animal::whereUuid($animal)
+            ->firstOrFail()
+            ?->addMedia($file)
+            ->toMediaCollection('avatar');
     }
 
     public function destroy(string $animal): void

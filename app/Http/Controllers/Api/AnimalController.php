@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Data\Animal\AnimalData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Animal\AnimalStoreRequest;
+use App\Http\Requests\Animal\AvatarRequest;
 use App\Repositories\AnimalRepository;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
@@ -149,6 +150,56 @@ class AnimalController extends Controller
                 AnimalData::from($request->validated())
             )
         );
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/animals/{uuid}/avatar",
+     *     tags={"Animals"},
+     *     summary="Update user avatar.",
+     *
+     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *
+     *     @OA\RequestBody(
+     *
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *
+     *             @OA\Schema(
+     *                 oneOf={
+     *                     @OA\Schema(
+     *
+     *                         @OA\Property(
+     *                             description="Animal avatar",
+     *                             property="avatar",
+     *                             type="string",
+     *                             format="binary"
+     *                         )
+     *                     )
+     *                 }
+     *             )
+     *         )
+     *     ),
+     *
+     *     @OA\Response(response=200, description="Successful response",
+     *
+     *         @OA\JsonContent(
+     *             type="object",
+     *
+     *             @OA\Property(property="thumb", type="string"),
+     *             @OA\Property(property="full", type="string")
+     *         )
+     *     )
+     * )
+     */
+    public function avatar(AvatarRequest $request, string $animal): JsonResponse
+    {
+        $media = $this->animalRepository->avatar($animal, $request->file('avatar'));
+
+        return Response::json([
+            'thumb' => $media?->getFullUrl('thumb'),
+            'full' => $media?->getFullUrl(),
+        ]);
     }
 
     /**
