@@ -6,13 +6,8 @@ use App\Http\Resources\Chat\MessageCollection;
 use App\Http\Resources\Chat\RecentChatCollection;
 use App\Models\Chat;
 
-class ChatRepository
+class ChatRepository extends BaseRepository
 {
-    public static function make(): static
-    {
-        return new static();
-    }
-
     public function recent(): RecentChatCollection
     {
         return new RecentChatCollection(

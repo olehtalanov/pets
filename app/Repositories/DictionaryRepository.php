@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Enums\Animal\EventRepeatSchemeEnum;
 use App\Http\Resources\Dictionary\TypedResource;
 use App\Models\AnimalType;
 use App\Models\Category;
@@ -10,13 +11,8 @@ use App\Models\Note;
 use App\Models\PinType;
 use Illuminate\Database\Eloquent\Collection;
 
-class DictionaryRepository
+class DictionaryRepository extends BaseRepository
 {
-    public static function make(): static
-    {
-        return new static();
-    }
-
     /**
      * @return array[]
      */
@@ -54,5 +50,10 @@ class DictionaryRepository
     public function noteCategories(): Collection|array
     {
         return Category::onlyParents(Note::class)->with('children')->get();
+    }
+
+    public function repeatable(): array
+    {
+        return EventRepeatSchemeEnum::getNames();
     }
 }

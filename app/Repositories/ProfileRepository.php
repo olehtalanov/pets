@@ -10,13 +10,8 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class ProfileRepository
+class ProfileRepository extends BaseRepository
 {
-    public static function make(): static
-    {
-        return new static();
-    }
-
     public function update(ProfileData $data): User
     {
         tap(Auth::user())->update($data->toArray());

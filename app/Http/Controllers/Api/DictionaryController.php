@@ -10,6 +10,12 @@ use Response;
 
 class DictionaryController extends Controller
 {
+    public function __construct(
+        private readonly DictionaryRepository $dictionaryRepository
+    ) {
+        //
+    }
+
     /**
      * @OA\Get(
      *     path="/api/dictionaries",
@@ -30,10 +36,31 @@ class DictionaryController extends Controller
      *     )
      * )
      */
-    public function index(DictionaryRepository $repository): JsonResponse
+    public function index(): JsonResponse
     {
         return Response::json(
-            $repository->list()
+            $this->dictionaryRepository->list()
+        );
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/dictionaries/repeatable",
+     *     tags={"Dictionaries"},
+     *     summary="Get list of event repeatable.",
+     *
+     *     @OA\Response(response=200, description="Successful response",
+     *
+     *         @OA\JsonContent(
+     *             type="object"
+     *         )
+     *     )
+     * )
+     */
+    public function repeatable(): JsonResponse
+    {
+        return Response::json(
+            $this->dictionaryRepository->repeatable()
         );
     }
 }

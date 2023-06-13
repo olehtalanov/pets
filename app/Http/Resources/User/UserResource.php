@@ -31,7 +31,7 @@ class UserResource extends JsonResource
         $media = $this->getFirstMedia('avatar');
 
         return [
-            'id' => $this->uuid,
+            'uuid' => $this->uuid,
             'name' => $this->name,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,

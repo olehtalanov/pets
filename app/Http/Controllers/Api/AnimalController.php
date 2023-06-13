@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Data\Animal\AnimalData;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Animal\AnimalStoreRequest;
 use App\Http\Requests\Animal\AvatarRequest;
+use App\Http\Requests\Animal\StoreRequest;
 use App\Repositories\AnimalRepository;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
@@ -99,7 +99,7 @@ class AnimalController extends Controller
      *     )
      * )
      */
-    public function store(AnimalStoreRequest $request): JsonResponse
+    public function store(StoreRequest $request): JsonResponse
     {
         return Response::json(
             $this->animalRepository->store(
@@ -142,7 +142,7 @@ class AnimalController extends Controller
      *     )
      * )
      */
-    public function update(AnimalStoreRequest $request, string $animal): JsonResponse
+    public function update(StoreRequest $request, string $animal): JsonResponse
     {
         return Response::json(
             $this->animalRepository->update(

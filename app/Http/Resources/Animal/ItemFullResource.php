@@ -12,19 +12,19 @@ use OpenApi\Annotations as OA;
  *     type="object",
  *
  *     @OA\Property(property="uuid", type="string"),
- *     @OA\Property(property="name", type="string"),
- *     @OA\Property(property="birth_date", type="string"),
- *     @OA\Property(property="type", type="string"),
- *     @OA\Property(property="breed", type="string"),
- *     @OA\Property(property="sex", type="string"),
- *     @OA\Property(property="weight", type="string"),
+ *     @OA\Property(property="name", type="string", example="Fluffy"),
+ *     @OA\Property(property="birth_date", type="string", example="2010-10-02"),
+ *     @OA\Property(property="type", type="string", example="Type"),
+ *     @OA\Property(property="breed", type="string", example="Breed"),
+ *     @OA\Property(property="sex", type="string", example="Male"),
+ *     @OA\Property(property="weight", type="string", example=5),
  *     @OA\Property(property="avatar", type="array", @OA\Items(
- *         @OA\Property(property="thumb", type="string", nullable=true),
- *         @OA\Property(property="full", type="string", nullable=true),
+ *         @OA\Property(property="thumb", type="string", nullable=true, example=null),
+ *         @OA\Property(property="full", type="string", nullable=true, example=null),
  *     )),
  *     @OA\Property(property="activiry", type="array", @OA\Items(
- *         @OA\Property(property="notes", type="integer"),
- *         @OA\Property(property="events", type="integer"),
+ *         @OA\Property(property="notes", type="integer", example=2),
+ *         @OA\Property(property="events", type="integer", example=12),
  *     )),
  * )
  */

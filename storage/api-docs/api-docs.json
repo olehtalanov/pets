@@ -361,6 +361,97 @@
                 }
             }
         },
+        "/api/dictionaries/repeatable": {
+            "get": {
+                "tags": [
+                    "Dictionaries"
+                ],
+                "summary": "Get list of event repeatable.",
+                "operationId": "576f61b97dfd0a7331ad0cbe8b4ba72d",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/events": {
+            "post": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Create new event.",
+                "operationId": "e958e1c6c275d5f9b7ebcd837903d0ef",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EventStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EventFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/events/{uuid}": {
+            "patch": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Update new event.",
+                "operationId": "01812be675556fa2f1c035266fb9e278",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EventStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EventFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/profile": {
             "get": {
                 "tags": [
@@ -579,28 +670,103 @@
     },
     "components": {
         "schemas": {
+            "EventStoreRequest": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Some title"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "starts_at": {
+                        "type": "string",
+                        "example": null,
+                        "nullable": true
+                    },
+                    "ends_at": {
+                        "type": "string",
+                        "example": null,
+                        "nullable": true
+                    },
+                    "repeat": {
+                        "type": "string",
+                        "example": "never"
+                    },
+                    "whole_day": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "EventFullResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Some title"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "starts_at": {
+                        "type": "string",
+                        "example": "2023-06-10 10:00:00"
+                    },
+                    "ends_at": {
+                        "type": "string",
+                        "example": "2023-06-12 18:00:00"
+                    },
+                    "repeat": {
+                        "type": "string",
+                        "example": "never"
+                    },
+                    "whole_day": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "animal": {
+                        "$ref": "#/components/schemas/AnimalFullResource"
+                    }
+                },
+                "type": "object"
+            },
             "AnimalFullResource": {
                 "properties": {
                     "uuid": {
                         "type": "string"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "Fluffy"
                     },
                     "birth_date": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "2010-10-02"
                     },
                     "type": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "Type"
                     },
                     "breed": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "Breed"
                     },
                     "sex": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "Male"
                     },
                     "weight": {
-                        "type": "string"
+                        "type": "string",
+                        "example": 5
                     },
                     "avatar": {
                         "type": "array",
@@ -608,10 +774,12 @@
                             "properties": {
                                 "thumb": {
                                     "type": "string",
+                                    "example": null,
                                     "nullable": true
                                 },
                                 "full": {
                                     "type": "string",
+                                    "example": null,
                                     "nullable": true
                                 }
                             },
@@ -623,10 +791,12 @@
                         "items": {
                             "properties": {
                                 "notes": {
-                                    "type": "integer"
+                                    "type": "integer",
+                                    "example": 2
                                 },
                                 "events": {
-                                    "type": "integer"
+                                    "type": "integer",
+                                    "example": 12
                                 }
                             },
                             "type": "object"

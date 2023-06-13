@@ -193,4 +193,12 @@ return [
         'code_valid_minutes' => 10,
     ],
 
+    'events' => [
+        // Default lifetime in minutes.
+        'default_lifetime' => 15,
+
+        // Default number of month to create repeatable records.
+        'future_repeatable' => 12,
+    ],
+
 ];

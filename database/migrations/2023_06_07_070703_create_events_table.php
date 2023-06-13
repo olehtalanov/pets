@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\User\EventRepeatSchemeEnum;
+use App\Enums\Animal\EventRepeatSchemeEnum;
 use App\Models\Animal;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -17,6 +17,10 @@ return new class extends Migration
         Schema::create('events', static function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
+            $table->foreignIdFor(\App\Models\Event::class, 'original_id')
+                ->nullable()
+                ->constrained((new \App\Models\Event())->getTable())
+                ->cascadeOnDelete();
             $table->foreignIdFor(Animal::class)
                 ->constrained()
                 ->cascadeOnDelete();
@@ -27,9 +31,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->timestamp('starts_at')->nullable();
             $table->timestamp('ends_at')->nullable();
-            $table->string('repeat_scheme')
-                ->default(EventRepeatSchemeEnum::Never->name);
-            $table->boolean('all_day')->default(0);
+            $table->enum('repeat_scheme', array_column(EventRepeatSchemeEnum::cases(), 'value'))
+                ->default(EventRepeatSchemeEnum::Never->value);
+            $table->boolean('whole_day')->default(0);
             $table->timestamps();
         });
     }

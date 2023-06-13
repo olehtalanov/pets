@@ -7,25 +7,24 @@ use App\Http\Resources\Animal\ItemFullResource;
 use App\Http\Resources\Animal\ListItemResource;
 use App\Models\Animal;
 use Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class AnimalRepository
+class AnimalRepository extends BaseRepository
 {
-    public static function make(): static
-    {
-        return new static();
-    }
-
     public function list(): AnonymousResourceCollection
     {
         return ListItemResource::collection(
             Auth::user()?->animals()
                 ->with(['type', 'breed'])
-                ->withCount(['notes', 'events'])
+                ->withCount([
+                    'notes',
+                    'events' => fn (Builder $query) => $query->actual(),
+                ])
                 ->get()
         );
     }

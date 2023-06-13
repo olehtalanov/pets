@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\User;
+namespace App\Enums\Animal;
 
 enum EventRepeatSchemeEnum: string
 {
@@ -11,4 +11,14 @@ enum EventRepeatSchemeEnum: string
     case EveryWeek = 'every_week';
     case EveryMonth = 'every_month';
     case EveryYear = 'every_year';
+
+    public static function getNames(): array
+    {
+        return trans('common.repeatable');
+    }
+
+    public function getName(): string
+    {
+        return trans('common.repeatable.'.$this->value);
+    }
 }
