@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\User\UserRoleEnum;
+use App\Events\User\Login;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\PersonalCodeRequest;
 use App\Http\Resources\User\UserResource;
-use App\Mail\Auth\PersonalCode;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Mail;
 use OpenApi\Annotations as OA;
 use Response;
 
-class AuthenticateController extends Controller
+class AuthenticationController extends Controller
 {
     /**
      * @OA\Post(
@@ -36,14 +36,16 @@ class AuthenticateController extends Controller
      */
     public function code(PersonalCodeRequest $request): JsonResponse
     {
-        $request->authenticate();
-
         /** @var User $user */
-        $user = User::whereEmail($request->input('email'))->first();
+        $user = User::firstOrCreate([
+            'email' => $request->input('email'),
+        ], [
+            'role' => UserRoleEnum::Regular,
+        ]);
 
         $code = $user->accessCodes()->create();
 
-        Mail::to($user)->send(new PersonalCode($code));
+        event(new Login($code));
 
         return Response::json(null, 204);
     }

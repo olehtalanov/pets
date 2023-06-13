@@ -74,7 +74,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @OA\Patch(
+     * @OA\Post(
      *     path="/api/profile/avatar",
      *     tags={"Profile"},
      *     summary="Update user avatar.",

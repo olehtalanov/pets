@@ -28,7 +28,7 @@ Route::group([
         ], static function () {
             Route::get('', [ProfileController::class, 'show'])->name('show');
             Route::patch('', [ProfileController::class, 'update'])->name('update');
-            Route::patch('avatar', [ProfileController::class, 'avatar'])->name('avatar');
+            Route::post('avatar', [ProfileController::class, 'avatar'])->name('avatar');
         });
 
         Route::group([
