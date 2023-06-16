@@ -27,7 +27,7 @@ class RepeatEvent implements ShouldQueue
      */
     public function __construct(
         private readonly Event $event,
-        private readonly ?Carbon $fromDate
+        private readonly ?Carbon $fromDate = null
     ) {
         //
     }

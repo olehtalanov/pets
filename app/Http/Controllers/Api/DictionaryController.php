@@ -52,7 +52,15 @@ class DictionaryController extends Controller
      *     @OA\Response(response=200, description="Successful response",
      *
      *         @OA\JsonContent(
-     *             type="object"
+     *             type="object",
+     *
+     *             @OA\Property(property="never", type="string", example="Never"),
+     *             @OA\Property(property="every_day", type="string", example="Every day"),
+     *             @OA\Property(property="every_working_day", type="string", example="Every working day"),
+     *             @OA\Property(property="every_weekend", type="string", example="Every weekend"),
+     *             @OA\Property(property="every_week", type="string", example="Every week"),
+     *             @OA\Property(property="every_month", type="string", example="Every month"),
+     *             @OA\Property(property="every_year", type="string", example="Every year"),
      *         )
      *     )
      * )

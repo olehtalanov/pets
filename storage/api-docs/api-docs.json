@@ -374,6 +374,36 @@
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "properties": {
+                                        "never": {
+                                            "type": "string",
+                                            "example": "Never"
+                                        },
+                                        "every_day": {
+                                            "type": "string",
+                                            "example": "Every day"
+                                        },
+                                        "every_working_day": {
+                                            "type": "string",
+                                            "example": "Every working day"
+                                        },
+                                        "every_weekend": {
+                                            "type": "string",
+                                            "example": "Every weekend"
+                                        },
+                                        "every_week": {
+                                            "type": "string",
+                                            "example": "Every week"
+                                        },
+                                        "every_month": {
+                                            "type": "string",
+                                            "example": "Every month"
+                                        },
+                                        "every_year": {
+                                            "type": "string",
+                                            "example": "Every year"
+                                        }
+                                    },
                                     "type": "object"
                                 }
                             }
@@ -383,6 +413,28 @@
             }
         },
         "/api/events": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Get list of events.",
+                "operationId": "e529c81e6aaec82f49950a87ed881f57",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/EventShortResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Events"
@@ -414,6 +466,48 @@
             }
         },
         "/api/events/{uuid}": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Get single event.",
+                "operationId": "f846708dd54f308af5db3385357473f3",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/EventFullResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Delete an event.",
+                "operationId": "1b4432e2eb3430460a1a211efa0815b5",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    }
+                }
+            },
             "patch": {
                 "tags": [
                     "Events"
@@ -700,41 +794,10 @@
                     "whole_day": {
                         "type": "boolean",
                         "example": false
-                    }
-                },
-                "type": "object"
-            },
-            "EventFullResource": {
-                "properties": {
-                    "uuid": {
-                        "type": "string"
                     },
-                    "title": {
-                        "type": "string",
-                        "example": "Some title"
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "starts_at": {
-                        "type": "string",
-                        "example": "2023-06-10 10:00:00"
-                    },
-                    "ends_at": {
-                        "type": "string",
-                        "example": "2023-06-12 18:00:00"
-                    },
-                    "repeat": {
-                        "type": "string",
-                        "example": "never"
-                    },
-                    "whole_day": {
+                    "only_this": {
                         "type": "boolean",
-                        "example": false
-                    },
-                    "animal": {
-                        "$ref": "#/components/schemas/AnimalFullResource"
+                        "example": true
                     }
                 },
                 "type": "object"
@@ -866,6 +929,72 @@
                         "items": {
                             "$ref": "#/components/schemas/DictionaryTypedResource"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "EventFullResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Some title"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "starts_at": {
+                        "type": "string",
+                        "example": "2023-06-10 10:00:00"
+                    },
+                    "ends_at": {
+                        "type": "string",
+                        "example": "2023-06-12 18:00:00"
+                    },
+                    "repeat": {
+                        "type": "string",
+                        "example": "never"
+                    },
+                    "whole_day": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "animal": {
+                        "$ref": "#/components/schemas/AnimalFullResource"
+                    }
+                },
+                "type": "object"
+            },
+            "EventShortResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Some title"
+                    },
+                    "starts_at": {
+                        "type": "string",
+                        "example": "2023-06-10 10:00:00"
+                    },
+                    "ends_at": {
+                        "type": "string",
+                        "example": "2023-06-12 18:00:00"
+                    },
+                    "repeat": {
+                        "type": "string",
+                        "example": "never"
+                    },
+                    "whole_day": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "animal": {
+                        "type": "string"
                     }
                 },
                 "type": "object"

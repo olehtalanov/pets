@@ -19,7 +19,8 @@ class AnimalRepository extends BaseRepository
     public function list(): AnonymousResourceCollection
     {
         return ListItemResource::collection(
-            Auth::user()?->animals()
+            Auth::user()
+                ->animals()
                 ->with(['type', 'breed'])
                 ->withCount([
                     'notes',
@@ -29,46 +30,44 @@ class AnimalRepository extends BaseRepository
         );
     }
 
-    public function one(string $animal): ItemFullResource
+    public function one(Animal $animal): ItemFullResource
     {
         return new ItemFullResource(
-            Animal::whereUuid($animal)
-                ->with(['type', 'breed'])
-                ->withCount(['notes', 'events'])
-                ->firstOrFail()
+            $animal
+                ->load(['type', 'breed'])
+                ->loadCount(['notes', 'events'])
         );
     }
 
     public function store(AnimalData $attributes): ItemFullResource
     {
         return new ItemFullResource(
-            Auth::user()?->animals()->create($attributes->toArray())
+            Auth::user()
+                ->animals()
+                ->create($attributes->toArray())
         );
     }
 
-    public function update(string $animal, AnimalData $attributes): ItemFullResource
+    public function update(Animal $animal, AnimalData $attributes): ItemFullResource
     {
-        Animal::whereUuid($animal)->update($attributes->toArray());
+        tap($animal)->update($attributes->toArray());
 
-        return new ItemFullResource(
-            Animal::findUOrFail($animal)
-        );
+        return new ItemFullResource($animal);
     }
 
     /**
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function avatar(string $animal, UploadedFile $file): ?Media
+    public function avatar(Animal $animal, UploadedFile $file): ?Media
     {
-        return Animal::whereUuid($animal)
-            ->firstOrFail()
-            ?->addMedia($file)
+        return $animal
+            ->addMedia($file)
             ->toMediaCollection('avatar');
     }
 
-    public function destroy(string $animal): void
+    public function destroy(Animal $animal): void
     {
-        Animal::whereUuid($animal)->delete();
+        $animal->delete();
     }
 }

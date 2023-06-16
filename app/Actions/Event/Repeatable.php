@@ -2,6 +2,7 @@
 
 namespace App\Actions\Event;
 
+use App\Enums\Animal\EventRepeatSchemeEnum;
 use App\Models\Event;
 use Carbon\Carbon;
 use Closure;
@@ -17,9 +18,20 @@ abstract class Repeatable
         protected ?Carbon $fromDate = null
     ) {
         $this->diffInMinutes = $this->event->starts_at->diffInMinutes($this->event->ends_at);
-        $this->endDate = $this->event->starts_at->addMonths(config('app.events.future_repeatable'));
 
-        if (! $this->event->wasRecentlyCreated && $this->event->isDirty('repeat_scheme')) {
+        $this->endDate = match ($this->event->repeat_scheme) {
+            EventRepeatSchemeEnum::Never => $this->event->ends_at,
+            EventRepeatSchemeEnum::EveryDay => $this->event->starts_at->addDays(config('app.events.repeat.days')),
+            EventRepeatSchemeEnum::EveryWorkingDay => $this->event->starts_at->addDays(config('app.events.repeat.working_days')),
+            EventRepeatSchemeEnum::EveryWeekend,
+            EventRepeatSchemeEnum::EveryWeek => $this->event->starts_at->addDays(config('app.events.repeat.weekends')),
+            EventRepeatSchemeEnum::EveryMonth => $this->event->starts_at->addMonths(config('app.events.repeat.months')),
+            EventRepeatSchemeEnum::EveryYear => $this->event->starts_at->addYears(config('app.events.repeat.months')),
+        };
+
+        if (! $this->event->wasRecentlyCreated
+            && $this->event->processable
+            && $this->event->isDirty('repeat_scheme')) {
             $this->event->children()->delete();
         }
     }

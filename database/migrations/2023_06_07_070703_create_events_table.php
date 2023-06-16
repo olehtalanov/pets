@@ -27,13 +27,14 @@ return new class extends Migration
             $table->foreignIdFor(User::class)
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->string('title');
-            $table->text('description')->nullable();
+            $table->string('title')->index();
+            $table->text('description')->nullable()->fulltext();
             $table->timestamp('starts_at')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->enum('repeat_scheme', array_column(EventRepeatSchemeEnum::cases(), 'value'))
                 ->default(EventRepeatSchemeEnum::Never->value);
             $table->boolean('whole_day')->default(0);
+            $table->boolean('processable')->default(0);
             $table->timestamps();
         });
     }

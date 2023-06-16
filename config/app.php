@@ -197,8 +197,13 @@ return [
         // Default lifetime in minutes.
         'default_lifetime' => 15,
 
-        // Default number of month to create repeatable records.
-        'future_repeatable' => 12,
+        'repeat' => [
+            'days' => 100,
+            'working_days' => 70,
+            'weekends' => 30,
+            'months' => 12,
+            'years' => 3,
+        ],
     ],
 
 ];

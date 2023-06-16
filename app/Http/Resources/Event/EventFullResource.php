@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Resources\Animal;
+namespace App\Http\Resources\Event;
 
+use App\Http\Resources\Animal\ItemFullResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Annotations as OA;
@@ -22,7 +23,7 @@ use OpenApi\Annotations as OA;
  *     )),
  * )
  */
-class EventResource extends JsonResource
+class EventFullResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -37,7 +38,10 @@ class EventResource extends JsonResource
             'description' => $this->description,
             'starts_at' => $this->starts_at?->toDateTimeString(),
             'ends_at' => $this->ends_at?->toDateTimeString(),
-            'repeat' => $this->repeat_scheme->getName(),
+            'repeat' => [
+                'scheme' => $this->repeat_scheme->value,
+                'name' => $this->repeat_scheme->getName(),
+            ],
             'whole_day' => $this->whole_day,
             'animal' => new ItemFullResource($this->animal),
         ];

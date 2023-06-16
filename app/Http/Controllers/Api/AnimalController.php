@@ -6,6 +6,7 @@ use App\Data\Animal\AnimalData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Animal\AvatarRequest;
 use App\Http\Requests\Animal\StoreRequest;
+use App\Models\Animal;
 use App\Repositories\AnimalRepository;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
@@ -58,8 +59,10 @@ class AnimalController extends Controller
      *     )
      * )
      */
-    public function show(string $animal): JsonResponse
+    public function show(Animal $animal): JsonResponse
     {
+        $this->authorize('view', $animal);
+
         return Response::json(
             $this->animalRepository->one($animal)
         );
@@ -142,8 +145,10 @@ class AnimalController extends Controller
      *     )
      * )
      */
-    public function update(StoreRequest $request, string $animal): JsonResponse
+    public function update(StoreRequest $request, Animal $animal): JsonResponse
     {
+        $this->authorize('update', $animal);
+
         return Response::json(
             $this->animalRepository->update(
                 $animal,
@@ -192,8 +197,10 @@ class AnimalController extends Controller
      *     )
      * )
      */
-    public function avatar(AvatarRequest $request, string $animal): JsonResponse
+    public function avatar(AvatarRequest $request, Animal $animal): JsonResponse
     {
+        $this->authorize('update', $animal);
+
         $media = $this->animalRepository->avatar($animal, $request->file('avatar'));
 
         return Response::json([
@@ -213,8 +220,10 @@ class AnimalController extends Controller
      *     @OA\Response(response=204, description="Successful response")
      * )
      */
-    public function destroy(string $animal): JsonResponse
+    public function destroy(Animal $animal): JsonResponse
     {
+        $this->authorize('delete', $animal);
+
         $this->animalRepository->destroy($animal);
 
         return Response::json(null, 204);

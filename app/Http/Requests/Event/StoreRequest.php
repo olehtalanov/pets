@@ -21,6 +21,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="ends_at", type="string", nullable=true, example=null),
  *     @OA\Property(property="repeat", type="string", example="never"),
  *     @OA\Property(property="whole_day", type="boolean", example=false),
+ *     @OA\Property(property="only_this", type="boolean", example=true),
  *     )),
  * )
  */
@@ -49,6 +50,7 @@ class StoreRequest extends FormRequest
             'ends_at' => ['nullable', 'date'],
             'repeat_scheme' => ['required', 'string', new Enum(EventRepeatSchemeEnum::class)],
             'whole_day' => ['nullable', 'boolean'],
+            'only_this' => ['sometimes', 'boolean'],
         ];
     }
 }

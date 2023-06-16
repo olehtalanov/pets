@@ -1,5 +1,5 @@
 <x-mail::message>
-    {{ trans('auth.code.mail.message') }}
+{{ trans('auth.code.mail.message') }}
 
-    # {{ $code->code }}
+# {{ $code->code }}
 </x-mail::message>

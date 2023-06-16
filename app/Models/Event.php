@@ -6,6 +6,7 @@ use App\Enums\Animal\EventRepeatSchemeEnum;
 use App\Traits\HasUuid;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,10 +30,12 @@ use Illuminate\Support\Carbon;
  * @property bool $whole_day
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property bool $processable
  * @property-read \App\Models\Animal $animal
  * @property-read \App\Models\Category|null $category
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Event> $children
+ * @property-read Collection<int, Event> $children
  * @property-read int|null $children_count
+ * @property-read Event|null $parent
  * @property-read \App\Models\User $user
  *
  * @method static Builder|Event actual()
@@ -47,6 +50,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Event whereEndsAt($value)
  * @method static Builder|Event whereId($value)
  * @method static Builder|Event whereOriginalId($value)
+ * @method static Builder|Event whereProcessable($value)
  * @method static Builder|Event whereRepeatScheme($value)
  * @method static Builder|Event whereStartsAt($value)
  * @method static Builder|Event whereTitle($value)
@@ -68,6 +72,7 @@ class Event extends Model
         'ends_at',
         'repeat_scheme',
         'whole_day',
+        'processable',
 
         'original_id',
         'animal_id',
@@ -79,6 +84,7 @@ class Event extends Model
         'ends_at' => 'datetime',
         'repeat_scheme' => EventRepeatSchemeEnum::class,
         'whole_day' => 'boolean',
+        'processable' => 'boolean',
     ];
 
     /* Relationships */
@@ -96,6 +102,11 @@ class Event extends Model
     public function category(): MorphOne
     {
         return $this->morphOne(Category::class, 'categorable');
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'original_id');
     }
 
     public function children(): HasMany
