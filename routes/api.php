@@ -11,6 +11,8 @@ Route::group([
 ], static function () {
     require __DIR__.'/auth.php';
 
+    Route::any('ping', fn() => Response::json(null, 204))->name('ping');
+
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], static function () {
