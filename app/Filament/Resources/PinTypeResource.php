@@ -14,7 +14,7 @@ class PinTypeResource extends Resource
 {
     protected static ?string $model = PinType::class;
 
-    protected static ?string $navigationIcon = 'iconsax-two-map-1';
+    protected static ?string $navigationIcon = 'heroicon-o-sparkles';
 
     protected static function getNavigationGroup(): ?string
     {
@@ -48,7 +48,7 @@ class PinTypeResource extends Resource
                 Forms\Components\Fieldset::make(trans('admin.fields.name'))
                     ->schema(
                         collect(config('app.available_locales'))
-                            ->map(fn (string $locale) => Forms\Components\TextInput::make('name.'.$locale)->required())
+                            ->map(fn(string $locale) => Forms\Components\TextInput::make('name.'.$locale)->required())
                             ->toArray()
                     ),
                 Forms\Components\Toggle::make('is_visible')

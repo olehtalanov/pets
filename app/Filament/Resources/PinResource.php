@@ -14,7 +14,7 @@ class PinResource extends Resource
 {
     protected static ?string $model = Pin::class;
 
-    protected static ?string $navigationIcon = 'iconsax-two-location';
+    protected static ?string $navigationIcon = 'heroicon-o-location-marker';
 
     protected static function getNavigationGroup(): ?string
     {
@@ -66,7 +66,7 @@ class PinResource extends Resource
                 Tables\Columns\TextColumn::make('user.name'),
                 Tables\Columns\TextColumn::make('type.name'),
                 Tables\Columns\TextColumn::make('coordinates')
-                    ->getStateUsing(fn (Pin $record) => "$record->latitude@$record->longitude"),
+                    ->getStateUsing(fn(Pin $record) => "$record->latitude@$record->longitude"),
             ])
             ->filters([
                 //

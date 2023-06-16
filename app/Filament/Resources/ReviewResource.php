@@ -17,7 +17,7 @@ class ReviewResource extends Resource
 {
     protected static ?string $model = Review::class;
 
-    protected static ?string $navigationIcon = 'iconsax-two-chart-21';
+    protected static ?string $navigationIcon = 'heroicon-o-star';
 
     protected static function getNavigationGroup(): ?string
     {
@@ -50,7 +50,7 @@ class ReviewResource extends Resource
             ->schema([
                 Forms\Components\Select::make('user_id')
                     ->label(trans('admin.fields.reviewer'))
-                    ->relationship('reviewer', 'name', fn (Builder $query) => $query->select(['users.*', DB::raw('CONCAT(first_name, last_name) as name')]))
+                    ->relationship('reviewer', 'name', fn(Builder $query) => $query->select(['users.*', DB::raw('CONCAT(first_name, last_name) as name')]))
                     ->required(),
                 Forms\Components\Select::make('pin_id')
                     ->required()

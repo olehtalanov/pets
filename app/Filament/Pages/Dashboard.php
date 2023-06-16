@@ -7,7 +7,7 @@ use Filament\Pages\Page;
 
 class Dashboard extends Page
 {
-    protected static ?string $navigationIcon = 'iconsax-two-home-trend-up';
+    protected static ?string $navigationIcon = 'heroicon-o-view-grid';
 
     protected static ?int $navigationSort = -2;
 

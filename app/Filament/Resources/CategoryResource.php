@@ -18,7 +18,7 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'iconsax-two-data-2';
+    protected static ?string $navigationIcon = 'heroicon-o-puzzle';
 
     protected static function getNavigationGroup(): ?string
     {
@@ -52,7 +52,7 @@ class CategoryResource extends Resource
                 Forms\Components\Fieldset::make(trans('admin.fields.name'))
                     ->schema(
                         collect(config('app.available_locales'))
-                            ->map(fn (string $locale) => Forms\Components\TextInput::make('name.'.$locale)->required())
+                            ->map(fn(string $locale) => Forms\Components\TextInput::make('name.'.$locale)->required())
                             ->toArray()
                     ),
                 Forms\Components\Select::make('parent_id')
@@ -65,7 +65,7 @@ class CategoryResource extends Resource
                         Event::class => trans('admin.fields.event'),
                         Note::class => trans('admin.fields.note'),
                     ])
-                    ->when(fn (Closure $get) => $get('parent_id') === null),
+                    ->when(fn(Closure $get) => $get('parent_id') === null),
             ]);
     }
 

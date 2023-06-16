@@ -14,7 +14,7 @@ class BreedResource extends Resource
 {
     protected static ?string $model = Breed::class;
 
-    protected static ?string $navigationIcon = 'iconsax-two-cup';
+    protected static ?string $navigationIcon = 'heroicon-o-cube-transparent';
 
     protected static function getNavigationGroup(): ?string
     {
@@ -55,7 +55,7 @@ class BreedResource extends Resource
                 Forms\Components\Fieldset::make(trans('admin.fields.name'))
                     ->schema(
                         collect(config('app.available_locales'))
-                            ->map(fn (string $locale) => Forms\Components\TextInput::make('name.'.$locale)->required())
+                            ->map(fn(string $locale) => Forms\Components\TextInput::make('name.'.$locale)->required())
                             ->toArray()
                     ),
                 Forms\Components\Toggle::make('is_visible')
