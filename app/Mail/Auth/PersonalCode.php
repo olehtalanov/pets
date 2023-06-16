@@ -17,8 +17,9 @@ class PersonalCode extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
-    public function __construct(public PersonalAccessCode $code)
-    {
+    public function __construct(
+        public PersonalAccessCode $code
+    ) {
         //
     }
 

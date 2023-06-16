@@ -14,9 +14,7 @@ class ProfileRepository extends BaseRepository
 {
     public function update(ProfileData $data): User
     {
-        tap(Auth::user())->update($data->toArray());
-
-        return Auth::user();
+        return tap(Auth::user())->update($data->toArray());
     }
 
     /**

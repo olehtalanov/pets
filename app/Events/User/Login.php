@@ -15,8 +15,9 @@ class Login
     /**
      * Create a new event instance.
      */
-    public function __construct(public readonly PersonalAccessCode $code)
-    {
+    public function __construct(
+        public readonly PersonalAccessCode $code
+    ) {
         //
     }
 
