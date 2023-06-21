@@ -50,9 +50,8 @@ class EventRepository extends BaseRepository
 
     public function store(
         EventData $data,
-        ?Carbon   $fromDate = null
-    ): Event
-    {
+        ?Carbon $fromDate = null
+    ): Event {
         /** @var Event $event */
         $event = Auth::user()
             ->events()
@@ -73,12 +72,11 @@ class EventRepository extends BaseRepository
     }
 
     public function update(
-        Event     $event,
+        Event $event,
         EventData $data,
-        bool      $onlyThis,
-    ): Event
-    {
-        $state = ChangeState::make($event, !$onlyThis);
+        bool $onlyThis,
+    ): Event {
+        $state = ChangeState::make($event, ! $onlyThis);
 
         tap($event)->update(
             $data

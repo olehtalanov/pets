@@ -94,8 +94,8 @@ class Category extends Model
             ->whereNull('parent_id')
             ->when(
                 $model,
-                fn(Builder $builder, string $model) => $builder->where('related_model', $model),
-                fn(Builder $builder) => $builder->whereNull('related_model')
+                fn (Builder $builder, string $model) => $builder->where('related_model', $model),
+                fn (Builder $builder) => $builder->whereNull('related_model')
             );
     }
 
@@ -103,7 +103,7 @@ class Category extends Model
     {
         $builder
             ->whereNotNull('parent_id')
-            ->when($model, fn($builder, string $model) => $builder->where('related_model', $model));
+            ->when($model, fn ($builder, string $model) => $builder->where('related_model', $model));
     }
 
     protected static function booted(): void

@@ -52,7 +52,7 @@ class CategoryResource extends Resource
                 Forms\Components\Fieldset::make(trans('admin.fields.name'))
                     ->schema(
                         collect(config('app.available_locales'))
-                            ->map(fn(string $locale) => Forms\Components\TextInput::make('name.'.$locale)->required())
+                            ->map(fn (string $locale) => Forms\Components\TextInput::make('name.'.$locale)->required())
                             ->toArray()
                     ),
                 Forms\Components\Select::make('parent_id')
@@ -65,7 +65,7 @@ class CategoryResource extends Resource
                         Event::class => trans('admin.fields.event'),
                         Note::class => trans('admin.fields.note'),
                     ])
-                    ->when(fn(Closure $get) => $get('parent_id') === null),
+                    ->when(fn (Closure $get) => $get('parent_id') === null),
             ]);
     }
 

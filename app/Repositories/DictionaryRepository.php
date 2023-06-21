@@ -26,7 +26,7 @@ class DictionaryRepository extends BaseRepository
             'categories' => [
                 'events' => TypedResource::collection($this->eventCategories()),
                 'notes' => TypedResource::collection($this->noteCategories()),
-                'common' => TypedResource::collection($this->commonCategories())
+                'common' => TypedResource::collection($this->commonCategories()),
             ],
         ];
     }
@@ -34,7 +34,7 @@ class DictionaryRepository extends BaseRepository
     public function animalTypes(): Collection|array
     {
         return AnimalType::onlyVisible()->with([
-            'breeds' => fn($query) => $query->onlyVisible()->select(),
+            'breeds' => fn ($query) => $query->onlyVisible()->select(),
         ])->get();
     }
 

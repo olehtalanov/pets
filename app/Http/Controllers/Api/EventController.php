@@ -19,8 +19,7 @@ class EventController extends Controller
 {
     public function __construct(
         private readonly EventRepository $eventRepository
-    )
-    {
+    ) {
         //
     }
 
@@ -66,6 +65,7 @@ class EventController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function show(Event $event): JsonResponse
@@ -137,6 +137,7 @@ class EventController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function update(StoreRequest $request, Event $event): JsonResponse
@@ -164,6 +165,7 @@ class EventController extends Controller
      *
      *     @OA\Response(response=204, description="Successful response")
      * )
+     *
      * @throws AuthorizationException
      */
     public function destroy(Event $event): JsonResponse

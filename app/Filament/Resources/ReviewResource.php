@@ -50,7 +50,7 @@ class ReviewResource extends Resource
             ->schema([
                 Forms\Components\Select::make('user_id')
                     ->label(trans('admin.fields.reviewer'))
-                    ->relationship('reviewer', 'name', fn(Builder $query) => $query->select(['users.*', DB::raw('CONCAT(first_name, last_name) as name')]))
+                    ->relationship('reviewer', 'name', fn (Builder $query) => $query->select(['users.*', DB::raw('CONCAT(first_name, last_name) as name')]))
                     ->required(),
                 Forms\Components\Select::make('pin_id')
                     ->required()

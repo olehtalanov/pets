@@ -18,8 +18,7 @@ class NoteController extends Controller
 {
     public function __construct(
         private readonly NoteRepository $noteRepository
-    )
-    {
+    ) {
         //
     }
 
@@ -55,7 +54,6 @@ class NoteController extends Controller
      *     summary="Get a note.",
      *
      *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
-     *
      *
      *     @OA\Response(response=200, description="Successful response",
      *
@@ -132,6 +130,7 @@ class NoteController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function update(StoreRequest $request, Note $note): JsonResponse
@@ -158,6 +157,7 @@ class NoteController extends Controller
      *
      *     @OA\Response(response=204, description="Successful response")
      * )
+     *
      * @throws AuthorizationException
      */
     public function destroy(Note $note): JsonResponse

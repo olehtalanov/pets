@@ -66,10 +66,10 @@ class UserResource extends Resource
                     ->reactive()
                     ->options(
                         collect(config('services.auth_providers'))
-                            ->mapWithKeys(fn(string $name) => [$name => ucfirst($name)])
+                            ->mapWithKeys(fn (string $name) => [$name => ucfirst($name)])
                     ),
                 Forms\Components\TextInput::make('provider_id')
-                    ->hidden(fn(callable $get) => !$get('provider')),
+                    ->hidden(fn (callable $get) => ! $get('provider')),
             ]);
     }
 
@@ -78,7 +78,7 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->formatStateUsing(fn(User $record) => "$record->first_name $record->last_name"),
+                    ->formatStateUsing(fn (User $record) => "$record->first_name $record->last_name"),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('email_verified_at')->dateTime(),
                 Tables\Columns\TextColumn::make('role')->enum(trans('admin.roles')),

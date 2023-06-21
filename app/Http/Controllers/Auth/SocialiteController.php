@@ -17,7 +17,7 @@ class SocialiteController extends Controller
 {
     public function link(string $provider): RedirectResponse
     {
-        if (!in_array($provider, config('services.auth_providers'), true)) {
+        if (! in_array($provider, config('services.auth_providers'), true)) {
             throw new InvalidProviderException();
         }
 
@@ -26,7 +26,7 @@ class SocialiteController extends Controller
 
     public function store(Request $request, string $provider): JsonResponse
     {
-        if (!in_array($provider, config('services.auth_providers'), true)) {
+        if (! in_array($provider, config('services.auth_providers'), true)) {
             throw new InvalidProviderException();
         }
 

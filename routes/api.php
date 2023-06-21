@@ -10,12 +10,12 @@ use App\Http\Controllers\Api\ProfileController;
 Route::group([
     'as' => 'api.',
 ], static function () {
-    require __DIR__ . '/auth.php';
+    require __DIR__.'/auth.php';
 
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], static function () {
-        Route::any('ping', static fn() => null)->name('ping');
+        Route::any('ping', static fn () => null)->name('ping');
 
         /* Animals */
 
