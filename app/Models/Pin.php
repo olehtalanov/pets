@@ -44,7 +44,8 @@ use Illuminate\Support\Carbon;
  */
 class Pin extends Model
 {
-    use HasFactory, HasUuid;
+    use HasFactory;
+    use HasUuid;
 
     protected $fillable = [
         'latitude',

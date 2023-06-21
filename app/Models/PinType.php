@@ -38,7 +38,9 @@ use Spatie\Translatable\HasTranslations;
  */
 class PinType extends Model
 {
-    use HasFactory, HasUuid, HasTranslations;
+    use HasFactory;
+    use HasUuid;
+    use HasTranslations;
 
     public $timestamps = false;
 

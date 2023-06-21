@@ -72,7 +72,9 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Animal extends Model implements HasMedia
 {
-    use HasFactory, HasUuid, UseMedia;
+    use HasFactory;
+    use HasUuid;
+    use UseMedia;
 
     protected $fillable = [
         'name',

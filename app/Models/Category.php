@@ -51,7 +51,9 @@ use Spatie\Translatable\HasTranslations;
  */
 class Category extends Model
 {
-    use HasFactory, HasUuid, HasTranslations;
+    use HasFactory;
+    use HasUuid;
+    use HasTranslations;
 
     protected $fillable = [
         'name',

@@ -43,7 +43,8 @@ use Illuminate\Support\Carbon;
  */
 class Review extends Model
 {
-    use HasFactory, HasUuid;
+    use HasFactory;
+    use HasUuid;
 
     protected $fillable = [
         'message',

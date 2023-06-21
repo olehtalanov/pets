@@ -64,7 +64,8 @@ use Illuminate\Support\Carbon;
  */
 class Event extends Model
 {
-    use HasFactory, HasUuid;
+    use HasFactory;
+    use HasUuid;
 
     protected $fillable = [
         'title',

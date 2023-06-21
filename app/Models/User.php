@@ -90,7 +90,11 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 final class User extends Authenticatable implements FilamentUser, HasMedia
 {
-    use HasApiTokens, HasUuid, HasFactory, Notifiable, UseMedia;
+    use HasApiTokens;
+    use HasUuid;
+    use HasFactory;
+    use Notifiable;
+    use UseMedia;
 
     protected $fillable = [
         'first_name',

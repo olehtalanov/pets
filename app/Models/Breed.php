@@ -35,7 +35,9 @@ use Spatie\Translatable\HasTranslations;
  */
 class Breed extends Model
 {
-    use HasFactory, HasTranslations, HasUuid;
+    use HasFactory;
+    use HasTranslations;
+    use HasUuid;
 
     public $timestamps = false;
 

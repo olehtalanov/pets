@@ -38,7 +38,8 @@ use Illuminate\Support\Carbon;
  */
 class Appeal extends Model
 {
-    use HasFactory, HasUuid;
+    use HasFactory;
+    use HasUuid;
 
     protected $fillable = [
         'message',
