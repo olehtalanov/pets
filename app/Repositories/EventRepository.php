@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
 
 class EventRepository extends BaseRepository
 {
-    public function list(Collection $filters): \Illuminate\Database\Eloquent\Collection
+    public function list(Collection $filters): Collection
     {
         return Auth::user()
             ->events()
@@ -25,6 +25,7 @@ class EventRepository extends BaseRepository
                     ->whereColumn('user_id', 'events.user_id')
                     ->select('name'),
             ])
+            ->with('categories:id,uuid,name')
             ->when($filters->get('animal'), function (Builder $builder, string $uuid) {
                 $builder->where('animal_id', DB::table('animals')->whereColumn('uuid', $uuid)->first()?->uuid);
             })
@@ -49,46 +50,50 @@ class EventRepository extends BaseRepository
 
     public function store(
         EventData $data,
-        ?Carbon $fromDate = null
-    ): Event {
+        ?Carbon   $fromDate = null
+    ): Event
+    {
         /** @var Event $event */
         $event = Auth::user()
             ->events()
             ->create(
-                $data->additional([
-                    'processable' => 1,
-                ])->toArray()
+                $data
+                    ->except('category_ids')
+                    ->additional([
+                        'processable' => 1,
+                    ])
+                    ->toArray()
             );
 
-        $event->setRelation(
-            'animal',
-            AnimalRepository::make()->one($event->animal)
-        );
+        $event->categories()->attach($data->category_ids);
 
         dispatch(new RepeatEvent($event, $fromDate));
 
-        return $event;
+        return $this->one($event);
     }
 
     public function update(
-        Event $event,
+        Event     $event,
         EventData $data,
-        bool $onlyThis,
-    ): Event {
-        $state = ChangeState::make($event, ! $onlyThis);
+        bool      $onlyThis,
+    ): Event
+    {
+        $state = ChangeState::make($event, !$onlyThis);
 
-        tap($event)->update($data->additional($state->additional)->toArray());
-
-        $event->setRelation(
-            'animal',
-            AnimalRepository::make()->one($event->animal)
+        tap($event)->update(
+            $data
+                ->except('category_ids')
+                ->additional($state->additional)
+                ->toArray()
         );
+
+        $event->categories()->sync($data->category_ids);
 
         if ($state->generateChildren) {
             dispatch(new RepeatEvent($event));
         }
 
-        return $event;
+        return $this->one($event);
     }
 
     public function destroy(Event $event): void

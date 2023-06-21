@@ -4,17 +4,18 @@ use App\Http\Controllers\Api\AnimalController;
 use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\DictionaryController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\ProfileController;
 
 Route::group([
     'as' => 'api.',
 ], static function () {
-    require __DIR__.'/auth.php';
+    require __DIR__ . '/auth.php';
 
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], static function () {
-        Route::any('ping', static fn () => null)->name('ping');
+        Route::any('ping', static fn() => null)->name('ping');
 
         /* Animals */
 
@@ -24,6 +25,10 @@ Route::group([
         /* Events */
 
         Route::apiResource('events', EventController::class);
+
+        /* Notes */
+
+        Route::apiResource('notes', NoteController::class);
 
         /* Profile */
 

@@ -2,7 +2,8 @@
 
 namespace App\Http\Resources\Event;
 
-use App\Http\Resources\Animal\ItemFullResource;
+use App\Http\Resources\Animal\FullResource as AnimalFullResource;
+use App\Http\Resources\Dictionary\TypedResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Annotations as OA;
@@ -20,10 +21,11 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="repeat", type="string", example="never"),
  *     @OA\Property(property="whole_day", type="boolean", example=false),
  *     @OA\Property(property="animal", type="object", ref="#/components/schemas/AnimalFullResource"),
+ *     @OA\Property(property="categories", type="array", @OA\Items(ref="#/components/schemas/DictionaryTypedResource")),
  *     )),
  * )
  */
-class EventFullResource extends JsonResource
+class FullResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -43,7 +45,8 @@ class EventFullResource extends JsonResource
                 'name' => $this->repeat_scheme->getName(),
             ],
             'whole_day' => $this->whole_day,
-            'animal' => new ItemFullResource($this->animal),
+            'animal' => new AnimalFullResource($this->animal),
+            'categories' => TypedResource::collection($this->categories),
         ];
     }
 }

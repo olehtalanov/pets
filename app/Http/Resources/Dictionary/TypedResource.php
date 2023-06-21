@@ -14,8 +14,6 @@ use OpenApi\Annotations as OA;
  *
  *     @OA\Property(property="uuid", type="string"),
  *     @OA\Property(property="name", type="string"),
- *     @OA\Property(property="breed", type="array", @OA\Items(ref="#/components/schemas/DictionaryTypedResource")),
- *     @OA\Property(property="children", type="array", @OA\Items(ref="#/components/schemas/DictionaryTypedResource"))
  * )
  */
 class TypedResource extends JsonResource

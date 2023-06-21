@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Chat;
 
-use App\Http\Resources\User\UserShortResource;
+use App\Http\Resources\User\ShortResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class LastMessageResource extends JsonResource
@@ -13,7 +13,7 @@ class LastMessageResource extends JsonResource
             'id' => $this->id,
             'content' => $this->content,
             'is_read' => $this->reat_at !== null,
-            'owner' => new UserShortResource($this->user),
+            'owner' => new ShortResource($this->user),
         ];
     }
 }

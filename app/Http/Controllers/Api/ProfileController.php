@@ -6,7 +6,7 @@ use App\Data\User\ProfileData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\AvatarRequest;
 use App\Http\Requests\User\ProfileRequest;
-use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\FullResource;
 use App\Repositories\ProfileRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,7 +17,8 @@ class ProfileController extends Controller
 {
     public function __construct(
         private readonly ProfileRepository $profileRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -39,7 +40,7 @@ class ProfileController extends Controller
     public function show(Request $request): JsonResponse
     {
         return Response::json(
-            new UserResource($request->user())
+            new FullResource($request->user())
         );
     }
 
@@ -78,7 +79,7 @@ class ProfileController extends Controller
         );
 
         return Response::json(
-            new UserResource($user)
+            new FullResource($user)
         );
     }
 

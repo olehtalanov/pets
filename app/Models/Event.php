@@ -4,14 +4,15 @@ namespace App\Models;
 
 use App\Enums\Animal\EventRepeatSchemeEnum;
 use App\Traits\HasUuid;
+use Database\Factories\EventFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -31,15 +32,15 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property bool $processable
- * @property-read \App\Models\Animal $animal
- * @property-read \App\Models\Category|null $category
+ * @property-read Animal $animal
+ * @property-read Category|null $category
  * @property-read Collection<int, Event> $children
  * @property-read int|null $children_count
  * @property-read Event|null $parent
- * @property-read \App\Models\User $user
+ * @property-read User $user
  *
  * @method static Builder|Event actual()
- * @method static \Database\Factories\EventFactory factory($count = null, $state = [])
+ * @method static EventFactory factory($count = null, $state = [])
  * @method static Builder|Event newModelQuery()
  * @method static Builder|Event newQuery()
  * @method static Builder|Event query()
@@ -99,9 +100,9 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function category(): MorphOne
+    public function categories(): BelongsToMany
     {
-        return $this->morphOne(Category::class, 'categorable');
+        return $this->belongsToMany(Category::class, 'categorables');
     }
 
     public function parent(): BelongsTo

@@ -417,7 +417,7 @@
                 "tags": [
                     "Events"
                 ],
-                "summary": "Get list of events.",
+                "summary": "Get list of the events.",
                 "operationId": "e529c81e6aaec82f49950a87ed881f57",
                 "responses": {
                     "200": {
@@ -470,7 +470,7 @@
                 "tags": [
                     "Events"
                 ],
-                "summary": "Get single event.",
+                "summary": "Get an event.",
                 "operationId": "f846708dd54f308af5db3385357473f3",
                 "responses": {
                     "200": {
@@ -512,7 +512,7 @@
                 "tags": [
                     "Events"
                 ],
-                "summary": "Update new event.",
+                "summary": "Update an event.",
                 "operationId": "01812be675556fa2f1c035266fb9e278",
                 "parameters": [
                     {
@@ -539,6 +539,145 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/EventFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/notes": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "summary": "Get list of the notes.",
+                "operationId": "bae18c4794ae9fa2869bd2d6172e8bc1",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NoteShortResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Notes"
+                ],
+                "summary": "Create new note.",
+                "operationId": "b741a3f13d8dcdf760b41fbad8c68737",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NoteStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NoteFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/notes/{uuid}": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "summary": "Get a note.",
+                "operationId": "e7e8acd34a2af8dac09c76e4a4570e24",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NoteFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Notes"
+                ],
+                "summary": "Delete the note.",
+                "operationId": "c492e5254867cea35aa9af3dc367eb9a",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Notes"
+                ],
+                "summary": "Update the note.",
+                "operationId": "6bb55ec41a79b44d85a3b0cb84aaa662",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NoteStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NoteFullResource"
                                 }
                             }
                         }
@@ -766,8 +905,15 @@
         "schemas": {
             "EventStoreRequest": {
                 "properties": {
-                    "uuid": {
-                        "type": "string"
+                    "animal_id": {
+                        "type": "string",
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    "category_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     },
                     "title": {
                         "type": "string",
@@ -798,6 +944,29 @@
                     "only_this": {
                         "type": "boolean",
                         "example": true
+                    }
+                },
+                "type": "object"
+            },
+            "NoteStoreRequest": {
+                "properties": {
+                    "animal_id": {
+                        "type": "string",
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    "category_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Some title"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "type": "object"
@@ -917,18 +1086,6 @@
                     },
                     "name": {
                         "type": "string"
-                    },
-                    "breed": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DictionaryTypedResource"
-                        }
-                    },
-                    "children": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DictionaryTypedResource"
-                        }
                     }
                 },
                 "type": "object"
@@ -964,6 +1121,12 @@
                     },
                     "animal": {
                         "$ref": "#/components/schemas/AnimalFullResource"
+                    },
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DictionaryTypedResource"
+                        }
                     }
                 },
                 "type": "object"
@@ -994,6 +1157,60 @@
                         "example": false
                     },
                     "animal": {
+                        "type": "string"
+                    },
+                    "categories": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "NoteFullResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "descrpition": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DictionaryTypedResource"
+                        }
+                    },
+                    "animal": {
+                        "$ref": "#/components/schemas/AnimalFullResource"
+                    },
+                    "last_action_at": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "NoteShortResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "descrpition": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "categories": {
+                        "type": "string"
+                    },
+                    "animal": {
+                        "type": "string"
+                    },
+                    "last_action_at": {
                         "type": "string"
                     }
                 },

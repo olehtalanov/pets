@@ -28,7 +28,7 @@ use OpenApi\Annotations as OA;
  *     )),
  * )
  */
-class ItemFullResource extends JsonResource
+class FullResource extends JsonResource
 {
     public function toArray(Request $request): array
     {

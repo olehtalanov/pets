@@ -19,7 +19,7 @@ use OpenApi\Annotations as OA;
  *     )),
  * )
  */
-class UserResource extends JsonResource
+class FullResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

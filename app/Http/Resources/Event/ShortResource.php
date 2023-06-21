@@ -18,10 +18,11 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="repeat", type="string", example="never"),
  *     @OA\Property(property="whole_day", type="boolean", example=false),
  *     @OA\Property(property="animal", type="string"),
+ *     @OA\Property(property="categories", type="string"),
  *     )),
  * )
  */
-class EventShortResource extends JsonResource
+class ShortResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -41,6 +42,7 @@ class EventShortResource extends JsonResource
             ],
             'whole_day' => $this->whole_day,
             'animal' => $this->animal_name,
+            'categories' => $this->categories->pluck('name')->implode(', '),
         ];
     }
 }

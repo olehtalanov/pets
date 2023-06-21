@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Chat;
 
-use App\Http\Resources\User\UserShortResource;
+use App\Http\Resources\User\ShortResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RecentChatResource extends JsonResource
@@ -12,7 +12,7 @@ class RecentChatResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
-            'user' => new UserShortResource($this->owner),
+            'user' => new ShortResource($this->owner),
             'last_message' => new LastMessageResource($this->lastMessage),
         ];
     }

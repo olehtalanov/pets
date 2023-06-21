@@ -6,10 +6,11 @@ use App\Data\Animal\EventData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Event\ListRequest;
 use App\Http\Requests\Event\StoreRequest;
-use App\Http\Resources\Event\EventFullResource;
-use App\Http\Resources\Event\EventShortResource;
+use App\Http\Resources\Event\FullResource;
+use App\Http\Resources\Event\ShortResource;
 use App\Models\Event;
 use App\Repositories\EventRepository;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
 use Response;
@@ -18,7 +19,8 @@ class EventController extends Controller
 {
     public function __construct(
         private readonly EventRepository $eventRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -26,7 +28,7 @@ class EventController extends Controller
      * @OA\Get(
      *     path="/api/events",
      *     tags={"Events"},
-     *     summary="Get list of events.",
+     *     summary="Get list of the events.",
      *
      *     @OA\Response(response=200, description="Successful response",
      *
@@ -41,7 +43,7 @@ class EventController extends Controller
     public function index(ListRequest $request): JsonResponse
     {
         return Response::json(
-            EventShortResource::collection(
+            ShortResource::collection(
                 $this->eventRepository->list(
                     $request->safe()->collect()
                 )
@@ -53,7 +55,7 @@ class EventController extends Controller
      * @OA\Get(
      *     path="/api/events/{uuid}",
      *     tags={"Events"},
-     *     summary="Get single event.",
+     *     summary="Get an event.",
      *
      *     @OA\Response(response=200, description="Successful response",
      *
@@ -64,11 +66,14 @@ class EventController extends Controller
      *         )
      *     )
      * )
+     * @throws AuthorizationException
      */
     public function show(Event $event): JsonResponse
     {
+        $this->authorize('view', $event);
+
         return Response::json(
-            new EventFullResource(
+            new FullResource(
                 $this->eventRepository->one($event)
             )
         );
@@ -100,7 +105,7 @@ class EventController extends Controller
     public function store(StoreRequest $request): JsonResponse
     {
         return Response::json(
-            new EventFullResource(
+            new FullResource(
                 $this->eventRepository->store(
                     EventData::from($request->validated())
                 )
@@ -112,7 +117,7 @@ class EventController extends Controller
      * @OA\Patch(
      *     path="/api/events/{uuid}",
      *     tags={"Events"},
-     *     summary="Update new event.",
+     *     summary="Update an event.",
      *
      *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
@@ -132,13 +137,14 @@ class EventController extends Controller
      *         )
      *     )
      * )
+     * @throws AuthorizationException
      */
     public function update(StoreRequest $request, Event $event): JsonResponse
     {
         $this->authorize('update', $event);
 
         return Response::json(
-            new EventFullResource(
+            new FullResource(
                 $this->eventRepository->update(
                     $event,
                     EventData::from($request->validated()),
@@ -158,6 +164,7 @@ class EventController extends Controller
      *
      *     @OA\Response(response=204, description="Successful response")
      * )
+     * @throws AuthorizationException
      */
     public function destroy(Event $event): JsonResponse
     {

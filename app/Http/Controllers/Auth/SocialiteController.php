@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Exceptions\Auth\InvalidProviderException;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\FullResource;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\JsonResponse;
@@ -17,7 +17,7 @@ class SocialiteController extends Controller
 {
     public function link(string $provider): RedirectResponse
     {
-        if (! in_array($provider, config('services.auth_providers'), true)) {
+        if (!in_array($provider, config('services.auth_providers'), true)) {
             throw new InvalidProviderException();
         }
 
@@ -26,7 +26,7 @@ class SocialiteController extends Controller
 
     public function store(Request $request, string $provider): JsonResponse
     {
-        if (! in_array($provider, config('services.auth_providers'), true)) {
+        if (!in_array($provider, config('services.auth_providers'), true)) {
             throw new InvalidProviderException();
         }
 
@@ -46,7 +46,7 @@ class SocialiteController extends Controller
         Auth::login($user);
 
         return Response::json([
-            'user' => new UserResource($user),
+            'user' => new FullResource($user),
             'token' => $user->createToken(
                 $request->input('token_name', 'app')
             )->plainTextToken,

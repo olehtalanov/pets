@@ -15,7 +15,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="avatar", type="string"),
  * )
  */
-class UserShortResource extends JsonResource
+class ShortResource extends JsonResource
 {
     public function toArray($request): array
     {

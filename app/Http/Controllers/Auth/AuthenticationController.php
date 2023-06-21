@@ -7,7 +7,7 @@ use App\Events\User\Login;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\PersonalCodeRequest;
-use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\FullResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
@@ -93,7 +93,7 @@ class AuthenticationController extends Controller
 
         return Response::json([
             'token' => $user->createToken($request->input('device_name'))->plainTextToken,
-            'profile' => new UserResource($user),
+            'profile' => new FullResource($user),
         ]);
     }
 }
