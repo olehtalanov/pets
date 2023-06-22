@@ -7,10 +7,10 @@ use App\Models\Pin;
 use Auth;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Symfony\Component\HttpFoundation\FileBag;
 
 class PinRepository extends BaseRepository
 {
@@ -70,12 +70,12 @@ class PinRepository extends BaseRepository
         $pin->delete();
     }
 
-    public function gallery(Pin $pin): MediaCollection
+    public function media(Pin $pin): MediaCollection
     {
         return $pin->getMedia('gallery');
     }
 
-    public function upload(Pin $pin, FileBag $files): MediaCollection
+    public function upload(Pin $pin, array|UploadedFile $files): MediaCollection
     {
         foreach ($files as $file) {
             $pin
@@ -83,7 +83,7 @@ class PinRepository extends BaseRepository
                 ->toMediaCollection('gallery');
         }
 
-        return $this->gallery($pin);
+        return $this->media($pin);
     }
 
     public function destroyMedia(Media $media): void

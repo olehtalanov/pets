@@ -34,7 +34,7 @@ class ShortResource extends JsonResource
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'type' => $this->type->name,
-            'rating' => $this->reviews_avg,
+            'rating' => (float)$this->reviews_avg,
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Data\User;
 
-use App\Models\AnimalType;
+use App\Models\PinType;
 use Spatie\LaravelData\Data;
 
 class PinData extends Data
@@ -16,6 +16,6 @@ class PinData extends Data
         public ?string $contact = null,
     )
     {
-        $this->type_id = AnimalType::findU($type_id)->getKey();
+        $this->type_id = PinType::findU($type_id)->getKey();
     }
 }

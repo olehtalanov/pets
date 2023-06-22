@@ -870,6 +870,108 @@
                 }
             }
         },
+        "/api/pins/{uuid}/media": {
+            "get": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Get list of the user pin media.",
+                "operationId": "1b6a34739e0296ff6f41fc121dac77f6",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/MediaShortResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Upload pin media.",
+                "operationId": "74824b9e49f8e2ff7f1d47df3268f483",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PinMediaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/MediaShortResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pins/{pin}/media/{media}": {
+            "delete": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Delete a pin.",
+                "operationId": "f395b4eba55dc289daca4a57677c2440",
+                "parameters": [
+                    {
+                        "name": "pin",
+                        "in": "path",
+                        "description": "UUID of pin.",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    {
+                        "name": "media",
+                        "in": "path",
+                        "description": "UUID of media which should be removed.",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824cb"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
         "/api/profile": {
             "get": {
                 "tags": [
@@ -1211,6 +1313,18 @@
                 },
                 "type": "object"
             },
+            "PinMediaRequest": {
+                "properties": {
+                    "files": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "AnimalFullResource": {
                 "properties": {
                     "uuid": {
@@ -1400,6 +1514,17 @@
                         "type": "string"
                     },
                     "categories": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "MediaShortResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "url": {
                         "type": "string"
                     }
                 },

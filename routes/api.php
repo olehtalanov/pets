@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\DictionaryController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\PinController;
-use App\Http\Controllers\Api\PinGalleryController;
+use App\Http\Controllers\Api\PinMediaController;
 use App\Http\Controllers\Api\ProfileController;
 
 Route::group([
@@ -41,12 +41,12 @@ Route::group([
             Route::get('search', [PinController::class, 'search'])->name('search');
 
             Route::group([
-                'as' => 'gallery.',
-                'prefix' => '{pin}/gallery'
+                'as' => 'media.',
+                'prefix' => '{pin}/media'
             ], static function () {
-                Route::get('', [PinGalleryController::class, 'index'])->name('index');
-                Route::post('', [PinGalleryController::class, 'upload'])->name('upload');
-                Route::delete('{media:uuid}', [PinGalleryController::class, 'destroy'])->name('destroy');
+                Route::get('', [PinMediaController::class, 'index'])->name('index');
+                Route::post('', [PinMediaController::class, 'upload'])->name('upload');
+                Route::delete('{media:uuid}', [PinMediaController::class, 'destroy'])->name('destroy');
             });
         });
 

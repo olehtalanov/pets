@@ -5,7 +5,20 @@ namespace App\Http\Requests\Pin;
 use Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Schema(
+ *     schema="PinMediaRequest",
+ *     type="object",
+ *
+ *     @OA\Property(property="files", type="array", @OA\Items(
+ *               type="string",
+ *               format="binary"
+ *          )),
+ *     )),
+ * )
+ */
 class UploadRequest extends FormRequest
 {
     /**
