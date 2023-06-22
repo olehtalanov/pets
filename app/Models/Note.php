@@ -23,11 +23,11 @@ use Illuminate\Support\Carbon;
  * @property string|null $description
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Animal $animal
- * @property-read Category|null $category
- * @property-read User $user
- *
- * @method static NoteFactory factory($count = null, $state = [])
+ * @property-read \App\Models\Animal $animal
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Category> $categories
+ * @property-read int|null $categories_count
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\NoteFactory factory($count = null, $state = [])
  * @method static Builder|Note newModelQuery()
  * @method static Builder|Note newQuery()
  * @method static Builder|Note query()
@@ -39,7 +39,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Note whereUpdatedAt($value)
  * @method static Builder|Note whereUserId($value)
  * @method static Builder|Note whereUuid($value)
- *
  * @mixin Eloquent
  */
 class Note extends Model

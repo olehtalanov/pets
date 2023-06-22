@@ -21,7 +21,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read \App\Models\User $user
- *
  * @method static \Database\Factories\AppealFactory factory($count = null, $state = [])
  * @method static Builder|Appeal newModelQuery()
  * @method static Builder|Appeal newQuery()
@@ -33,7 +32,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Appeal whereUpdatedAt($value)
  * @method static Builder|Appeal whereUserId($value)
  * @method static Builder|Appeal whereUuid($value)
- *
  * @mixin Eloquent
  */
 class Appeal extends Model

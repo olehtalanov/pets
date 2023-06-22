@@ -32,7 +32,7 @@
                 "tags": [
                     "Animals"
                 ],
-                "summary": "Create new animal.",
+                "summary": "Create a new animal.",
                 "operationId": "d2201701adacfd22417c6637db81b633",
                 "requestBody": {
                     "required": true,
@@ -439,7 +439,7 @@
                 "tags": [
                     "Events"
                 ],
-                "summary": "Create new event.",
+                "summary": "Create a new event.",
                 "operationId": "e958e1c6c275d5f9b7ebcd837903d0ef",
                 "requestBody": {
                     "required": true,
@@ -573,7 +573,7 @@
                 "tags": [
                     "Notes"
                 ],
-                "summary": "Create new note.",
+                "summary": "Create a new note.",
                 "operationId": "b741a3f13d8dcdf760b41fbad8c68737",
                 "requestBody": {
                     "required": true,
@@ -678,6 +678,191 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/NoteFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pins": {
+            "get": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Get list of the user`s pins.",
+                "operationId": "993b0878ab5c8d9e5e54d49926dfb0e6",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResourceCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Create a new pin.",
+                "operationId": "35b6f8b08551f523a17e6b93db1d013c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PinStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PinFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pins/search": {
+            "get": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Get list of pins matched by filters.",
+                "operationId": "d207abf4d0f8aed658a4589cc20ab9c7",
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "path",
+                        "required": false
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "path",
+                        "required": false
+                    },
+                    {
+                        "name": "radius",
+                        "in": "path",
+                        "required": false
+                    },
+                    {
+                        "name": "type_ids[]",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PinShortResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pins/{uuid}": {
+            "get": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Get a pin.",
+                "operationId": "32e81b6eb589b4f8aec42dc3ad27ee70",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PinFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Delete a pin.",
+                "operationId": "1b66bc67cbfea673ccd06ac00b6c5d4f",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Update a pin.",
+                "operationId": "aa5d23b59277787c844b39162b95214b",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PinStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PinFullResource"
                                 }
                             }
                         }
@@ -971,6 +1156,61 @@
                 },
                 "type": "object"
             },
+            "PinSearchRequest": {
+                "properties": {
+                    "latitude": {
+                        "type": "number",
+                        "format": "float",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "float",
+                        "nullable": true
+                    },
+                    "radius": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "type_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "PinStoreRequest": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Some title"
+                    },
+                    "type_id": {
+                        "type": "string",
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "address": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "contact": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "AnimalFullResource": {
                 "properties": {
                     "uuid": {
@@ -1212,6 +1452,92 @@
                     },
                     "last_action_at": {
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PaginatedResourceCollection": {
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/PinShortResource"
+                                }
+                            ]
+                        }
+                    },
+                    "meta": {
+                        "properties": {
+                            "total": {
+                                "type": "integer"
+                            },
+                            "current": {
+                                "type": "integer"
+                            },
+                            "next": {
+                                "type": "string",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "PinFullResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "contact": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "gallery": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "PinShortResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "number",
+                        "format": "float"
                     }
                 },
                 "type": "object"

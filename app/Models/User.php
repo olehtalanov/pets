@@ -63,7 +63,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read int|null $reviews_count
  * @property-read Collection<int, PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- *
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
@@ -85,7 +84,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|User whereRole($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @method static Builder|User whereUuid($value)
- *
  * @mixin Eloquent
  */
 final class User extends Authenticatable implements FilamentUser, HasMedia

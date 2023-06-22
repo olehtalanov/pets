@@ -5,17 +5,19 @@ use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\DictionaryController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\NoteController;
+use App\Http\Controllers\Api\PinController;
+use App\Http\Controllers\Api\PinGalleryController;
 use App\Http\Controllers\Api\ProfileController;
 
 Route::group([
     'as' => 'api.',
 ], static function () {
-    require __DIR__.'/auth.php';
+    require __DIR__ . '/auth.php';
 
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], static function () {
-        Route::any('ping', static fn () => null)->name('ping');
+        Route::any('ping', static fn() => null)->name('ping');
 
         /* Animals */
 
@@ -29,6 +31,26 @@ Route::group([
         /* Notes */
 
         Route::apiResource('notes', NoteController::class);
+
+        /* Pins */
+
+        Route::group([
+            'as' => 'pins.',
+            'prefix' => 'pins',
+        ], static function () {
+            Route::get('search', [PinController::class, 'search'])->name('search');
+
+            Route::group([
+                'as' => 'gallery.',
+                'prefix' => '{pin}/gallery'
+            ], static function () {
+                Route::get('', [PinGalleryController::class, 'index'])->name('index');
+                Route::post('', [PinGalleryController::class, 'upload'])->name('upload');
+                Route::delete('{media:uuid}', [PinGalleryController::class, 'destroy'])->name('destroy');
+            });
+        });
+
+        Route::apiResource('pins', PinController::class);
 
         /* Profile */
 

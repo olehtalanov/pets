@@ -16,7 +16,8 @@ class AnimalController extends Controller
 {
     public function __construct(
         protected AnimalRepository $animalRepository,
-    ) {
+    )
+    {
         //
     }
 
@@ -72,7 +73,7 @@ class AnimalController extends Controller
      * @OA\Post(
      *     path="/api/animals",
      *     tags={"Animals"},
-     *     summary="Create new animal.",
+     *     summary="Create a new animal.",
      *
      *     @OA\RequestBody(
      *         required=true,

@@ -21,7 +21,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read \App\Models\Chat $chat
  * @property-read \App\Models\User|null $user
- *
  * @method static Builder|Message newModelQuery()
  * @method static Builder|Message newQuery()
  * @method static Builder|Message query()
@@ -33,7 +32,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Message whereReadAt($value)
  * @method static Builder|Message whereUpdatedAt($value)
  * @method static Builder|Message whereUserId($value)
- *
  * @mixin Eloquent
  */
 final class Message extends Model

@@ -23,7 +23,6 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $pins_count
  * @property-read Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
- *
  * @method static \Database\Factories\PinTypeFactory factory($count = null, $state = [])
  * @method static Builder|PinType newModelQuery()
  * @method static Builder|PinType newQuery()
@@ -33,7 +32,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|PinType whereIsVisible($value)
  * @method static Builder|PinType whereName($value)
  * @method static Builder|PinType whereUuid($value)
- *
  * @mixin Eloquent
  */
 class PinType extends Model

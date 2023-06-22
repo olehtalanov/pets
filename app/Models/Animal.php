@@ -46,7 +46,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read int|null $notes_count
  * @property-read \App\Models\User $owner
  * @property-read \App\Models\AnimalType|null $type
- *
  * @method static \Database\Factories\AnimalFactory factory($count = null, $state = [])
  * @method static Builder|Animal newModelQuery()
  * @method static Builder|Animal newQuery()
@@ -67,7 +66,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Animal whereUuid($value)
  * @method static Builder|Animal whereWeight($value)
  * @method static Builder|Animal whereWeightUnit($value)
- *
  * @mixin Eloquent
  */
 class Animal extends Model implements HasMedia

@@ -32,15 +32,15 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property bool $processable
- * @property-read Animal $animal
- * @property-read Category|null $category
+ * @property-read \App\Models\Animal $animal
+ * @property-read Collection<int, \App\Models\Category> $categories
+ * @property-read int|null $categories_count
  * @property-read Collection<int, Event> $children
  * @property-read int|null $children_count
  * @property-read Event|null $parent
- * @property-read User $user
- *
+ * @property-read \App\Models\User $user
  * @method static Builder|Event actual()
- * @method static EventFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\EventFactory factory($count = null, $state = [])
  * @method static Builder|Event newModelQuery()
  * @method static Builder|Event newQuery()
  * @method static Builder|Event query()
@@ -59,7 +59,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Event whereUserId($value)
  * @method static Builder|Event whereUuid($value)
  * @method static Builder|Event whereWholeDay($value)
- *
  * @mixin Eloquent
  */
 class Event extends Model

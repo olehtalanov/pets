@@ -30,7 +30,6 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $messages_count
  * @property-read \App\Models\User|null $owner
  * @property-read \App\Models\User|null $recipient
- *
  * @method static Builder|Chat current()
  * @method static Builder|Chat newModelQuery()
  * @method static Builder|Chat newQuery()
@@ -44,7 +43,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Chat whereRecipientId($value)
  * @method static Builder|Chat whereUpdatedAt($value)
  * @method static Builder|Chat whereUuid($value)
- *
  * @mixin Eloquent
  */
 final class Chat extends Model

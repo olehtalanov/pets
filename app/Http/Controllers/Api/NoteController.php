@@ -18,7 +18,8 @@ class NoteController extends Controller
 {
     public function __construct(
         private readonly NoteRepository $noteRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -76,7 +77,7 @@ class NoteController extends Controller
      * @OA\Post(
      *     path="/api/notes",
      *     tags={"Notes"},
-     *     summary="Create new note.",
+     *     summary="Create a new note.",
      *
      *     @OA\RequestBody(
      *         required=true,

@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -204,6 +204,11 @@ return [
             'months' => 12,
             'years' => 3,
         ],
+    ],
+
+    'pins' => [
+        'pagination' => 20,
+        'search_limit' => 100,
     ],
 
 ];

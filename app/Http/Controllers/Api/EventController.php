@@ -19,7 +19,8 @@ class EventController extends Controller
 {
     public function __construct(
         private readonly EventRepository $eventRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -83,7 +84,7 @@ class EventController extends Controller
      * @OA\Post(
      *     path="/api/events",
      *     tags={"Events"},
-     *     summary="Create new event.",
+     *     summary="Create a new event.",
      *
      *     @OA\RequestBody(
      *         required=true,

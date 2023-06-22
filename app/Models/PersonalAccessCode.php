@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $code
  * @property \Illuminate\Support\Carbon $valid_until
  * @property-read \App\Models\User $user
- *
  * @method static Builder|PersonalAccessCode active()
  * @method static Builder|PersonalAccessCode newModelQuery()
  * @method static Builder|PersonalAccessCode newQuery()
@@ -24,7 +23,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder|PersonalAccessCode whereId($value)
  * @method static Builder|PersonalAccessCode whereUserId($value)
  * @method static Builder|PersonalAccessCode whereValidUntil($value)
- *
  * @mixin Eloquent
  */
 class PersonalAccessCode extends Model

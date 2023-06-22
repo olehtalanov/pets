@@ -22,7 +22,6 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $animals_count
  * @property-read Collection<int, \App\Models\Breed> $breeds
  * @property-read int|null $breeds_count
- *
  * @method static \Database\Factories\AnimalTypeFactory factory($count = null, $state = [])
  * @method static Builder|AnimalType newModelQuery()
  * @method static Builder|AnimalType newQuery()
@@ -32,7 +31,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|AnimalType whereIsVisible($value)
  * @method static Builder|AnimalType whereName($value)
  * @method static Builder|AnimalType whereUuid($value)
- *
  * @mixin Eloquent
  */
 class AnimalType extends Model

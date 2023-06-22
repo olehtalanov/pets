@@ -19,7 +19,6 @@ use Spatie\Translatable\HasTranslations;
  * @property array $name
  * @property bool $is_visible
  * @property-read \App\Models\AnimalType $type
- *
  * @method static \Database\Factories\BreedFactory factory($count = null, $state = [])
  * @method static Builder|Breed newModelQuery()
  * @method static Builder|Breed newQuery()
@@ -30,7 +29,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|Breed whereIsVisible($value)
  * @method static Builder|Breed whereName($value)
  * @method static Builder|Breed whereUuid($value)
- *
  * @mixin Eloquent
  */
 class Breed extends Model

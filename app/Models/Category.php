@@ -27,16 +27,15 @@ use Spatie\Translatable\HasTranslations;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Category> $children
  * @property-read int|null $children_count
- * @property-read Collection<int, Event> $events
+ * @property-read Collection<int, \App\Models\Event> $events
  * @property-read int|null $events_count
- * @property-read Collection<int, Event> $notes
+ * @property-read Collection<int, \App\Models\Event> $notes
  * @property-read int|null $notes_count
  * @property-read Category|null $parent
- *
- * @method static CategoryFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\CategoryFactory factory($count = null, $state = [])
  * @method static Builder|Category newModelQuery()
  * @method static Builder|Category newQuery()
- * @method static Builder|Category onlyChildren(string $model)
+ * @method static Builder|Category onlyChildren(?string $model = null)
  * @method static Builder|Category onlyParents(?string $model = null)
  * @method static Builder|Category query()
  * @method static Builder|Category whereCreatedAt($value)
@@ -46,7 +45,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|Category whereRelatedModel($value)
  * @method static Builder|Category whereUpdatedAt($value)
  * @method static Builder|Category whereUuid($value)
- *
  * @mixin Eloquent
  */
 class Category extends Model

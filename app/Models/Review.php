@@ -25,7 +25,6 @@ use Illuminate\Support\Carbon;
  * @property-read \App\Models\Pin $pin
  * @property-read \App\Models\User|null $reviewable
  * @property-read \App\Models\User $reviewer
- *
  * @method static \Database\Factories\ReviewFactory factory($count = null, $state = [])
  * @method static Builder|Review newModelQuery()
  * @method static Builder|Review newQuery()
@@ -38,7 +37,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Review whereUpdatedAt($value)
  * @method static Builder|Review whereUserId($value)
  * @method static Builder|Review whereUuid($value)
- *
  * @mixin Eloquent
  */
 class Review extends Model
