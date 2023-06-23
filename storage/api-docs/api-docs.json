@@ -1356,13 +1356,13 @@
                 }
             }
         },
-        "/api/auth/code": {
+        "/api/v1/auth/code": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Get auth code.",
-                "operationId": "aabbafa823c500650fa2d7d5767377aa",
+                "operationId": "e8f751e23f9c4553f8e6dbe59a877bdf",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1389,13 +1389,13 @@
                 }
             }
         },
-        "/api/auth/login": {
+        "/api/v1/auth/login": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Authenticate user.",
-                "operationId": "20be90132d4a62e09d891319a5fd32dc",
+                "operationId": "bea916da0c8a4243646b3bc3b78e2e81",
                 "requestBody": {
                     "required": true,
                     "content": {

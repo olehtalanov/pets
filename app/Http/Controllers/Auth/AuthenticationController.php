@@ -17,7 +17,7 @@ class AuthenticationController extends Controller
 {
     /**
      * @OA\Post(
-     *     path="/api/auth/code",
+     *     path="/api/v1/auth/code",
      *     tags={"Auth"},
      *     summary="Get auth code.",
      *
@@ -52,7 +52,7 @@ class AuthenticationController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/auth/login",
+     *     path="/api/v1/auth/login",
      *     tags={"Auth"},
      *     summary="Authenticate user.",
      *
