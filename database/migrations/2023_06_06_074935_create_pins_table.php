@@ -23,6 +23,7 @@ return new class () extends Migration {
                 ->constrained((new PinType())->getTable())
                 ->nullOnDelete();
             $table->string('name');
+            $table->text('description')->nullable();
             $table->text('address')->nullable();
             $table->text('contact')->nullable();
             $table->double('latitude', 10, 8);

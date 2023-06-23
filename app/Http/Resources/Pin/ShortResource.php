@@ -13,9 +13,9 @@ use OpenApi\Annotations as OA;
  *
  *     @OA\Property(property="uuid", type="string"),
  *     @OA\Property(property="name", type="string"),
+ *     @OA\Property(property="type", type="string"),
  *     @OA\Property(property="latitude", type="float"),
  *     @OA\Property(property="longitude", type="float"),
- *     @OA\Property(property="type", type="string"),
  *     @OA\Property(property="rating", type="float"),
  * )
  */
@@ -31,9 +31,9 @@ class ShortResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
+            'type' => $this->type->name,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
-            'type' => $this->type->name,
             'rating' => (float)$this->reviews_avg,
         ];
     }

@@ -16,6 +16,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="type_id", type="string", example="995037a6-60b3-4055-aa14-3513aa9824ca"),
  *     @OA\Property(property="latitude", type="float"),
  *     @OA\Property(property="longitude", type="float"),
+ *     @OA\Property(property="description", type="string", nullable=true),
  *     @OA\Property(property="address", type="string", nullable=true),
  *     @OA\Property(property="contact", type="string", nullable=true),
  *     )),
@@ -43,6 +44,7 @@ class StoreRequest extends FormRequest
             'type_id' => ['required', 'string', 'exists:pin_types,uuid'],
             'latitude' => ['required', 'numeric'],
             'longitude' => ['required', 'numeric'],
+            'description' => ['nullable', 'string'],
             'address' => ['nullable', 'string'],
             'contact' => ['nullable', 'string'],
         ];

@@ -1302,6 +1302,10 @@
                         "type": "number",
                         "format": "float"
                     },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
                     "address": {
                         "type": "string",
                         "nullable": true
@@ -1622,6 +1626,17 @@
                     "type": {
                         "type": "string"
                     },
+                    "latitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
                     "address": {
                         "type": "string"
                     },
@@ -1649,6 +1664,9 @@
                     "name": {
                         "type": "string"
                     },
+                    "type": {
+                        "type": "string"
+                    },
                     "latitude": {
                         "type": "number",
                         "format": "float"
@@ -1656,9 +1674,6 @@
                     "longitude": {
                         "type": "number",
                         "format": "float"
-                    },
-                    "type": {
-                        "type": "string"
                     },
                     "rating": {
                         "type": "number",

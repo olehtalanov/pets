@@ -66,6 +66,7 @@ class Pin extends Model implements HasMedia
 
     protected $fillable = [
         'name',
+        'description',
         'address',
         'contact',
         'latitude',
@@ -91,8 +92,6 @@ class Pin extends Model implements HasMedia
     {
         return $this->hasMany(Review::class);
     }
-
-    /* Scopes */
 
     /* Media */
 
