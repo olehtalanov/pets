@@ -2,13 +2,14 @@
 
 namespace App\Http\Resources\Pin;
 
+use App\Http\Resources\User\ShortResource as UserShortResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(
- *     schema="PinShortResource",
+ *     schema="PinReviewResource",
  *     type="object",
  *
  *     @OA\Property(property="uuid", type="string"),
@@ -17,9 +18,10 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="latitude", type="float"),
  *     @OA\Property(property="longitude", type="float"),
  *     @OA\Property(property="rating", type="float"),
+ *     @OA\Property(property="reviewable", type="object", ref="#/components/schemas/UserShortResource"),
  * )
  */
-class ShortResource extends JsonResource
+class ReviewResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -35,6 +37,7 @@ class ShortResource extends JsonResource
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'rating' => (float)$this->reviews_avg_rating,
+            'reviewable' => new UserShortResource($this->user)
         ];
     }
 }

@@ -26,7 +26,7 @@ class EventController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/events",
+     *     path="/api/v1/events",
      *     tags={"Events"},
      *     summary="Get list of the events.",
      *
@@ -53,7 +53,7 @@ class EventController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/events/{uuid}",
+     *     path="/api/v1/events/{event}",
      *     tags={"Events"},
      *     summary="Get an event.",
      *
@@ -82,7 +82,7 @@ class EventController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/events",
+     *     path="/api/v1/events",
      *     tags={"Events"},
      *     summary="Create a new event.",
      *
@@ -116,11 +116,11 @@ class EventController extends Controller
 
     /**
      * @OA\Patch(
-     *     path="/api/events/{uuid}",
+     *     path="/api/v1/events/{event}",
      *     tags={"Events"},
      *     summary="Update an event.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="event", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\RequestBody(
      *         required=true,
@@ -158,11 +158,11 @@ class EventController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/events/{uuid}",
+     *     path="/api/v1/events/{event}",
      *     tags={"Events"},
      *     summary="Delete an event.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="event", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=204, description="Successful response")
      * )

@@ -8,9 +8,12 @@ use App\Http\Requests\Animal\AvatarRequest;
 use App\Http\Requests\Animal\StoreRequest;
 use App\Models\Animal;
 use App\Repositories\AnimalRepository;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
 use Response;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class AnimalController extends Controller
 {
@@ -23,7 +26,7 @@ class AnimalController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/animals",
+     *     path="/api/v1/animals",
      *     tags={"Animals"},
      *     summary="Get list of user animals.",
      *
@@ -46,11 +49,11 @@ class AnimalController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/animals/{uuid}",
+     *     path="/api/v1/animals/{animal}",
      *     tags={"Animals"},
      *     summary="Get animal details.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="animal", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
      *
@@ -59,6 +62,7 @@ class AnimalController extends Controller
      *         )
      *     )
      * )
+     * @throws AuthorizationException
      */
     public function show(Animal $animal): JsonResponse
     {
@@ -71,7 +75,7 @@ class AnimalController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/animals",
+     *     path="/api/v1/animals",
      *     tags={"Animals"},
      *     summary="Create a new animal.",
      *
@@ -114,11 +118,11 @@ class AnimalController extends Controller
 
     /**
      * @OA\Patch(
-     *     path="/api/animals/{uuid}",
+     *     path="/api/v1/animals/{animal}",
      *     tags={"Animals"},
      *     summary="Update existing animal.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="animal", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\RequestBody(
      *         required=true,
@@ -145,6 +149,7 @@ class AnimalController extends Controller
      *         @OA\JsonContent(ref="#/components/schemas/AnimalFullResource")
      *     )
      * )
+     * @throws AuthorizationException
      */
     public function update(StoreRequest $request, Animal $animal): JsonResponse
     {
@@ -160,11 +165,11 @@ class AnimalController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/animals/{uuid}/avatar",
+     *     path="/api/v1/animals/{animal}/avatar",
      *     tags={"Animals"},
      *     summary="Update user avatar.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="animal", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\RequestBody(
      *
@@ -197,12 +202,17 @@ class AnimalController extends Controller
      *         )
      *     )
      * )
+     * @throws AuthorizationException
      */
     public function avatar(AvatarRequest $request, Animal $animal): JsonResponse
     {
         $this->authorize('update', $animal);
 
-        $media = $this->animalRepository->avatar($animal, $request->file('avatar'));
+        try {
+            $media = $this->animalRepository->avatar($animal, $request->file('avatar'));
+        } catch (FileIsTooBig|FileDoesNotExist $e) {
+            //
+        }
 
         return Response::json([
             'thumb' => $media?->getFullUrl('thumb'),
@@ -212,14 +222,15 @@ class AnimalController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/animals/{uuid}",
+     *     path="/api/v1/animals/{animal}",
      *     tags={"Animals"},
      *     summary="Delete an animal.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="animal", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=204, description="Successful response")
      * )
+     * @throws AuthorizationException
      */
     public function destroy(Animal $animal): JsonResponse
     {

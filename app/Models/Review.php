@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
+use Database\Factories\ReviewFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Carbon;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * App\Models\Review
@@ -22,10 +25,10 @@ use Illuminate\Support\Carbon;
  * @property int $rating
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \App\Models\Pin $pin
- * @property-read \App\Models\User|null $reviewable
- * @property-read \App\Models\User $reviewer
- * @method static \Database\Factories\ReviewFactory factory($count = null, $state = [])
+ * @property-read Pin $pin
+ * @property-read User|null $reviewable
+ * @property-read User $reviewer
+ * @method static ReviewFactory factory($count = null, $state = [])
  * @method static Builder|Review newModelQuery()
  * @method static Builder|Review newQuery()
  * @method static Builder|Review query()
@@ -39,10 +42,11 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Review whereUuid($value)
  * @mixin Eloquent
  */
-class Review extends Model
+class Review extends Model implements HasMedia
 {
     use HasFactory;
     use HasUuid;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'message',

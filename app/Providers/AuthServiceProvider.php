@@ -6,10 +6,12 @@ use App\Models\Animal;
 use App\Models\Event;
 use App\Models\Note;
 use App\Models\Pin;
+use App\Models\Review;
 use App\Policies\AnimalPolicy;
 use App\Policies\EventPolicy;
 use App\Policies\NotePolicy;
 use App\Policies\PinPolicy;
+use App\Policies\ReviewPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -25,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         Event::class => EventPolicy::class,
         Note::class => NotePolicy::class,
         Pin::class => PinPolicy::class,
+        Review::class => ReviewPolicy::class,
     ];
 
     /**

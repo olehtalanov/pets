@@ -7,13 +7,12 @@ use App\Models\Pin;
 use Auth;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
-use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PinRepository extends BaseRepository
 {
+    use MediaTrait;
+
     public function search(Collection $filters): Collection
     {
         return Pin::query()
@@ -40,7 +39,7 @@ class PinRepository extends BaseRepository
             ->with('type')
             ->withAvg('reviews', 'rating')
             ->latest()
-            ->paginate(config('app.pins.pagination'));
+            ->paginate(config('app.pagination_default'));
     }
 
     public function one(Pin $pin): Pin
@@ -68,26 +67,5 @@ class PinRepository extends BaseRepository
     public function destroy(Pin $pin): void
     {
         $pin->delete();
-    }
-
-    public function media(Pin $pin): MediaCollection
-    {
-        return $pin->getMedia('gallery');
-    }
-
-    public function upload(Pin $pin, array|UploadedFile $files): MediaCollection
-    {
-        foreach ($files as $file) {
-            $pin
-                ->addMedia($file)
-                ->toMediaCollection('gallery');
-        }
-
-        return $this->media($pin);
-    }
-
-    public function destroyMedia(Media $media): void
-    {
-        $media->delete();
     }
 }

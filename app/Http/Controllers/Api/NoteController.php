@@ -25,7 +25,7 @@ class NoteController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/notes",
+     *     path="/api/v1/notes",
      *     tags={"Notes"},
      *     summary="Get list of the notes.",
      *
@@ -50,11 +50,11 @@ class NoteController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/notes/{uuid}",
+     *     path="/api/v1/notes/{note}",
      *     tags={"Notes"},
      *     summary="Get a note.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="note", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
      *
@@ -75,7 +75,7 @@ class NoteController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/notes",
+     *     path="/api/v1/notes",
      *     tags={"Notes"},
      *     summary="Create a new note.",
      *
@@ -109,11 +109,11 @@ class NoteController extends Controller
 
     /**
      * @OA\Patch(
-     *     path="/api/notes/{uuid}",
+     *     path="/api/v1/notes/{note}",
      *     tags={"Notes"},
      *     summary="Update the note.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="note", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\RequestBody(
      *         required=true,
@@ -150,11 +150,11 @@ class NoteController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/notes/{uuid}",
+     *     path="/api/v1/notes/{note}",
      *     tags={"Notes"},
      *     summary="Delete the note.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="note", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=204, description="Successful response")
      * )

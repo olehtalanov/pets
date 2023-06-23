@@ -17,13 +17,14 @@ class ProfileController extends Controller
 {
     public function __construct(
         private readonly ProfileRepository $profileRepository
-    ) {
+    )
+    {
         //
     }
 
     /**
      * @OA\Get(
-     *     path="/api/profile",
+     *     path="/api/v1/profile",
      *     tags={"Profile"},
      *     summary="Get user details.",
      *
@@ -45,7 +46,7 @@ class ProfileController extends Controller
 
     /**
      * @OA\Patch(
-     *     path="/api/profile",
+     *     path="/api/v1/profile",
      *     tags={"Profile"},
      *     summary="Update user profile.",
      *
@@ -84,7 +85,7 @@ class ProfileController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/profile/avatar",
+     *     path="/api/v1/profile/avatar",
      *     tags={"Profile"},
      *     summary="Update user avatar.",
      *

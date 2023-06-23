@@ -5,13 +5,13 @@
         "version": "1.0"
     },
     "paths": {
-        "/api/animals": {
+        "/api/v1/animals": {
             "get": {
                 "tags": [
                     "Animals"
                 ],
                 "summary": "Get list of user animals.",
-                "operationId": "33ea37fa99c2d039345ee028491a5fda",
+                "operationId": "462221b2b926884dfcb64648e09f3bfe",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -33,7 +33,7 @@
                     "Animals"
                 ],
                 "summary": "Create a new animal.",
-                "operationId": "d2201701adacfd22417c6637db81b633",
+                "operationId": "949307ddd485693196318a8379298d0a",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -119,16 +119,16 @@
                 }
             }
         },
-        "/api/animals/{uuid}": {
+        "/api/v1/animals/{animal}": {
             "get": {
                 "tags": [
                     "Animals"
                 ],
                 "summary": "Get animal details.",
-                "operationId": "283398fd9008666083b94ffe0cc55e79",
+                "operationId": "1e532e728869fe040909991c8ff37148",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "animal",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -152,10 +152,10 @@
                     "Animals"
                 ],
                 "summary": "Delete an animal.",
-                "operationId": "a5cab3bbd8b70f62c1f1ed660a3ca927",
+                "operationId": "2afde2e2fa50ce6d51b3204360a384da",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "animal",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -172,10 +172,10 @@
                     "Animals"
                 ],
                 "summary": "Update existing animal.",
-                "operationId": "95650581bc570bfeb2c0f683b3854fc2",
+                "operationId": "f3411e8d86c8a711aa343cc20ab3fb72",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "animal",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -266,16 +266,16 @@
                 }
             }
         },
-        "/api/animals/{uuid}/avatar": {
+        "/api/v1/animals/{animal}/avatar": {
             "post": {
                 "tags": [
                     "Animals"
                 ],
                 "summary": "Update user avatar.",
-                "operationId": "6fd3ad843b1ff5f21982c468a745a903",
+                "operationId": "d5059ce02f6a7f62d79ec71d6910d5f1",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "animal",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -323,13 +323,13 @@
                 }
             }
         },
-        "/api/dictionaries": {
+        "/api/v1/dictionaries": {
             "get": {
                 "tags": [
                     "Dictionaries"
                 ],
                 "summary": "Get list of required dictionaries.",
-                "operationId": "d054aa8a0daf6fd98b427a00b66ff895",
+                "operationId": "4a30b48ff2d2b106c96f27a37c6c3db2",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -361,13 +361,13 @@
                 }
             }
         },
-        "/api/dictionaries/repeatable": {
+        "/api/v1/dictionaries/repeatable": {
             "get": {
                 "tags": [
                     "Dictionaries"
                 ],
                 "summary": "Get list of event repeatable.",
-                "operationId": "576f61b97dfd0a7331ad0cbe8b4ba72d",
+                "operationId": "76446be374c5abad9f85c69cf724dfaf",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -412,13 +412,13 @@
                 }
             }
         },
-        "/api/events": {
+        "/api/v1/events": {
             "get": {
                 "tags": [
                     "Events"
                 ],
                 "summary": "Get list of the events.",
-                "operationId": "e529c81e6aaec82f49950a87ed881f57",
+                "operationId": "9d193c96b81abc746c99eff78d54737d",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -440,7 +440,7 @@
                     "Events"
                 ],
                 "summary": "Create a new event.",
-                "operationId": "e958e1c6c275d5f9b7ebcd837903d0ef",
+                "operationId": "7d4658700b83072ed94175c8f1bac8a3",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -465,13 +465,13 @@
                 }
             }
         },
-        "/api/events/{uuid}": {
+        "/api/v1/events/{event}": {
             "get": {
                 "tags": [
                     "Events"
                 ],
                 "summary": "Get an event.",
-                "operationId": "f846708dd54f308af5db3385357473f3",
+                "operationId": "ff2b02c83ff5f2955a7dfe3f703461bc",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -493,10 +493,10 @@
                     "Events"
                 ],
                 "summary": "Delete an event.",
-                "operationId": "1b4432e2eb3430460a1a211efa0815b5",
+                "operationId": "725a2330cf730965879db5b5bc43b0c3",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "event",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -513,10 +513,10 @@
                     "Events"
                 ],
                 "summary": "Update an event.",
-                "operationId": "01812be675556fa2f1c035266fb9e278",
+                "operationId": "0a2783f6ecd6226fe3859046c3522e39",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "event",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -546,13 +546,13 @@
                 }
             }
         },
-        "/api/notes": {
+        "/api/v1/notes": {
             "get": {
                 "tags": [
                     "Notes"
                 ],
                 "summary": "Get list of the notes.",
-                "operationId": "bae18c4794ae9fa2869bd2d6172e8bc1",
+                "operationId": "9a959e36a067705923b1403aa9ce6bde",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -574,7 +574,7 @@
                     "Notes"
                 ],
                 "summary": "Create a new note.",
-                "operationId": "b741a3f13d8dcdf760b41fbad8c68737",
+                "operationId": "6149b28393a9a434f11d4ec7e605cce8",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -599,16 +599,16 @@
                 }
             }
         },
-        "/api/notes/{uuid}": {
+        "/api/v1/notes/{note}": {
             "get": {
                 "tags": [
                     "Notes"
                 ],
                 "summary": "Get a note.",
-                "operationId": "e7e8acd34a2af8dac09c76e4a4570e24",
+                "operationId": "f5701b3b3b894427bec8546f63e2a0f3",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "note",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -632,10 +632,10 @@
                     "Notes"
                 ],
                 "summary": "Delete the note.",
-                "operationId": "c492e5254867cea35aa9af3dc367eb9a",
+                "operationId": "f26de33ac1d36467b48d54674c3c2afc",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "note",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -652,10 +652,10 @@
                     "Notes"
                 ],
                 "summary": "Update the note.",
-                "operationId": "6bb55ec41a79b44d85a3b0cb84aaa662",
+                "operationId": "9dfc1c405ebd2ecb37b09de2692d9e2a",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "note",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -685,13 +685,13 @@
                 }
             }
         },
-        "/api/pins": {
+        "/api/v1/pins": {
             "get": {
                 "tags": [
                     "Pins"
                 ],
                 "summary": "Get list of the user`s pins.",
-                "operationId": "993b0878ab5c8d9e5e54d49926dfb0e6",
+                "operationId": "62dc87663d3ee1cf3519966cff94c098",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -710,7 +710,7 @@
                     "Pins"
                 ],
                 "summary": "Create a new pin.",
-                "operationId": "35b6f8b08551f523a17e6b93db1d013c",
+                "operationId": "bbfae9748d7dfe23ea2600d341dcd679",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -735,13 +735,13 @@
                 }
             }
         },
-        "/api/pins/search": {
+        "/api/v1/pins/search": {
             "get": {
                 "tags": [
                     "Pins"
                 ],
                 "summary": "Get list of pins matched by filters.",
-                "operationId": "d207abf4d0f8aed658a4589cc20ab9c7",
+                "operationId": "cbc1db2dd6485777945d4431c14e066b",
                 "parameters": [
                     {
                         "name": "latitude",
@@ -784,16 +784,16 @@
                 }
             }
         },
-        "/api/pins/{uuid}": {
+        "/api/v1/pins/{pin}": {
             "get": {
                 "tags": [
                     "Pins"
                 ],
                 "summary": "Get a pin.",
-                "operationId": "32e81b6eb589b4f8aec42dc3ad27ee70",
+                "operationId": "a0b09c30b0994b5e679f4de20922c82c",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "pin",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -817,10 +817,10 @@
                     "Pins"
                 ],
                 "summary": "Delete a pin.",
-                "operationId": "1b66bc67cbfea673ccd06ac00b6c5d4f",
+                "operationId": "7c6960ae78c7d9549007e9aadaad5ac2",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "pin",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -837,10 +837,10 @@
                     "Pins"
                 ],
                 "summary": "Update a pin.",
-                "operationId": "aa5d23b59277787c844b39162b95214b",
+                "operationId": "bbac96604f5c26375e38474f3c73497c",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "pin",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -870,16 +870,16 @@
                 }
             }
         },
-        "/api/pins/{uuid}/media": {
+        "/api/v1/pins/{pin}/media": {
             "get": {
                 "tags": [
                     "Pins"
                 ],
                 "summary": "Get list of the user pin media.",
-                "operationId": "1b6a34739e0296ff6f41fc121dac77f6",
+                "operationId": "b6fb7ba593b5396b7587fdbac61fc81a",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "pin",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -906,10 +906,10 @@
                     "Pins"
                 ],
                 "summary": "Upload pin media.",
-                "operationId": "74824b9e49f8e2ff7f1d47df3268f483",
+                "operationId": "50a0d05b98d1c6c9ec6d2451eefe6e1e",
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "pin",
                         "in": "path",
                         "required": true,
                         "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
@@ -942,13 +942,13 @@
                 }
             }
         },
-        "/api/pins/{pin}/media/{media}": {
+        "/api/v1/pins/{pin}/media/{media}": {
             "delete": {
                 "tags": [
                     "Pins"
                 ],
                 "summary": "Delete a pin.",
-                "operationId": "f395b4eba55dc289daca4a57677c2440",
+                "operationId": "3322d0ad8d3ce0106835281f109e83ba",
                 "parameters": [
                     {
                         "name": "pin",
@@ -972,13 +972,13 @@
                 }
             }
         },
-        "/api/profile": {
+        "/api/v1/profile": {
             "get": {
                 "tags": [
                     "Profile"
                 ],
                 "summary": "Get user details.",
-                "operationId": "f1784685f8270527da017b3616288443",
+                "operationId": "840711b2cfe9f9c00a12c154bfb21787",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -997,7 +997,7 @@
                     "Profile"
                 ],
                 "summary": "Update user profile.",
-                "operationId": "9b7235bb283355b576750777fbc0a703",
+                "operationId": "2416ea03dc2ac6a315f36e2de0dd8f71",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1044,13 +1044,13 @@
                 }
             }
         },
-        "/api/profile/avatar": {
+        "/api/v1/profile/avatar": {
             "post": {
                 "tags": [
                     "Profile"
                 ],
                 "summary": "Update user avatar.",
-                "operationId": "5fbcb521732cc847837906195ddc8390",
+                "operationId": "aab356471782aa4ab172229bb1e61fc6",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -1089,6 +1089,269 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/v1/pins/{pin}/reviews": {
+            "get": {
+                "tags": [
+                    "Pins",
+                    "Reviews"
+                ],
+                "summary": "Get list of the reviews of the pin.",
+                "operationId": "48e86af93bffc91fe3fcc340470d7ab8",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ReviewFullResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pins",
+                    "Reviews"
+                ],
+                "summary": "Add review to the pin.",
+                "operationId": "6d40c04c2d7566359d8fb2bf6afc3b7d",
+                "parameters": [
+                    {
+                        "name": "pin",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReviewStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ReviewFullResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pins/{pin}/reviews/{review}": {
+            "delete": {
+                "tags": [
+                    "Pins",
+                    "Reviews"
+                ],
+                "summary": "Delete a pin.",
+                "operationId": "b0fdeff530bf34ee65bd58ceeba9ce73",
+                "parameters": [
+                    {
+                        "name": "pin",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    {
+                        "name": "review",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824cb"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Pins",
+                    "Reviews"
+                ],
+                "summary": "Update pin review.",
+                "operationId": "6ab53c18f72fb2d569dedb2707a23b21",
+                "parameters": [
+                    {
+                        "name": "pin",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    {
+                        "name": "review",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824cb"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReviewStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ReviewFullResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pins/{pin}/reviews/{review}/media": {
+            "get": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Get list of the review media.",
+                "operationId": "db9f3361a4ee275a2d8f48d84957f33a",
+                "parameters": [
+                    {
+                        "name": "pin",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    {
+                        "name": "review",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824cb"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/MediaShortResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Upload review media.",
+                "operationId": "8d279a513d9aa68ee9d0db3a7e0073da",
+                "parameters": [
+                    {
+                        "name": "pin",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    {
+                        "name": "review",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824cb"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PinMediaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/MediaShortResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pins/{pin}/reviews/{review}/media/{media}": {
+            "delete": {
+                "tags": [
+                    "Pins"
+                ],
+                "summary": "Delete a pin.",
+                "operationId": "0796a867b71e417899e32f292a357ea3",
+                "parameters": [
+                    {
+                        "name": "pin",
+                        "in": "path",
+                        "description": "UUID of pin.",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    {
+                        "name": "review",
+                        "in": "path",
+                        "description": "UUID of pin.",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    {
+                        "name": "media",
+                        "in": "path",
+                        "description": "UUID of media which should be removed.",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824cc"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
                     }
                 }
             }
@@ -1325,6 +1588,20 @@
                             "type": "string",
                             "format": "binary"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "ReviewStoreRequest": {
+                "properties": {
+                    "rating": {
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Some message.",
+                        "nullable": true
                     }
                 },
                 "type": "object"
@@ -1656,6 +1933,35 @@
                 },
                 "type": "object"
             },
+            "PinReviewResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "rating": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "reviewable": {
+                        "$ref": "#/components/schemas/UserShortResource"
+                    }
+                },
+                "type": "object"
+            },
             "PinShortResource": {
                 "properties": {
                     "uuid": {
@@ -1678,6 +1984,25 @@
                     "rating": {
                         "type": "number",
                         "format": "float"
+                    }
+                },
+                "type": "object"
+            },
+            "ReviewFullResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "message": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "pin": {
+                        "$ref": "#/components/schemas/PinReviewResource"
                     }
                 },
                 "type": "object"

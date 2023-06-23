@@ -12,13 +12,14 @@ class DictionaryController extends Controller
 {
     public function __construct(
         private readonly DictionaryRepository $dictionaryRepository
-    ) {
+    )
+    {
         //
     }
 
     /**
      * @OA\Get(
-     *     path="/api/dictionaries",
+     *     path="/api/v1/dictionaries",
      *     tags={"Dictionaries"},
      *     summary="Get list of required dictionaries.",
      *
@@ -45,7 +46,7 @@ class DictionaryController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/dictionaries/repeatable",
+     *     path="/api/v1/dictionaries/repeatable",
      *     tags={"Dictionaries"},
      *     summary="Get list of event repeatable.",
      *

@@ -6,17 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Pin\UploadRequest;
 use App\Http\Resources\Media\ShortResource;
 use App\Models\Pin;
-use App\Repositories\PinRepository;
+use App\Models\Review;
+use App\Repositories\ReviewRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
 use Response;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class PinMediaController extends Controller
+class ReviewMediaController extends Controller
 {
     public function __construct(
-        protected PinRepository $pinRepository
+        protected ReviewRepository $reviewRepository
     )
     {
         //
@@ -24,11 +25,12 @@ class PinMediaController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/pins/{pin}/media",
+     *     path="/api/v1/pins/{pin}/reviews/{review}/media",
      *     tags={"Pins"},
-     *     summary="Get list of the user pin media.",
+     *     summary="Get list of the review media.",
      *
      *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="review", required=true, example="995037a6-60b3-4055-aa14-3513aa9824cb", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
      *
@@ -40,24 +42,25 @@ class PinMediaController extends Controller
      * )
      * @throws AuthorizationException
      */
-    public function index(Pin $pin): JsonResponse
+    public function index(Pin $pin, Review $review): JsonResponse
     {
-        $this->authorize('upload', $pin);
+        $this->authorize('upload', $review);
 
         return Response::json(
             ShortResource::collection(
-                $this->pinRepository->media($pin)
+                $this->reviewRepository->media($review)
             )
         );
     }
 
     /**
      * @OA\Post(
-     *     path="/api/v1/pins/{pin}/media",
+     *     path="/api/v1/pins/{pin}/reviews/{review}/media",
      *     tags={"Pins"},
-     *     summary="Upload pin media.",
+     *     summary="Upload review media.",
      *
      *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="review", required=true, example="995037a6-60b3-4055-aa14-3513aa9824cb", in="path"),
      *
      *     @OA\RequestBody(
      *         required=true,
@@ -78,25 +81,26 @@ class PinMediaController extends Controller
      * )
      * @throws AuthorizationException
      */
-    public function store(UploadRequest $request, Pin $pin): JsonResponse
+    public function store(UploadRequest $request, Pin $pin, Review $review): JsonResponse
     {
         $this->authorize('upload', $pin);
 
         return Response::json(
             ShortResource::collection(
-                $this->pinRepository->upload($pin, $request->file('files'))
+                $this->reviewRepository->upload($review, $request->file('files'))
             )
         );
     }
 
     /**
      * @OA\Delete(
-     *     path="/api/v1/pins/{pin}/media/{media}",
+     *     path="/api/v1/pins/{pin}/reviews/{review}/media/{media}",
      *     tags={"Pins"},
      *     summary="Delete a pin.",
      *
      *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path", description="UUID of pin."),
-     *     @OA\Parameter(name="media", required=true, example="995037a6-60b3-4055-aa14-3513aa9824cb", in="path", description="UUID of media which should be removed."),
+     *     @OA\Parameter(name="review", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path", description="UUID of pin."),
+     *     @OA\Parameter(name="media", required=true, example="995037a6-60b3-4055-aa14-3513aa9824cc", in="path", description="UUID of media which should be removed."),
      *
      *     @OA\Response(response=204, description="Successful response")
      * )
@@ -107,7 +111,7 @@ class PinMediaController extends Controller
     {
         $this->authorize('deleteMedia', $pin);
 
-        $this->pinRepository->destroyMedia($media);
+        $this->reviewRepository->destroyMedia($media);
 
         return Response::json(null, 204);
     }

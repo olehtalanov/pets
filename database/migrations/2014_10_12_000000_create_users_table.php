@@ -28,6 +28,9 @@ return new class () extends Migration {
             $table->string('provider_token')->nullable();
             $table->string('provider_refresh_token')->nullable();
 
+            $table->double('latitude', 10, 8)->nullable();
+            $table->double('longitude', 11, 8)->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

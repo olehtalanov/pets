@@ -207,8 +207,9 @@ return [
     ],
 
     'pins' => [
-        'pagination' => 20,
         'search_limit' => 100,
     ],
+
+    'pagination_default' => 20,
 
 ];

@@ -28,7 +28,7 @@ class PinController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/pins",
+     *     path="/api/v1/pins",
      *     tags={"Pins"},
      *     summary="Get list of the user`s pins.",
      *
@@ -54,7 +54,7 @@ class PinController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/pins/search",
+     *     path="/api/v1/pins/search",
      *     tags={"Pins"},
      *     summary="Get list of pins matched by filters.",
      *
@@ -83,11 +83,11 @@ class PinController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/pins/{uuid}",
+     *     path="/api/v1/pins/{pin}",
      *     tags={"Pins"},
      *     summary="Get a pin.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
      *
@@ -108,7 +108,7 @@ class PinController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/pins",
+     *     path="/api/v1/pins",
      *     tags={"Pins"},
      *     summary="Create a new pin.",
      *
@@ -142,11 +142,11 @@ class PinController extends Controller
 
     /**
      * @OA\Patch(
-     *     path="/api/pins/{uuid}",
+     *     path="/api/v1/pins/{pin}",
      *     tags={"Pins"},
      *     summary="Update a pin.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\RequestBody(
      *         required=true,
@@ -182,11 +182,11 @@ class PinController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/pins/{uuid}",
+     *     path="/api/v1/pins/{pin}",
      *     tags={"Pins"},
      *     summary="Delete a pin.",
      *
-     *     @OA\Parameter(name="uuid", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=204, description="Successful response")
      * )

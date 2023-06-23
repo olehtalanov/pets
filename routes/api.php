@@ -8,9 +8,12 @@ use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\PinController;
 use App\Http\Controllers\Api\PinMediaController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\ReviewMediaController;
 
 Route::group([
     'as' => 'api.',
+    'prefix' => 'v1',
 ], static function () {
     require __DIR__ . '/auth.php';
 
@@ -44,12 +47,22 @@ Route::group([
                 'as' => 'media.',
                 'prefix' => '{pin}/media'
             ], static function () {
-                Route::get('', [PinMediaController::class, 'index'])->name('index');
-                Route::post('', [PinMediaController::class, 'upload'])->name('upload');
+                Route::get('/', [PinMediaController::class, 'index'])->name('index');
+                Route::post('/', [PinMediaController::class, 'store'])->name('store');
                 Route::delete('{media:uuid}', [PinMediaController::class, 'destroy'])->name('destroy');
+            });
+
+            Route::group([
+                'as' => 'reviews.media.',
+                'prefix' => '{pin}/reviews/{review}/media'
+            ], static function () {
+                Route::get('/', [ReviewMediaController::class, 'index'])->name('index');
+                Route::post('/', [ReviewMediaController::class, 'store'])->name('store');
+                Route::delete('{media:uuid}', [ReviewMediaController::class, 'destroy'])->name('destroy');
             });
         });
 
+        Route::apiResource('pins.reviews', ReviewController::class)->except('show');
         Route::apiResource('pins', PinController::class);
 
         /* Profile */
@@ -58,8 +71,8 @@ Route::group([
             'as' => 'profile.',
             'prefix' => 'profile',
         ], static function () {
-            Route::get('', [ProfileController::class, 'show'])->name('show');
-            Route::patch('', [ProfileController::class, 'update'])->name('update');
+            Route::get('/', [ProfileController::class, 'show'])->name('show');
+            Route::patch('/', [ProfileController::class, 'update'])->name('update');
             Route::post('avatar', [ProfileController::class, 'avatar'])->name('avatar');
         });
 
@@ -69,7 +82,7 @@ Route::group([
             'as' => 'chats.',
             'prefix' => 'chats',
         ], static function () {
-            Route::get('', [ChatController::class, 'index'])->name('index');
+            Route::get('/', [ChatController::class, 'index'])->name('index');
             Route::get('{chat}', [ChatController::class, 'show'])->name('show');
         });
 
@@ -79,7 +92,7 @@ Route::group([
             'as' => 'dictionaries.',
             'prefix' => 'dictionaries',
         ], static function () {
-            Route::get('', [DictionaryController::class, 'index'])->name('index');
+            Route::get('/', [DictionaryController::class, 'index'])->name('index');
             Route::get('repeatable', [DictionaryController::class, 'repeatable'])->name('repeatable');
         });
     });
