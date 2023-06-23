@@ -206,8 +206,13 @@ return [
         ],
     ],
 
-    'search_limit' => 100,
+    'pagination' => [
+        'search' => env('PAGINATION_SEARCH', 100),
+        'default' => env('PAGINATION_DEFAULT', 20),
+    ],
 
-    'pagination_default' => 20,
+    'notifications' => [
+        'appeal' => explode(',', env('NOTIFICATIONS_APPEAL', '')),
+    ],
 
 ];

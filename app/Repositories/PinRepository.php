@@ -30,7 +30,7 @@ class PinRepository extends BaseRepository
             ->when($filters->get('type_ids'), function (Builder $builder, array $ids) {
                 $builder->whereIn('type_id', DB::table('pin_types')->whereIn('uuid', $ids)->pluck('id'));
             })
-            ->paginate($filters->get('limit', config('app.search_limit')));
+            ->paginate($filters->get('limit', config('app.pagination.search')));
     }
 
     public function list(): LengthAwarePaginator
@@ -40,7 +40,7 @@ class PinRepository extends BaseRepository
             ->with('type')
             ->withAvg('reviews', 'rating')
             ->latest()
-            ->paginate(config('app.pagination_default'));
+            ->paginate(config('app.pagination.default'));
     }
 
     public function one(Pin $pin): Pin

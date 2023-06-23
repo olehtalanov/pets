@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Enums\User\UserRoleEnum;
-use App\Events\User\Login;
+use App\Events\User\LoggedIn;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\PersonalCodeRequest;
@@ -45,7 +45,7 @@ class AuthenticationController extends Controller
 
         $code = $user->accessCodes()->create();
 
-        event(new Login($code));
+        event(new LoggedIn($code));
 
         return Response::json(null, 204);
     }

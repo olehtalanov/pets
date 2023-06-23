@@ -7,6 +7,7 @@ use Akuechler\Geoly;
 use App\Enums\User\UserRoleEnum;
 use App\Traits\HasUuid;
 use App\Traits\UseMedia;
+use Database\Factories\UserFactory;
 use Eloquent;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Builder;
@@ -49,24 +50,24 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property Carbon|null $updated_at
  * @property float|null $latitude
  * @property float|null $longitude
- * @property-read \App\Models\PersonalAccessCode|null $accessCodes
- * @property-read Collection<int, \App\Models\Animal> $animals
+ * @property-read PersonalAccessCode|null $accessCodes
+ * @property-read Collection<int, Animal> $animals
  * @property-read int|null $animals_count
- * @property-read Collection<int, \App\Models\Event> $events
+ * @property-read Collection<int, Event> $events
  * @property-read int|null $events_count
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read Collection<int, \App\Models\Note> $notes
+ * @property-read Collection<int, Note> $notes
  * @property-read int|null $notes_count
  * @property-read DatabaseNotificationCollection<int, DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @property-read Collection<int, \App\Models\Pin> $pins
+ * @property-read Collection<int, Pin> $pins
  * @property-read int|null $pins_count
- * @property-read Collection<int, \App\Models\Review> $reviews
+ * @property-read Collection<int, Review> $reviews
  * @property-read int|null $reviews_count
  * @property-read Collection<int, PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static UserFactory factory($count = null, $state = [])
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
@@ -157,6 +158,11 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function appeals(): HasMany
+    {
+        return $this->hasMany(Appeal::class);
     }
 
     public function accessCodes(): HasOne

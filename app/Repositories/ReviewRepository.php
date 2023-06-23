@@ -25,7 +25,7 @@ class ReviewRepository extends BaseRepository
                 ]
             ])
             ->latest()
-            ->paginate(config('app.pagination_default'));
+            ->paginate(config('app.pagination.default'));
     }
 
     public function list(Pin $pin): Collection

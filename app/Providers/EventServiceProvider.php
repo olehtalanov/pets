@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use App\Events\User\Login;
+use App\Events\User\AppealAdded;
+use App\Events\User\LoggedIn;
+use App\Listeners\User\NotifyAboutNewAppeal;
 use App\Listeners\User\SendPersonalCode;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -20,9 +22,13 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        Login::class => [
+        LoggedIn::class => [
             SendPersonalCode::class,
         ],
+
+        AppealAdded::class => [
+            NotifyAboutNewAppeal::class,
+        ]
     ];
 
     /**

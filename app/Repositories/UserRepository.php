@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Data\User\AppealData;
 use App\Data\User\CoordinatesData;
+use App\Models\Appeal;
 use App\Models\User;
 use Auth;
 use DB;
@@ -38,7 +40,7 @@ class UserRepository extends BaseRepository
                     $query->whereIn('breed_id', DB::table('breeds')->whereIn('uuid', $ids)->pluck('id'));
                 });
             })
-            ->paginate(config('app.search_limit'));
+            ->paginate(config('app.pagination.search'));
     }
 
     public function storeCoordinates(CoordinatesData $data): array
@@ -51,5 +53,13 @@ class UserRepository extends BaseRepository
     public function showCoordinates(): array
     {
         return Auth::user()->only('latitude', 'longitude');
+    }
+
+    public function storeAppeal(AppealData $data): Appeal
+    {
+        /** @var Appeal $appeal */
+        $appeal = Auth::user()->appeals()->create($data->toArray());
+
+        return $appeal;
     }
 }

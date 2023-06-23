@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AnimalController;
+use App\Http\Controllers\Api\AppealController;
 use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\DictionaryController;
 use App\Http\Controllers\Api\EventController;
@@ -97,6 +98,10 @@ Route::group([
             Route::get('/', [ChatController::class, 'index'])->name('index');
             Route::get('{chat}', [ChatController::class, 'show'])->name('show');
         });
+
+        /* Appeals */
+
+        Route::post('appeals', AppealController::class)->name('appeals.store');
 
         /* Dictionaries */
 

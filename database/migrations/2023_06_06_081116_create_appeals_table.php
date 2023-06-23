@@ -17,7 +17,7 @@ return new class () extends Migration {
             $table->foreignIdFor(User::class)
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->text('message')->nullable();
+            $table->text('message');
             $table->unsignedTinyInteger('rating')->nullable();
             $table->timestamps();
         });

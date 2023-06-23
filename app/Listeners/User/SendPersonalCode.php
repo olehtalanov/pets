@@ -2,7 +2,7 @@
 
 namespace App\Listeners\User;
 
-use App\Events\User\Login;
+use App\Events\User\LoggedIn;
 use App\Mail\Auth\PersonalCode;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -15,7 +15,7 @@ class SendPersonalCode implements ShouldQueue
     /**
      * Handle the event.
      */
-    public function handle(Login $event): void
+    public function handle(LoggedIn $event): void
     {
         Mail::to($event->code->user)->send(new PersonalCode($event->code));
     }
