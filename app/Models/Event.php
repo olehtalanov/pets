@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Enums\Animal\EventRepeatSchemeEnum;
 use App\Traits\HasUuid;
-use Database\Factories\EventFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

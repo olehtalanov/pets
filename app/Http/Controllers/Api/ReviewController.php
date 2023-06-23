@@ -18,8 +18,7 @@ class ReviewController extends Controller
 {
     public function __construct(
         protected ReviewRepository $reviewRepository
-    )
-    {
+    ) {
         //
     }
 

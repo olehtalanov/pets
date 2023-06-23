@@ -36,7 +36,7 @@ class ReviewRepository extends BaseRepository
 
         return Review::wherePinId($pin->getKey())
             ->get()
-            ->each(fn($review) => $review->setRelation('pin', $pin));
+            ->each(fn ($review) => $review->setRelation('pin', $pin));
     }
 
     public function one(Review $review): Review

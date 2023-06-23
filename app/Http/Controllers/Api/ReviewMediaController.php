@@ -18,8 +18,7 @@ class ReviewMediaController extends Controller
 {
     public function __construct(
         protected ReviewRepository $reviewRepository
-    )
-    {
+    ) {
         //
     }
 

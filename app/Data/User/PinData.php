@@ -14,8 +14,7 @@ class PinData extends Data
         public string  $type_id,
         public ?string $address = null,
         public ?string $contact = null,
-    )
-    {
+    ) {
         $this->type_id = PinType::findU($type_id)->getKey();
     }
 }

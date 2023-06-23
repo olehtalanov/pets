@@ -12,8 +12,7 @@ class DictionaryController extends Controller
 {
     public function __construct(
         private readonly DictionaryRepository $dictionaryRepository
-    )
-    {
+    ) {
         //
     }
 

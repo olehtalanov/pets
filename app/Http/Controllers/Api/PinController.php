@@ -21,8 +21,7 @@ class PinController extends Controller
 {
     public function __construct(
         private readonly PinRepository $pinRepository
-    )
-    {
+    ) {
         //
     }
 

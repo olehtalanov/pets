@@ -12,8 +12,7 @@ class ReviewData extends Data
     public function __construct(
         public int     $rating,
         public ?string $message = null
-    )
-    {
+    ) {
         $this->user_id = Auth::id();
     }
 }

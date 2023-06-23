@@ -7,7 +7,6 @@ use Akuechler\Geoly;
 use App\Enums\User\UserRoleEnum;
 use App\Traits\HasUuid;
 use App\Traits\UseMedia;
-use Database\Factories\UserFactory;
 use Eloquent;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Builder;
@@ -190,15 +189,15 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
     protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->first_name ? "$this->first_name $this->last_name" : null
+            get: fn () => $this->first_name ? "$this->first_name $this->last_name" : null
         );
     }
 
     protected function phone(): Attribute
     {
         return Attribute::make(
-            get: static fn($value): string => "+$value",
-            set: static fn($value) => preg_replace('/\D/', '', $value)
+            get: static fn ($value): string => "+$value",
+            set: static fn ($value) => preg_replace('/\D/', '', $value)
         );
     }
 

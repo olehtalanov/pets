@@ -21,7 +21,7 @@ Route::group([
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], static function () {
-        Route::any('ping', static fn() => null)->name('ping');
+        Route::any('ping', static fn () => null)->name('ping');
 
         /* Animals */
 

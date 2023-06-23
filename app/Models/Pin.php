@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Akuechler\Geoly;
 use App\Traits\HasUuid;
-use Database\Factories\PinFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

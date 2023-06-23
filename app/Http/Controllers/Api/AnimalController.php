@@ -19,8 +19,7 @@ class AnimalController extends Controller
 {
     public function __construct(
         protected AnimalRepository $animalRepository,
-    )
-    {
+    ) {
         //
     }
 

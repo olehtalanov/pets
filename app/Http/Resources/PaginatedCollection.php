@@ -33,8 +33,7 @@ class PaginatedCollection extends ResourceCollection
     public function __construct(
         $resource,
         protected string $paginatingResource
-    )
-    {
+    ) {
         parent::__construct($resource);
 
         $this->resource = $this->collectResource($resource);

@@ -43,7 +43,7 @@ class FullResource extends JsonResource
             'address' => $this->address,
             'contact' => $this->contact,
             'rating' => (float)$this->reviews_avg_rating,
-            'gallery' => $this->getMedia('gallery')->map(fn(Media $media) => $media->getFullUrl()),
+            'gallery' => $this->getMedia('gallery')->map(fn (Media $media) => $media->getFullUrl()),
         ];
     }
 }

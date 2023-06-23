@@ -18,8 +18,7 @@ class UserController extends Controller
 {
     public function __construct(
         protected UserRepository $userRepository,
-    )
-    {
+    ) {
         //
     }
 
