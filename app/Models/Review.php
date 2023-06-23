@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
+use App\Traits\UseMedia;
 use Database\Factories\ReviewFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -13,7 +14,6 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Carbon;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -51,7 +51,7 @@ class Review extends Model implements HasMedia
 {
     use HasFactory;
     use HasUuid;
-    use InteractsWithMedia;
+    use UseMedia;
 
     protected $fillable = [
         'message',

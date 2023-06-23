@@ -14,6 +14,10 @@ trait UseMedia
 
     public function addMedia(string|UploadedFile $file): FileAdder
     {
-        return $this->parentAddMedia($file)->usingFileName($file->hashName());
+        $parts = explode('.', $file->hashName());
+
+        return $this->parentAddMedia($file)->usingFileName(
+            substr($parts[0], 0, 12) . '.' . $parts[1]
+        );
     }
 }

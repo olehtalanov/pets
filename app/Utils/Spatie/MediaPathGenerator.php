@@ -12,7 +12,7 @@ class MediaPathGenerator implements PathGenerator
          */
     public function getPath(Media $media): string
     {
-        return $this->getBasePath($media).'/';
+        return $this->getBasePath($media) . '/';
     }
 
     /*
@@ -20,7 +20,7 @@ class MediaPathGenerator implements PathGenerator
      */
     public function getPathForConversions(Media $media): string
     {
-        return $this->getBasePath($media).'/';
+        return $this->getBasePath($media) . '/';
     }
 
     /*
@@ -28,7 +28,7 @@ class MediaPathGenerator implements PathGenerator
      */
     public function getPathForResponsiveImages(Media $media): string
     {
-        return $this->getBasePath($media).'/r/';
+        return $this->getBasePath($media) . '/r/';
     }
 
     /*
@@ -39,9 +39,9 @@ class MediaPathGenerator implements PathGenerator
         $prefix = config('media-library.prefix', '');
 
         if ($prefix !== '') {
-            return $prefix.'/'.md5($media->uuid);
+            return $prefix . '/' . substr(md5($media->uuid), 0, 12);
         }
 
-        return md5($media->uuid);
+        return substr(md5($media->uuid), 0, 12);
     }
 }
