@@ -323,6 +323,30 @@
                 }
             }
         },
+        "/api/v1/appeals": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Send contact us request.",
+                "operationId": "60962c1da164229adef9f74d7054d284",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AppealRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Notification has been sent."
+                    }
+                }
+            }
+        },
         "/api/v1/dictionaries": {
             "get": {
                 "tags": [
@@ -1728,6 +1752,18 @@
                     "message": {
                         "type": "string",
                         "example": "Some message.",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "AppealRequest": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "integer",
                         "nullable": true
                     }
                 },

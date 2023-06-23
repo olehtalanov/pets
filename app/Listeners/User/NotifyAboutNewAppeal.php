@@ -13,7 +13,6 @@ class NotifyAboutNewAppeal
      */
     public function handle(AppealAdded $event): void
     {
-        Mail::to(config('app.notifications.appeal'))
-            ->send(new Appeal($event->appeal));
+        Mail::to(config('app.notifications.appeal'))->send(new Appeal($event->appeal));
     }
 }

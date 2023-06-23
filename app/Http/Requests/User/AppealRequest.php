@@ -5,7 +5,17 @@ namespace App\Http\Requests\User;
 use Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Schema(
+ *     schema="AppealRequest",
+ *     type="object",
+ *
+ *     @OA\Property(property="message", type="string"),
+ *     @OA\Property(property="rating", type="int", nullable=true),
+ * )
+ */
 class AppealRequest extends FormRequest
 {
     /**
