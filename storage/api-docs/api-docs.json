@@ -271,7 +271,7 @@
                 "tags": [
                     "Animals"
                 ],
-                "summary": "Update user avatar.",
+                "summary": "Update an animal avatar.",
                 "operationId": "d5059ce02f6a7f62d79ec71d6910d5f1",
                 "parameters": [
                     {

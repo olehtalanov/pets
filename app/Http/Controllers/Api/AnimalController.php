@@ -19,7 +19,8 @@ class AnimalController extends Controller
 {
     public function __construct(
         protected AnimalRepository $animalRepository,
-    ) {
+    )
+    {
         //
     }
 
@@ -167,7 +168,7 @@ class AnimalController extends Controller
      * @OA\Post(
      *     path="/api/v1/animals/{animal}/avatar",
      *     tags={"Animals"},
-     *     summary="Update user avatar.",
+     *     summary="Update an animal avatar.",
      *
      *     @OA\Parameter(name="animal", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
