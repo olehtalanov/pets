@@ -40,6 +40,7 @@ class ReviewMediaController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function index(Pin $pin, Review $review): JsonResponse
@@ -79,6 +80,7 @@ class ReviewMediaController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function store(UploadRequest $request, Pin $pin, Review $review): JsonResponse

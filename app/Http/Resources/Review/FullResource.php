@@ -15,6 +15,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="uuid", type="string"),
  *     @OA\Property(property="rating", type="float"),
  *     @OA\Property(property="message", type="string", nullable=true),
+ *     @OA\Property(property="last_action_at", type="string"),
  *     @OA\Property(property="pin", type="object", ref="#/components/schemas/PinReviewResource"),
  * )
  */
@@ -31,6 +32,7 @@ class FullResource extends JsonResource
             'uuid' => $this->uuid,
             'rating' => $this->rating,
             'message' => $this->message,
+            'last_action_at' => $this->updated_at->toDateTimeString(),
             'pin' => new PinReviewResource($this->pin),
         ];
     }

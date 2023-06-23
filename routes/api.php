@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\PinMediaController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\ReviewMediaController;
+use App\Http\Controllers\Api\UserController;
 
 Route::group([
     'as' => 'api.',
@@ -64,6 +65,17 @@ Route::group([
 
         Route::apiResource('pins.reviews', ReviewController::class)->except('show');
         Route::apiResource('pins', PinController::class);
+
+        /* Users */
+
+        Route::group([
+            'as' => 'users.',
+            'prefix' => 'users'
+        ], static function () {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::get('coordinates', [UserController::class, 'showCoordinates'])->name('coordinates.show');
+            Route::post('coordinates', [UserController::class, 'storeCoordinates'])->name('coordinates.store');
+        });
 
         /* Profile */
 

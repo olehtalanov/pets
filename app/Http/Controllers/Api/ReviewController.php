@@ -59,9 +59,9 @@ class ReviewController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *
-     *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(ref="#/components/schemas/ReviewStoreRequest")
+     *         @OA\JsonContent(
+     *             required={"rating"},
+     *             ref="#/components/schemas/ReviewStoreRequest"
      *         )
      *     ),
      *
@@ -73,6 +73,7 @@ class ReviewController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function store(StoreRequest $request, Pin $pin): JsonResponse
@@ -101,9 +102,9 @@ class ReviewController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *
-     *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(ref="#/components/schemas/ReviewStoreRequest")
+     *         @OA\JsonContent(
+     *             required={"rating"},
+     *             ref="#/components/schemas/ReviewStoreRequest"
      *         )
      *     ),
      *
@@ -115,6 +116,7 @@ class ReviewController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function update(StoreRequest $request, Pin $pin, Review $review): JsonResponse

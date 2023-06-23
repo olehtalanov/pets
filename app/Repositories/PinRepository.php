@@ -4,7 +4,9 @@ namespace App\Repositories;
 
 use App\Data\User\PinData;
 use App\Models\Pin;
+use App\Traits\MediaTrait;
 use Auth;
+use DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -13,7 +15,7 @@ class PinRepository extends BaseRepository
 {
     use MediaTrait;
 
-    public function search(Collection $filters): Collection
+    public function search(Collection $filters): LengthAwarePaginator
     {
         return Pin::query()
             ->with('type')
@@ -22,14 +24,13 @@ class PinRepository extends BaseRepository
                 $builder->radius(
                     $filters->get('latitude'),
                     $filters->get('longitude'),
-                    $filters->get('radius')
+                    $filters->get('radius') / 1000
                 );
             })
             ->when($filters->get('type_ids'), function (Builder $builder, array $ids) {
-                $builder->whereIn('type_id', $ids);
+                $builder->whereIn('type_id', DB::table('pin_types')->whereIn('uuid', $ids)->pluck('id'));
             })
-            ->limit($filters->get('limit', config('app.pins.search_limit')))
-            ->get();
+            ->paginate($filters->get('limit', config('app.search_limit')));
     }
 
     public function list(): LengthAwarePaginator

@@ -38,6 +38,7 @@ class PinMediaController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function index(Pin $pin): JsonResponse
@@ -76,6 +77,7 @@ class PinMediaController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function store(UploadRequest $request, Pin $pin): JsonResponse

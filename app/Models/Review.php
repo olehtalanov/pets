@@ -11,8 +11,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Carbon;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * App\Models\Review
@@ -25,6 +28,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property int $rating
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read MediaCollection<int, Media> $media
+ * @property-read int|null $media_count
  * @property-read Pin $pin
  * @property-read User|null $reviewable
  * @property-read User $reviewer
@@ -73,5 +78,18 @@ class Review extends Model implements HasMedia
         return $this->belongsTo(Pin::class);
     }
 
-    /* Scopes */
+    /* Media */
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('gallery')
+            ->registerMediaConversions(function (Media $media) {
+                $this
+                    ->addMediaConversion('thumb')
+                    ->fit(Manipulations::FIT_CROP, 80, 80)
+                    ->width(80)
+                    ->height(80);
+            });
+    }
 }

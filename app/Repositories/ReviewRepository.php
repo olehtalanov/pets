@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Data\User\ReviewData;
 use App\Models\Pin;
 use App\Models\Review;
+use App\Traits\MediaTrait;
 use Auth;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;

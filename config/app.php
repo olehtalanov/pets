@@ -206,9 +206,7 @@ return [
         ],
     ],
 
-    'pins' => [
-        'search_limit' => 100,
-    ],
+    'search_limit' => 100,
 
     'pagination_default' => 20,
 

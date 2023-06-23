@@ -8,7 +8,7 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(
- *     schema="AnimalShortResource",
+ *     schema="AnimalShortenResource",
  *     type="object",
  *
  *     @OA\Property(property="uuid", type="string"),
@@ -17,13 +17,9 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="breed", type="string"),
  *     @OA\Property(property="sex", type="string"),
  *     @OA\Property(property="avatar", type="string", nullable=true),
- *     @OA\Property(property="activity", type="array", @OA\Items(
- *         @OA\Property(property="notes", type="integer"),
- *         @OA\Property(property="events", type="integer"),
- *     )),
  * )
  */
-class ShortResource extends JsonResource
+class ShortenResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
@@ -34,10 +30,6 @@ class ShortResource extends JsonResource
             'breed' => $this->breed->name,
             'sex' => $this->sex->getName(),
             'avatar' => $this->getFirstMedia('avatar')?->getFullUrl('thumb'),
-            'activity' => [
-                'notes' => $this->notes_count,
-                'events' => $this->events_count,
-            ],
         ];
     }
 }

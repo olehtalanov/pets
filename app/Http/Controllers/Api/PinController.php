@@ -40,6 +40,7 @@ class PinController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws ResourceNotSetException
      */
     public function index(): JsonResponse
@@ -60,14 +61,14 @@ class PinController extends Controller
      *
      *     @OA\Parameter(name="latitude", in="path", required=false),
      *     @OA\Parameter(name="longitude", in="path", required=false),
-     *     @OA\Parameter(name="radius", in="path", required=false),
+     *     @OA\Parameter(name="radius", in="path", required=false, description="Radius in meters."),
      *     @OA\Parameter(name="type_ids[]", in="path", required=false, @OA\Schema(type="string")),
      *
      *     @OA\Response(response=200, description="Successful response",
      *
      *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/PinShortResource")
+     *             type="object",
+     *             ref="#/components/schemas/PaginatedResourceCollection"
      *         )
      *     )
      * )
@@ -164,6 +165,7 @@ class PinController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function update(StoreRequest $request, Pin $pin): JsonResponse

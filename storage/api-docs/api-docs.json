@@ -20,7 +20,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/AnimalListItemResource"
+                                        "$ref": "#/components/schemas/AnimalShortResource"
                                     }
                                 }
                             }
@@ -756,6 +756,7 @@
                     {
                         "name": "radius",
                         "in": "path",
+                        "description": "Radius in meters.",
                         "required": false
                     },
                     {
@@ -773,10 +774,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/PinShortResource"
-                                    }
+                                    "$ref": "#/components/schemas/PaginatedResourceCollection"
                                 }
                             }
                         }
@@ -1135,7 +1133,7 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/ReviewStoreRequest"
                             }
@@ -1211,7 +1209,7 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/ReviewStoreRequest"
                             }
@@ -1352,6 +1350,135 @@
                 "responses": {
                     "204": {
                         "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get list of users matched by filters.",
+                "operationId": "b343fe695d1beaa03b7deb8449dd1b7c",
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "path",
+                        "required": false
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "path",
+                        "required": false
+                    },
+                    {
+                        "name": "radius",
+                        "in": "path",
+                        "description": "Radius in meters",
+                        "required": false
+                    },
+                    {
+                        "name": "animal_type_ids[]",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "breed_ids[]",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResourceCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/coordinates": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get auth user coordinates.",
+                "operationId": "4a5aa97caf96d0b7aa000c3a5f755194",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "latitude": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "nullable": true
+                                        },
+                                        "longitude": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Set auth user coordinates.",
+                "operationId": "4970a96e02198295dcbacd35c8be4588",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserCoordinatesRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "latitude": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "nullable": true
+                                        },
+                                        "longitude": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1606,6 +1733,19 @@
                 },
                 "type": "object"
             },
+            "UserCoordinatesRequest": {
+                "properties": {
+                    "latitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "type": "object"
+            },
             "AnimalFullResource": {
                 "properties": {
                     "uuid": {
@@ -1672,7 +1812,7 @@
                 },
                 "type": "object"
             },
-            "AnimalListItemResource": {
+            "AnimalShortResource": {
                 "properties": {
                     "uuid": {
                         "type": "string"
@@ -1693,7 +1833,7 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "activiry": {
+                    "activity": {
                         "type": "array",
                         "items": {
                             "properties": {
@@ -1706,6 +1846,30 @@
                             },
                             "type": "object"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "AnimalShortenResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "breed": {
+                        "type": "string"
+                    },
+                    "sex": {
+                        "type": "string"
+                    },
+                    "avatar": {
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "type": "object"
@@ -1870,6 +2034,9 @@
                             "oneOf": [
                                 {
                                     "$ref": "#/components/schemas/PinShortResource"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/UserSearchResource"
                                 }
                             ]
                         }
@@ -2001,6 +2168,9 @@
                         "type": "string",
                         "nullable": true
                     },
+                    "last_action_at": {
+                        "type": "string"
+                    },
                     "pin": {
                         "$ref": "#/components/schemas/PinReviewResource"
                     }
@@ -2027,6 +2197,34 @@
                                 }
                             },
                             "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UserSearchResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "avatar": {
+                        "type": "string"
+                    },
+                    "animals": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AnimalShortenResource"
                         }
                     }
                 },

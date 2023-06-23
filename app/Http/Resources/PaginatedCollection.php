@@ -15,6 +15,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="items", type="array", @OA\Items(
  *         oneOf={
  *             @OA\Schema(ref="#/components/schemas/PinShortResource"),
+ *             @OA\Schema(ref="#/components/schemas/UserSearchResource"),
  *         }
  *     )),
  *     @OA\Property(property="meta", type="object",

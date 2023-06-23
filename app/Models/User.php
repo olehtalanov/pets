@@ -48,27 +48,30 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read PersonalAccessCode|null $accessCodes
- * @property-read Collection<int, Animal> $animals
+ * @property float|null $latitude
+ * @property float|null $longitude
+ * @property-read \App\Models\PersonalAccessCode|null $accessCodes
+ * @property-read Collection<int, \App\Models\Animal> $animals
  * @property-read int|null $animals_count
- * @property-read Collection<int, Event> $events
+ * @property-read Collection<int, \App\Models\Event> $events
  * @property-read int|null $events_count
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read Collection<int, Note> $notes
+ * @property-read Collection<int, \App\Models\Note> $notes
  * @property-read int|null $notes_count
  * @property-read DatabaseNotificationCollection<int, DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @property-read Collection<int, Pin> $pins
+ * @property-read Collection<int, \App\Models\Pin> $pins
  * @property-read int|null $pins_count
- * @property-read Collection<int, Review> $reviews
+ * @property-read Collection<int, \App\Models\Review> $reviews
  * @property-read int|null $reviews_count
  * @property-read Collection<int, PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- * @method static UserFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
+ * @method static Builder|User radius($latitude, $longitude, $radius)
  * @method static Builder|User whereCreatedAt($value)
  * @method static Builder|User whereDeviceId($value)
  * @method static Builder|User whereEmail($value)
@@ -76,6 +79,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|User whereFirstName($value)
  * @method static Builder|User whereId($value)
  * @method static Builder|User whereLastName($value)
+ * @method static Builder|User whereLatitude($value)
+ * @method static Builder|User whereLongitude($value)
  * @method static Builder|User wherePassword($value)
  * @method static Builder|User wherePhone($value)
  * @method static Builder|User whereProvider($value)

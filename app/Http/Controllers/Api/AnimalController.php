@@ -35,7 +35,7 @@ class AnimalController extends Controller
      *         @OA\JsonContent(
      *             type="array",
      *
-     *             @OA\Items(ref="#/components/schemas/AnimalListItemResource"),
+     *             @OA\Items(ref="#/components/schemas/AnimalShortResource"),
      *         )
      *     )
      * )
@@ -149,6 +149,7 @@ class AnimalController extends Controller
      *         @OA\JsonContent(ref="#/components/schemas/AnimalFullResource")
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function update(StoreRequest $request, Animal $animal): JsonResponse
@@ -202,6 +203,7 @@ class AnimalController extends Controller
      *         )
      *     )
      * )
+     *
      * @throws AuthorizationException
      */
     public function avatar(AvatarRequest $request, Animal $animal): JsonResponse
@@ -230,6 +232,7 @@ class AnimalController extends Controller
      *
      *     @OA\Response(response=204, description="Successful response")
      * )
+     *
      * @throws AuthorizationException
      */
     public function destroy(Animal $animal): JsonResponse

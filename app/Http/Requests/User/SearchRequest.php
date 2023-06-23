@@ -1,24 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Pin;
+namespace App\Http\Requests\User;
 
 use Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use OpenApi\Annotations as OA;
 
-/**
- * @OA\Schema(
- *     schema="PinSearchRequest",
- *     type="object",
- *
- *     @OA\Property(property="latitude", type="float", nullable=true),
- *     @OA\Property(property="longitude", type="float", nullable=true),
- *     @OA\Property(property="radius", type="int", nullable=true),
- *     @OA\Property(property="type_ids", type="array", @OA\Items(type="string"), nullable=true),
- *     )),
- * )
- */
 class SearchRequest extends FormRequest
 {
     /**
@@ -40,8 +27,10 @@ class SearchRequest extends FormRequest
             'latitude' => ['nullable', 'numeric', 'required_with:longitude,radius'],
             'longitude' => ['nullable', 'numeric', 'required_with:latitude,radius'],
             'radius' => ['nullable', 'numeric', 'required_with:latitude,longitude'],
-            'type_ids' => ['sometimes', 'array'],
-            'type_ids.*' => ['string', 'exists:pin_types,uuid'],
+            'animal_type_ids' => ['sometimes', 'array'],
+            'animal_type_ids.*' => ['string', 'exists:animal_types,uuid'],
+            'breed_ids' => ['sometimes', 'array'],
+            'breed_ids.*' => ['string', 'exists:breeds,uuid'],
         ];
     }
 }
