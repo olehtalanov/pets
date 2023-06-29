@@ -24,11 +24,10 @@ class ProfileController extends Controller
     /**
      * @OA\Get(
      *     path="/api/v1/profile",
-     *     tags={"Profile"},
+     *     tags={"Profile", "Users"},
      *     summary="Get user details.",
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="object",
      *             ref="#/components/schemas/UserFullResource"
@@ -46,24 +45,16 @@ class ProfileController extends Controller
     /**
      * @OA\Patch(
      *     path="/api/v1/profile",
-     *     tags={"Profile"},
+     *     tags={"Profile", "Users"},
      *     summary="Update user profile.",
      *
      *     @OA\RequestBody(
      *         required=true,
      *
-     *         @OA\JsonContent(
-     *             required={"first_name","last_name"},
-     *
-     *             @OA\Property(property="first_name", type="string", example="John"),
-     *             @OA\Property(property="last_name", type="string", example="Doe"),
-     *             @OA\Property(property="email", type="string", example="expample@mail.com"),
-     *             @OA\Property(property="phone", type="string", example="380009998877"),
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/ProfileRequest")
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="object",
      *             ref="#/components/schemas/UserFullResource"
@@ -85,26 +76,14 @@ class ProfileController extends Controller
     /**
      * @OA\Post(
      *     path="/api/v1/profile/avatar",
-     *     tags={"Profile"},
+     *     tags={"Profile", "Users"},
      *     summary="Update user avatar.",
      *
      *     @OA\RequestBody(
-     *
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
-     *
      *             @OA\Schema(
-     *                 oneOf={
-     *                     @OA\Schema(
-     *
-     *                         @OA\Property(
-     *                             description="User avatar",
-     *                             property="avatar",
-     *                             type="string",
-     *                             format="binary"
-     *                         )
-     *                     )
-     *                 }
+     *                 @OA\Property(description="User avatar", property="avatar", type="string", format="binary")
      *             )
      *         )
      *     ),

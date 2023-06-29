@@ -11,6 +11,7 @@ use OpenApi\Annotations as OA;
  * @OA\Schema(
  *     schema="PinStoreRequest",
  *     type="object",
+ *     required={"name","type_id","latitude","longitude"},
  *
  *     @OA\Property(property="name", type="string", example="Some title"),
  *     @OA\Property(property="type_id", type="string", example="995037a6-60b3-4055-aa14-3513aa9824ca"),

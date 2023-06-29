@@ -16,7 +16,6 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="longitude", type="float", nullable=true),
  *     @OA\Property(property="radius", type="int", nullable=true),
  *     @OA\Property(property="type_ids", type="array", @OA\Items(type="string"), nullable=true),
- *     )),
  * )
  */
 class SearchRequest extends FormRequest

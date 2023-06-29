@@ -11,6 +11,7 @@ use OpenApi\Annotations as OA;
  * @OA\Schema(
  *     schema="NoteStoreRequest",
  *     type="object",
+ *     required={"animal_id","category_id","title"},
  *
  *     @OA\Property(property="animal_id", type="string", example="995037a6-60b3-4055-aa14-3513aa9824ca"),
  *     @OA\Property(property="category_ids", type="array", @OA\Items(type="string")),

@@ -30,6 +30,8 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|PinType query()
  * @method static Builder|PinType whereId($value)
  * @method static Builder|PinType whereIsVisible($value)
+ * @method static Builder|PinType whereLocale(string $column, string $locale)
+ * @method static Builder|PinType whereLocales(string $column, array $locales)
  * @method static Builder|PinType whereName($value)
  * @method static Builder|PinType whereUuid($value)
  * @mixin Eloquent

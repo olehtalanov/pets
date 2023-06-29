@@ -32,7 +32,6 @@ class ReviewMediaController extends Controller
      *     @OA\Parameter(name="review", required=true, example="995037a6-60b3-4055-aa14-3513aa9824cb", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/MediaShortResource"),
@@ -72,7 +71,6 @@ class ReviewMediaController extends Controller
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/MediaShortResource"),

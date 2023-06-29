@@ -6,7 +6,20 @@ use Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Schema(
+ *     schema="ProfileRequest",
+ *     type="object",
+ *     required={"first_name","last_name"},
+ *
+ *     @OA\Property(property="first_name", type="string", example="John"),
+ *     @OA\Property(property="last_name", type="string", example="Doe"),
+ *     @OA\Property(property="email", type="string", example="expample@mail.com"),
+ *     @OA\Property(property="phone", type="string", example="380009998877"),
+ * )
+ */
 class ProfileRequest extends FormRequest
 {
     /**

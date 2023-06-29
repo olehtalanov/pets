@@ -285,18 +285,14 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "oneOf": [
-                                    {
-                                        "properties": {
-                                            "avatar": {
-                                                "description": "Animal avatar",
-                                                "type": "string",
-                                                "format": "binary"
-                                            }
-                                        },
-                                        "type": "object"
+                                "properties": {
+                                    "avatar": {
+                                        "description": "Animal avatar",
+                                        "type": "string",
+                                        "format": "binary"
                                     }
-                                ]
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -343,6 +339,121 @@
                 "responses": {
                     "204": {
                         "description": "Notification has been sent."
+                    }
+                }
+            }
+        },
+        "/api/v1/chats": {
+            "get": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": "Get chat list.",
+                "operationId": "726a849d8102d220801b07f87e1fce64",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResourceCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": "Check if user has unread chats.",
+                "operationId": "873ac8945858494b5fb722f4b7c6895f",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                },
+                                "example": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/chats/{chat}": {
+            "get": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": "Get chat paginated messages.",
+                "operationId": "1ea440d75b31c84ea4a063c0bdbabcf7",
+                "parameters": [
+                    {
+                        "name": "chat",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ChatFullResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": "Delete the chat.",
+                "operationId": "df8ef820f2865073f7d8319fda395890",
+                "parameters": [
+                    {
+                        "name": "chat",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/chats/{chat}/restore": {
+            "post": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": "Restore previously deleted chat.",
+                "operationId": "d7f646614b99a5db804a9165624902fc",
+                "parameters": [
+                    {
+                        "name": "chat",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
                     }
                 }
             }
@@ -496,6 +607,14 @@
                 ],
                 "summary": "Get an event.",
                 "operationId": "ff2b02c83ff5f2955a7dfe3f703461bc",
+                "parameters": [
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -563,6 +682,120 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/EventFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/chats/messages": {
+            "post": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": "Create a new chat message.",
+                "operationId": "384150af9e580aa1ece4ad70e0be2eb7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatMessageStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatMessageFullResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/chats/messages/mark": {
+            "post": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": "Mark as read specified chat messages.",
+                "operationId": "bebf1698d07ae946a56caec76afd0422",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatMessageReadRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/chats/messages/{message}": {
+            "delete": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": "Delete the chat message.",
+                "operationId": "657124f67abbef79487711f0e74300dc",
+                "parameters": [
+                    {
+                        "name": "message",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": "Update the chat message.",
+                "operationId": "3f16c93c13e899a26379b049a805de23",
+                "parameters": [
+                    {
+                        "name": "message",
+                        "in": "path",
+                        "required": true,
+                        "example": "9986e68c-fd37-41a0-8aa3-6c03625366ba"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatMessageUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatMessageFullResource"
                                 }
                             }
                         }
@@ -997,7 +1230,8 @@
         "/api/v1/profile": {
             "get": {
                 "tags": [
-                    "Profile"
+                    "Profile",
+                    "Users"
                 ],
                 "summary": "Get user details.",
                 "operationId": "840711b2cfe9f9c00a12c154bfb21787",
@@ -1016,7 +1250,8 @@
             },
             "patch": {
                 "tags": [
-                    "Profile"
+                    "Profile",
+                    "Users"
                 ],
                 "summary": "Update user profile.",
                 "operationId": "2416ea03dc2ac6a315f36e2de0dd8f71",
@@ -1025,29 +1260,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "first_name",
-                                    "last_name"
-                                ],
-                                "properties": {
-                                    "first_name": {
-                                        "type": "string",
-                                        "example": "John"
-                                    },
-                                    "last_name": {
-                                        "type": "string",
-                                        "example": "Doe"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "example": "expample@mail.com"
-                                    },
-                                    "phone": {
-                                        "type": "string",
-                                        "example": "380009998877"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/ProfileRequest"
                             }
                         }
                     }
@@ -1069,7 +1282,8 @@
         "/api/v1/profile/avatar": {
             "post": {
                 "tags": [
-                    "Profile"
+                    "Profile",
+                    "Users"
                 ],
                 "summary": "Update user avatar.",
                 "operationId": "aab356471782aa4ab172229bb1e61fc6",
@@ -1077,18 +1291,14 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "oneOf": [
-                                    {
-                                        "properties": {
-                                            "avatar": {
-                                                "description": "User avatar",
-                                                "type": "string",
-                                                "format": "binary"
-                                            }
-                                        },
-                                        "type": "object"
+                                "properties": {
+                                    "avatar": {
+                                        "description": "User avatar",
+                                        "type": "string",
+                                        "format": "binary"
                                     }
-                                ]
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -1604,7 +1814,54 @@
     },
     "components": {
         "schemas": {
+            "ChatMessageReadRequest": {
+                "required": [
+                    "ids"
+                ],
+                "properties": {
+                    "ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ChatMessageStoreRequest": {
+                "required": [
+                    "recipient_id",
+                    "message"
+                ],
+                "properties": {
+                    "recipient_id": {
+                        "type": "string",
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ChatMessageUpdateRequest": {
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "EventStoreRequest": {
+                "required": [
+                    "animal_id",
+                    "title",
+                    "repeat_scheme"
+                ],
                 "properties": {
                     "animal_id": {
                         "type": "string",
@@ -1650,6 +1907,11 @@
                 "type": "object"
             },
             "NoteStoreRequest": {
+                "required": [
+                    "animal_id",
+                    "category_id",
+                    "title"
+                ],
                 "properties": {
                     "animal_id": {
                         "type": "string",
@@ -1699,6 +1961,12 @@
                 "type": "object"
             },
             "PinStoreRequest": {
+                "required": [
+                    "name",
+                    "type_id",
+                    "latitude",
+                    "longitude"
+                ],
                 "properties": {
                     "name": {
                         "type": "string",
@@ -1778,6 +2046,31 @@
                     "longitude": {
                         "type": "number",
                         "format": "float"
+                    }
+                },
+                "type": "object"
+            },
+            "ProfileRequest": {
+                "required": [
+                    "first_name",
+                    "last_name"
+                ],
+                "properties": {
+                    "first_name": {
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "example": "Doe"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "expample@mail.com"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "380009998877"
                     }
                 },
                 "type": "object"
@@ -1906,6 +2199,122 @@
                     "avatar": {
                         "type": "string",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "ChatFullResource": {
+                "properties": {
+                    "users": {
+                        "properties": {
+                            "9966bede-7d84-452c-9278-42b4d79c8735": {
+                                "$ref": "#/components/schemas/UserShortResource"
+                            },
+                            "9966be96-ff28-49b5-9b45-d785bbdcac7c": {
+                                "$ref": "#/components/schemas/UserShortResource"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "items": {
+                        "properties": {
+                            "2023-06-29": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/ChatMessageFullResource"
+                                }
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "total": {
+                                "type": "integer"
+                            },
+                            "current": {
+                                "type": "integer"
+                            },
+                            "nextLink": {
+                                "type": "string",
+                                "nullable": true
+                            },
+                            "prevLink": {
+                                "type": "string",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "ChatLastMessageResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "example": "9986e68c-fd37-41a0-8aa3-6c03625366ba"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Some unread message..."
+                    },
+                    "is_read": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "ChatMessageFullResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "example": "9986e68c-fd37-41a0-8aa3-6c03625366ba"
+                    },
+                    "owner_uuid": {
+                        "type": "string",
+                        "example": "9966be96-ff28-49b5-9b45-d785bbdcac7c"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Hello"
+                    },
+                    "time": {
+                        "type": "string",
+                        "example": "10:04"
+                    },
+                    "own": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "is_read": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "changed": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "ChatRecentResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "example": "9986e68c-fd37-41a0-8aa3-6c03625366ba"
+                    },
+                    "interlocutor": {
+                        "$ref": "#/components/schemas/UserShortResource"
+                    },
+                    "last_message": {
+                        "$ref": "#/components/schemas/ChatLastMessageResource"
+                    },
+                    "unread": {
+                        "description": "Number of unread messages by current user.",
+                        "type": "integer",
+                        "example": 5
                     }
                 },
                 "type": "object"
@@ -2073,6 +2482,9 @@
                                 },
                                 {
                                     "$ref": "#/components/schemas/UserSearchResource"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/ChatRecentResource"
                                 }
                             ]
                         }
@@ -2085,7 +2497,7 @@
                             "current": {
                                 "type": "integer"
                             },
-                            "next": {
+                            "nextLink": {
                                 "type": "string",
                                 "nullable": true
                             }

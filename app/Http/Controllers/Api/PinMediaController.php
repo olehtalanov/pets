@@ -30,7 +30,6 @@ class PinMediaController extends Controller
      *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/MediaShortResource"),
@@ -61,7 +60,6 @@ class PinMediaController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/PinMediaRequest")
@@ -69,7 +67,6 @@ class PinMediaController extends Controller
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/MediaShortResource"),

@@ -29,10 +29,8 @@ class NoteController extends Controller
      *     summary="Get list of the notes.",
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
-     *
      *             @OA\Items(ref="#/components/schemas/NoteShortResource"),
      *         )
      *     )
@@ -56,10 +54,7 @@ class NoteController extends Controller
      *     @OA\Parameter(name="note", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/NoteFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/NoteFullResource")
      *     )
      * )
      */
@@ -80,7 +75,6 @@ class NoteController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
      *         @OA\JsonContent(
      *             required={"animal_id","category_id","title"},
      *             ref="#/components/schemas/NoteStoreRequest"
@@ -88,10 +82,7 @@ class NoteController extends Controller
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/NoteFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/NoteFullResource")
      *     )
      * )
      */
@@ -116,18 +107,11 @@ class NoteController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
-     *         @OA\JsonContent(
-     *             required={"animal_id","category_id","title"},
-     *             ref="#/components/schemas/NoteStoreRequest"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/NoteStoreRequest")
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/NoteFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/NoteFullResource")
      *     )
      * )
      *

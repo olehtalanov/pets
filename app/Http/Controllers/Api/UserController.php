@@ -35,7 +35,6 @@ class UserController extends Controller
      *     @OA\Parameter(name="breed_ids[]", in="path", required=false, @OA\Schema(type="string")),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="object",
      *             ref="#/components/schemas/PaginatedResourceCollection"
@@ -71,7 +70,6 @@ class UserController extends Controller
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="latitude", type="float", nullable=true),
@@ -96,7 +94,6 @@ class UserController extends Controller
      *     summary="Get auth user coordinates.",
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="latitude", type="float", nullable=true),

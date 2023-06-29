@@ -21,7 +21,6 @@ class AppealController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
      *         @OA\JsonContent(
      *             required={"message"},
      *             ref="#/components/schemas/AppealRequest"

@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AppealController;
 use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\DictionaryController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\PinController;
 use App\Http\Controllers\Api\PinMediaController;
@@ -22,8 +23,6 @@ Route::group([
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], static function () {
-        Route::any('ping', static fn () => null)->name('ping');
-
         /* Animals */
 
         Route::apiResource('animals', AnimalController::class);
@@ -95,9 +94,19 @@ Route::group([
             'as' => 'chats.',
             'prefix' => 'chats',
         ], static function () {
-            Route::get('/', [ChatController::class, 'index'])->name('index');
-            Route::get('{chat}', [ChatController::class, 'show'])->name('show');
+            Route::get('ping', [ChatController::class, 'ping'])->name('ping');
+            Route::post('{chat}/restore', [ChatController::class, 'restore'])->name('restore');
+
+            Route::group([
+                'as' => 'messages.',
+                'prefix' => 'messages'
+            ], static function () {
+                Route::post('mark', [MessageController::class, 'mark'])->name('mark');
+            });
+            Route::apiResource('messages', MessageController::class)->except('index', 'show');
         });
+
+        Route::apiResource('chats', ChatController::class)->except('store', 'update');
 
         /* Appeals */
 

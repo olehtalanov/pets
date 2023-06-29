@@ -3,12 +3,16 @@
 namespace App\Providers;
 
 use App\Models\Animal;
+use App\Models\Chat;
 use App\Models\Event;
+use App\Models\Message;
 use App\Models\Note;
 use App\Models\Pin;
 use App\Models\Review;
 use App\Policies\AnimalPolicy;
+use App\Policies\ChatPolicy;
 use App\Policies\EventPolicy;
+use App\Policies\MessagePolicy;
 use App\Policies\NotePolicy;
 use App\Policies\PinPolicy;
 use App\Policies\ReviewPolicy;
@@ -28,6 +32,8 @@ class AuthServiceProvider extends ServiceProvider
         Note::class => NotePolicy::class,
         Pin::class => PinPolicy::class,
         Review::class => ReviewPolicy::class,
+        Chat::class => ChatPolicy::class,
+        Message::class => MessagePolicy::class,
     ];
 
     /**

@@ -19,8 +19,7 @@ class AnimalController extends Controller
 {
     public function __construct(
         protected AnimalRepository $animalRepository,
-    )
-    {
+    ) {
         //
     }
 
@@ -31,10 +30,8 @@ class AnimalController extends Controller
      *     summary="Get list of user animals.",
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
-     *
      *             @OA\Items(ref="#/components/schemas/AnimalShortResource"),
      *         )
      *     )
@@ -56,10 +53,7 @@ class AnimalController extends Controller
      *     @OA\Parameter(name="animal", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/AnimalFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/AnimalFullResource")
      *     )
      * )
      * @throws AuthorizationException
@@ -84,7 +78,6 @@ class AnimalController extends Controller
      *
      *         @OA\JsonContent(
      *             required={"name","sex","birth_date","breed_name","weight","weight_unit"},
-     *
      *             @OA\Property(property="name", type="string", example="Fluffy"),
      *             @OA\Property(property="sex", type="string", enum={"male","female"}, example="male"),
      *             @OA\Property(property="birth_date", type="string", example="2021-06-22"),
@@ -100,10 +93,7 @@ class AnimalController extends Controller
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/AnimalFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/AnimalFullResource")
      *     )
      * )
      */
@@ -126,10 +116,8 @@ class AnimalController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
      *         @OA\JsonContent(
      *             required={"name","sex","birth_date","breed_name","weight","weight_unit"},
-     *
      *             @OA\Property(property="name", type="string", example="Fluffy"),
      *             @OA\Property(property="sex", type="string", enum={"male","female"}, example="male"),
      *             @OA\Property(property="birth_date", type="string", example="2021-06-22"),
@@ -145,7 +133,6 @@ class AnimalController extends Controller
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(ref="#/components/schemas/AnimalFullResource")
      *     )
      * )
@@ -173,22 +160,10 @@ class AnimalController extends Controller
      *     @OA\Parameter(name="animal", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\RequestBody(
-     *
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
-     *
      *             @OA\Schema(
-     *                 oneOf={
-     *                     @OA\Schema(
-     *
-     *                         @OA\Property(
-     *                             description="Animal avatar",
-     *                             property="avatar",
-     *                             type="string",
-     *                             format="binary"
-     *                         )
-     *                     )
-     *                 }
+     *                 @OA\Property(description="Animal avatar", property="avatar", type="string", format="binary")
      *             )
      *         )
      *     ),
@@ -197,7 +172,6 @@ class AnimalController extends Controller
      *
      *         @OA\JsonContent(
      *             type="object",
-     *
      *             @OA\Property(property="thumb", type="string"),
      *             @OA\Property(property="full", type="string")
      *         )

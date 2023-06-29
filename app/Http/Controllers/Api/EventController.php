@@ -30,10 +30,8 @@ class EventController extends Controller
      *     summary="Get list of the events.",
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
-     *
      *             @OA\Items(ref="#/components/schemas/EventShortResource"),
      *         )
      *     )
@@ -56,11 +54,11 @@ class EventController extends Controller
      *     tags={"Events"},
      *     summary="Get an event.",
      *
-     *     @OA\Response(response=200, description="Successful response",
+     *     @OA\Parameter(name="event", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
+     *     @OA\Response(response=200, description="Successful response",
      *         @OA\JsonContent(
      *             type="array",
-     *
      *             @OA\Items(ref="#/components/schemas/EventFullResource"),
      *         )
      *     )
@@ -87,18 +85,11 @@ class EventController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
-     *         @OA\JsonContent(
-     *             required={"animal_id","title","repeat_scheme"},
-     *             ref="#/components/schemas/EventStoreRequest"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/EventStoreRequest")
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/EventFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/EventFullResource")
      *     )
      * )
      */
@@ -123,7 +114,6 @@ class EventController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
      *         @OA\JsonContent(
      *             required={"animal_id","title","repeat_scheme"},
      *             ref="#/components/schemas/EventStoreRequest"
@@ -131,10 +121,7 @@ class EventController extends Controller
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/EventFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/EventFullResource")
      *     )
      * )
      *

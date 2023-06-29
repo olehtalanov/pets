@@ -32,7 +32,6 @@ class PinController extends Controller
      *     summary="Get list of the user`s pins.",
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="object",
      *             ref="#/components/schemas/PaginatedResourceCollection",
@@ -64,7 +63,6 @@ class PinController extends Controller
      *     @OA\Parameter(name="type_ids[]", in="path", required=false, @OA\Schema(type="string")),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="object",
      *             ref="#/components/schemas/PaginatedResourceCollection"
@@ -90,10 +88,7 @@ class PinController extends Controller
      *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/PinFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/PinFullResource")
      *     )
      * )
      */
@@ -114,18 +109,11 @@ class PinController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
-     *         @OA\JsonContent(
-     *             required={"name","type_id","latitude","longitude"},
-     *             ref="#/components/schemas/PinStoreRequest"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/PinStoreRequest")
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/PinFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/PinFullResource")
      *     )
      * )
      */
@@ -150,7 +138,6 @@ class PinController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
      *         @OA\JsonContent(
      *             required={"name","type_id","latitude","longitude"},
      *             ref="#/components/schemas/PinStoreRequest"
@@ -158,10 +145,7 @@ class PinController extends Controller
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/PinFullResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/PinFullResource")
      *     )
      * )
      *

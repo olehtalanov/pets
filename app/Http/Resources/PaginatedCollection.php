@@ -16,12 +16,13 @@ use OpenApi\Annotations as OA;
  *         oneOf={
  *             @OA\Schema(ref="#/components/schemas/PinShortResource"),
  *             @OA\Schema(ref="#/components/schemas/UserSearchResource"),
+ *             @OA\Schema(ref="#/components/schemas/ChatRecentResource"),
  *         }
  *     )),
  *     @OA\Property(property="meta", type="object",
  *         @OA\Property(property="total", type="int"),
  *         @OA\Property(property="current", type="int"),
- *         @OA\Property(property="next", type="string", nullable=true),
+ *         @OA\Property(property="nextLink", type="string", nullable=true),
  *     ),
  * )
  */
@@ -35,8 +36,6 @@ class PaginatedCollection extends ResourceCollection
         protected string $paginatingResource
     ) {
         parent::__construct($resource);
-
-        $this->resource = $this->collectResource($resource);
 
         if (!$paginatingResource) {
             throw new ResourceNotSetException();
@@ -55,7 +54,7 @@ class PaginatedCollection extends ResourceCollection
             'meta' => [
                 'total' => $this->total(),
                 'current' => $this->currentPage(),
-                'next' => $this->nextPageUrl(),
+                'nextLink' => $this->nextPageUrl(),
             ],
         ];
     }

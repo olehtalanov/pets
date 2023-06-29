@@ -11,6 +11,7 @@ return new class () extends Migration {
     {
         Schema::create('messages', static function (Blueprint $table) {
             $table->id();
+            $table->uuid()->unique();
             $table->foreignIdFor(Chat::class)
                 ->constrained()
                 ->cascadeOnDelete();
@@ -18,7 +19,7 @@ return new class () extends Migration {
                 ->nullable()
                 ->constrained()
                 ->nullOnDelete();
-            $table->text('content');
+            $table->text('message');
             $table->json('meta')->nullable();
             $table->timestamp('read_at')->nullable();
             $table->timestamps();

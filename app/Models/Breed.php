@@ -27,6 +27,8 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|Breed whereAnimalTypeId($value)
  * @method static Builder|Breed whereId($value)
  * @method static Builder|Breed whereIsVisible($value)
+ * @method static Builder|Breed whereLocale(string $column, string $locale)
+ * @method static Builder|Breed whereLocales(string $column, array $locales)
  * @method static Builder|Breed whereName($value)
  * @method static Builder|Breed whereUuid($value)
  * @mixin Eloquent

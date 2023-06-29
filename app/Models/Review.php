@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Traits\HasUuid;
 use App\Traits\UseMedia;
-use Database\Factories\ReviewFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,10 +29,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property Carbon|null $updated_at
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read Pin $pin
- * @property-read User|null $reviewable
- * @property-read User $reviewer
- * @method static ReviewFactory factory($count = null, $state = [])
+ * @property-read \App\Models\Pin $pin
+ * @property-read \App\Models\User|null $reviewable
+ * @property-read \App\Models\User $reviewer
+ * @method static \Database\Factories\ReviewFactory factory($count = null, $state = [])
  * @method static Builder|Review newModelQuery()
  * @method static Builder|Review newQuery()
  * @method static Builder|Review query()

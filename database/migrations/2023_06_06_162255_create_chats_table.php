@@ -13,7 +13,6 @@ return new class () extends Migration {
 
             $table->id();
             $table->uuid()->unique();
-            $table->string('name');
             $table->foreignIdFor(User::class, 'owner_id')
                 ->nullable()
                 ->constrained($userModel->getTable())
@@ -22,9 +21,8 @@ return new class () extends Migration {
                 ->nullable()
                 ->constrained($userModel->getTable())
                 ->nullOnDelete();
-            $table->boolean('is_archived')->default(0);
-            $table->timestamp('last_message_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

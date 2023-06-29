@@ -23,12 +23,9 @@ class DictionaryController extends Controller
      *     summary="Get list of required dictionaries.",
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
-     *
      *             @OA\Items(
-     *
      *               @OA\Property(property="types", type="array", @OA\Items(ref="#/components/schemas/DictionaryTypedResource")),
      *               @OA\Property(property="pins", type="array", @OA\Items(ref="#/components/schemas/DictionaryTypedResource")),
      *             ),

@@ -29,10 +29,8 @@ class ReviewController extends Controller
      *     summary="Get list of the reviews of the pin.",
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
-     *
      *             @OA\Items(ref="#/components/schemas/ReviewFullResource"),
      *         )
      *     )
@@ -108,7 +106,6 @@ class ReviewController extends Controller
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/ReviewFullResource"),

@@ -5,7 +5,6 @@ namespace App\Models;
 use Akuechler\Geoly;
 use App\Traits\HasUuid;
 use App\Traits\UseMedia;
-use Database\Factories\PinFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -35,11 +34,11 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $contact
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read Collection<int, Review> $reviews
+ * @property-read Collection<int, \App\Models\Review> $reviews
  * @property-read int|null $reviews_count
- * @property-read PinType|null $type
- * @property-read User $user
- * @method static PinFactory factory($count = null, $state = [])
+ * @property-read \App\Models\PinType|null $type
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\PinFactory factory($count = null, $state = [])
  * @method static Builder|Pin newModelQuery()
  * @method static Builder|Pin newQuery()
  * @method static Builder|Pin query()

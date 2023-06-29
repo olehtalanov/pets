@@ -39,6 +39,8 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|Category query()
  * @method static Builder|Category whereCreatedAt($value)
  * @method static Builder|Category whereId($value)
+ * @method static Builder|Category whereLocale(string $column, string $locale)
+ * @method static Builder|Category whereLocales(string $column, array $locales)
  * @method static Builder|Category whereName($value)
  * @method static Builder|Category whereParentId($value)
  * @method static Builder|Category whereRelatedModel($value)

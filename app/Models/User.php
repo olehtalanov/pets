@@ -53,6 +53,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read PersonalAccessCode|null $accessCodes
  * @property-read Collection<int, Animal> $animals
  * @property-read int|null $animals_count
+ * @property-read Collection<int, Appeal> $appeals
+ * @property-read int|null $appeals_count
  * @property-read Collection<int, Event> $events
  * @property-read int|null $events_count
  * @property-read MediaCollection<int, Media> $media
@@ -202,7 +204,7 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
     protected function phone(): Attribute
     {
         return Attribute::make(
-            get: static fn ($value): string => "+$value",
+            get: static fn ($value): ?string => $value ? "+$value" : null,
             set: static fn ($value) => preg_replace('/\D/', '', $value)
         );
     }
