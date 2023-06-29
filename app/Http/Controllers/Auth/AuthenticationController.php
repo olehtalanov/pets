@@ -10,6 +10,7 @@ use App\Http\Requests\Auth\PersonalCodeRequest;
 use App\Http\Resources\User\FullResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
 use OpenApi\Annotations as OA;
 use Response;
 
@@ -23,10 +24,8 @@ class AuthenticationController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
      *         @OA\JsonContent(
      *             required={"email"},
-     *
      *             @OA\Property(property="email", type="string", example="expample@mail.com"),
      *         )
      *     ),
@@ -69,18 +68,16 @@ class AuthenticationController extends Controller
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",
-     *
      *         @OA\JsonContent(
      *             type="array",
-     *
      *             @OA\Items(
-     *
      *                 @OA\Property(property="token", type="string"),
      *                 @OA\Property(property="profile", type="object", ref="#/components/schemas/UserFullResource"),
      *             ),
      *         )
      *     )
      * )
+     * @throws ValidationException
      */
     public function login(LoginRequest $request): JsonResponse
     {
