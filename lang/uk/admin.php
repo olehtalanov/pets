@@ -21,6 +21,24 @@ return [
         'reviewable' => 'Підлягає перегляду',
         'reviewer' => 'Рецензент',
         'rating' => 'Рейтинг',
+        'verified' => 'Перевірений',
+        'radius' => 'Радіус',
+        'latitude' => 'Широта',
+        'longitude' => 'Довгота',
+        'first_name' => 'Імʼя',
+        'last_name' => 'Прізвище',
+        'phone' => 'Телефон',
+        'provider' => 'Провайдер',
+        'provider_id' => 'Провайдер ID',
+        'email_verified_at' => 'Email підтверджено о',
+        'role' => 'Роль',
+        'created_at' => 'Дата створення',
+        'created_from' => 'Створено з',
+        'created_until' => 'Створено до'
+    ],
+
+    'placeholders' => [
+        'any_type' => 'Будь-який тип'
     ],
 
     'nav' => [

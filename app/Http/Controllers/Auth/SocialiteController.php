@@ -20,11 +20,13 @@ class SocialiteController extends Controller
      *     path="/api/v1/auth/{provider}/redirect",
      *     tags={"Auth"},
      *     summary="Get OAuth redirect link.",
+     *     @OA\Parameter(name="provider", required=true, example="facebook", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
      *         @OA\Schema(type="string")
      *     )
      * )
+     * @throws InvalidProviderException
      */
     public function link(string $provider): string
     {
@@ -40,6 +42,7 @@ class SocialiteController extends Controller
      *     path="/api/v1/auth/{provider}/callback",
      *     tags={"Auth"},
      *     summary="Authenticate user.",
+     *     @OA\Parameter(name="provider", required=true, example="facebook", in="path"),
      *
      *     @OA\Response(response=200, description="Successful response",
      *         @OA\JsonContent(
@@ -51,6 +54,7 @@ class SocialiteController extends Controller
      *         )
      *     )
      * )
+     * @throws InvalidProviderException
      */
     public function store(Request $request, string $provider): JsonResponse
     {

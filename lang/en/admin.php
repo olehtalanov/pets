@@ -21,6 +21,24 @@ return [
         'reviewable' => 'Reviewable',
         'reviewer' => 'Reviewer',
         'rating' => 'Rating',
+        'verified' => 'Verified',
+        'radius' => 'Radius',
+        'latitude' => 'Latitude',
+        'longitude' => 'Longitude',
+        'first_name' => 'First name',
+        'last_name' => 'Last name',
+        'phone' => 'Phone number',
+        'provider' => 'Provider',
+        'provider_id' => 'Provider ID',
+        'email_verified_at' => 'Email verified at',
+        'role' => 'Role',
+        'created_at' => 'Creation date',
+        'created_from' => 'Created from',
+        'created_until' => 'Created until',
+    ],
+
+    'placeholders' => [
+        'any_type' => 'Any type'
     ],
 
     'nav' => [

@@ -9,6 +9,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
 
 class PinResource extends Resource
 {
@@ -66,10 +67,34 @@ class PinResource extends Resource
                 Tables\Columns\TextColumn::make('user.name'),
                 Tables\Columns\TextColumn::make('type.name'),
                 Tables\Columns\TextColumn::make('coordinates')
-                    ->getStateUsing(fn (Pin $record) => "$record->latitude@$record->longitude"),
+                    ->getStateUsing(fn(Pin $record) => "$record->latitude@$record->longitude"),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('position')
+                    ->form([
+                        Forms\Components\TextInput::make('latitude')
+                            ->label(trans('admin.fields.latitude'))
+                            ->numeric(),
+                        Forms\Components\TextInput::make('longitude')
+                            ->label(trans('admin.fields.longitude'))
+                            ->numeric(),
+                        Forms\Components\TextInput::make('radius')
+                            ->label(trans('admin.fields.radius'))
+                            ->numeric()
+                            ->step(1)
+                            ->minValue(1),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['latitude'] && $data['longitude'] && $data['radius'],
+                                fn(Builder $query): Builder => $query->radius(
+                                    $data['latitude'],
+                                    $data['longitude'],
+                                    $data['radius']
+                                )
+                            );
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

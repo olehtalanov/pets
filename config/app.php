@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'uk',
 
     'available_locales' => ['en', 'uk'],
 

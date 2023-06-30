@@ -1818,6 +1818,14 @@
                 ],
                 "summary": "Get OAuth redirect link.",
                 "operationId": "7b17acddf8260a354d76d6dc80667bba",
+                "parameters": [
+                    {
+                        "name": "provider",
+                        "in": "path",
+                        "required": true,
+                        "example": "facebook"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response"
@@ -1832,6 +1840,14 @@
                 ],
                 "summary": "Authenticate user.",
                 "operationId": "2ca38527e69deec9f18b0c9389a6be62",
+                "parameters": [
+                    {
+                        "name": "provider",
+                        "in": "path",
+                        "required": true,
+                        "example": "facebook"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
