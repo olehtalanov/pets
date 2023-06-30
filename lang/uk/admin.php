@@ -40,7 +40,13 @@ return [
     ],
 
     'placeholders' => [
-        'any_type' => 'Будь-який тип'
+        'any_type' => 'Будь-який тип',
+        'registrations' => [
+            'weekly' => 'Цьоготижневі реєстрації',
+        ],
+        'animals' => [
+            'weekly' => 'Цього тижня додано тварин'
+        ],
     ],
 
     'nav' => [

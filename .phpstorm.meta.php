@@ -43,6 +43,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -103,6 +104,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -111,6 +113,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
@@ -147,6 +150,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -207,6 +211,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -215,6 +220,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
@@ -251,6 +257,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -311,6 +318,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -319,6 +327,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
@@ -355,6 +364,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -415,6 +425,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -423,6 +434,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
@@ -459,6 +471,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -519,6 +532,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -527,6 +541,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\App::get(0), map([
@@ -563,6 +578,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -623,6 +639,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -631,6 +648,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\App::make(0), map([
@@ -667,6 +685,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -727,6 +746,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -735,6 +755,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\App::makeWith(0), map([
@@ -771,6 +792,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -831,6 +853,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -839,6 +862,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\app(0), map([
@@ -875,6 +899,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -935,6 +960,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -943,6 +969,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\resolve(0), map([
@@ -979,6 +1006,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -1039,6 +1067,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -1047,6 +1076,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
@@ -1083,6 +1113,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\Migrations\RollbackCommand' => \Illuminate\Database\Console\Migrations\RollbackCommand::class,
             'Illuminate\Database\Console\Migrations\StatusCommand' => \Illuminate\Database\Console\Migrations\StatusCommand::class,
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
+            'Illuminate\Database\Console\Seeds\SeedCommand' => \Illuminate\Database\Console\Seeds\SeedCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ChannelListCommand' => \Illuminate\Foundation\Console\ChannelListCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
@@ -1143,6 +1174,7 @@ namespace PHPSTORM_META {
             'command.media-library:clear' => \Spatie\MediaLibrary\MediaCollections\Commands\ClearCommand::class,
             'command.media-library:regenerate' => \Spatie\MediaLibrary\Conversions\Commands\RegenerateCommand::class,
             'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+            'db' => \Illuminate\Database\DatabaseManager::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
             'mail.manager' => \Illuminate\Mail\MailManager::class,
@@ -1151,6 +1183,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
             'translation.loader' => \Illuminate\Translation\FileLoader::class,
+            'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
 

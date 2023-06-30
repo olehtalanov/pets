@@ -40,7 +40,13 @@ return [
     ],
 
     'placeholders' => [
-        'any_type' => 'Any type'
+        'any_type' => 'Any type',
+        'registrations' => [
+            'weekly' => 'This week\'s registrations',
+        ],
+        'animals' => [
+            'weekly' => 'Added animals this week'
+        ],
     ],
 
     'nav' => [
