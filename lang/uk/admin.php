@@ -34,7 +34,9 @@ return [
         'role' => 'Роль',
         'created_at' => 'Дата створення',
         'created_from' => 'Створено з',
-        'created_until' => 'Створено до'
+        'created_until' => 'Створено до',
+        'animal' => 'Тварина',
+        'owner' => 'Власник',
     ],
 
     'placeholders' => [
@@ -49,6 +51,9 @@ return [
         'pins' => 'Шпильки',
         'pin_types' => 'Типи шпільок',
         'reviews' => 'Відгуки',
+        'animals' => 'Тварини',
+        'events' => 'Події',
+        'notes' => 'Примітки'
     ],
 
     'nav_groups' => [

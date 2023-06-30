@@ -35,6 +35,8 @@ return [
         'created_at' => 'Creation date',
         'created_from' => 'Created from',
         'created_until' => 'Created until',
+        'animal' => 'Animal',
+        'owner' => 'Owner',
     ],
 
     'placeholders' => [
@@ -49,6 +51,9 @@ return [
         'pins' => 'Pins',
         'pin_types' => 'Pin types',
         'reviews' => 'Reviews',
+        'animals' => 'Animals',
+        'events' => 'Events',
+        'notes' => 'Notes',
     ],
 
     'nav_groups' => [

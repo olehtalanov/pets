@@ -13,9 +13,7 @@ class AnimalPolicy
      */
     public function view(User $user, Animal $animal): Response
     {
-        return $animal->user_id === $user->id
-            ? Response::allow()
-            : Response::deny();
+        return $this->checkAccess($user, $animal);
     }
 
     /**
@@ -23,9 +21,7 @@ class AnimalPolicy
      */
     public function update(User $user, Animal $animal): Response
     {
-        return $animal->user_id === $user->id
-            ? Response::allow()
-            : Response::deny();
+        return $this->checkAccess($user, $animal);
     }
 
     /**
@@ -33,6 +29,15 @@ class AnimalPolicy
      */
     public function delete(User $user, Animal $animal): Response
     {
+        return $this->checkAccess($user, $animal);
+    }
+
+    private function checkAccess(User $user, Animal $animal): Response
+    {
+        if ($user->canAccessFilament()) {
+            return Response::allow();
+        }
+
         return $animal->user_id === $user->id
             ? Response::allow()
             : Response::deny();

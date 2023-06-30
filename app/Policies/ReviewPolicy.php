@@ -12,9 +12,13 @@ class ReviewPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user, Pin $pin): Response
+    public function create(User $user, ?Pin $pin = null): Response
     {
-        return $pin->user_id !== $user->id && $pin->reviews()->where('user_id', $user->id)->doesntExist()
+        if (app('router')->is('filament.*')) {
+            return Response::allow();
+        }
+
+        return $pin?->user_id !== $user->id && $pin?->reviews()->where('user_id', $user->id)->doesntExist()
             ? Response::allow()
             : Response::deny();
     }
