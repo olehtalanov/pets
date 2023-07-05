@@ -1,8 +1,8 @@
 <?php
 
-use App\Enums\Animal\EventRepeatSchemeEnum;
-use App\Enums\Animal\SexEnum;
-use App\Enums\Animal\WeightUnitEnum;
+use App\Enums\EventRepeatSchemeEnum;
+use App\Enums\SexEnum;
+use App\Enums\WeightUnitEnum;
 
 return [
     'placeholder' => [

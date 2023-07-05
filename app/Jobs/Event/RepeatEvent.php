@@ -9,7 +9,7 @@ use App\Actions\Event\EveryWeekend;
 use App\Actions\Event\EveryWorkingDay;
 use App\Actions\Event\EveryYear;
 use App\Actions\Event\NeverRepeat;
-use App\Enums\Animal\EventRepeatSchemeEnum;
+use App\Enums\EventRepeatSchemeEnum;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -29,7 +29,7 @@ class RepeatEvent implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        private readonly Event $event,
+        private readonly Event   $event,
         private readonly ?Carbon $fromDate = null
     ) {
         //

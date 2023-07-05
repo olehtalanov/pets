@@ -1,6 +1,7 @@
 <?php
 
-use App\Enums\User\UserRoleEnum;
+use App\Enums\AppealStatusEnum;
+use App\Enums\UserRoleEnum;
 
 return [
     'fields' => [
@@ -37,6 +38,27 @@ return [
         'created_until' => 'Створено до',
         'animal' => 'Тварина',
         'owner' => 'Власник',
+        'original_event' => 'Відлік від події',
+        'title' => 'Заголовок',
+        'description' => 'Опис',
+        'starts_at' => 'Починається о',
+        'ends_at' => 'Закінчується о',
+        'repeat_scheme' => 'Схема повторів',
+        'whole_day' => 'Цілий день',
+        'address' => 'Адреса',
+        'contact' => 'Контактна інформація',
+        'type' => 'Тип',
+        'custom_type_name' => 'Користувацький тип',
+        'custom_breed_name' => 'Користувацька порода',
+        'breed_name' => 'Назва породи',
+        'metis' => 'Метис',
+        'sterilised' => 'Стерилізована',
+        'sex' => 'Стать',
+        'weight' => 'Вага',
+        'weight_unit' => 'Одиниця ваги',
+        'birth_date' => 'Дата народження',
+        'status' => 'Статус',
+        'appeal' => 'Звернення',
     ],
 
     'placeholders' => [
@@ -59,7 +81,8 @@ return [
         'reviews' => 'Відгуки',
         'animals' => 'Тварини',
         'events' => 'Події',
-        'notes' => 'Примітки'
+        'notes' => 'Примітки',
+        'appeals' => 'Звернення',
     ],
 
     'nav_groups' => [
@@ -75,5 +98,21 @@ return [
     'roles' => [
         UserRoleEnum::Admin->value => 'Адміністратор',
         UserRoleEnum::Regular->value => 'Користувач',
+    ],
+
+    'rating_statuses' => [
+        1 => 'Дуже погано',
+        2 => 'Погано',
+        3 => 'Нормально',
+        4 => 'Добре',
+        5 => 'Відмінно'
+    ],
+
+    'appeals' => [
+        'statuses' => [
+            AppealStatusEnum::Pending->value => 'В очікуванні',
+            AppealStatusEnum::InProgress->value => 'В процесі',
+            AppealStatusEnum::Processed->value => 'Оброблено',
+        ]
     ],
 ];

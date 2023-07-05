@@ -1,6 +1,7 @@
 <?php
 
-use App\Enums\User\UserRoleEnum;
+use App\Enums\AppealStatusEnum;
+use App\Enums\UserRoleEnum;
 
 return [
     'fields' => [
@@ -37,6 +38,27 @@ return [
         'created_until' => 'Created until',
         'animal' => 'Animal',
         'owner' => 'Owner',
+        'original_event' => 'Countdown from the event',
+        'title' => 'Title',
+        'description' => 'Description',
+        'starts_at' => 'Starts at',
+        'ends_at' => 'Ends at',
+        'repeat_scheme' => 'Repeat scheme',
+        'whole_day' => 'Whole day',
+        'address' => 'Address',
+        'contact' => 'Contact',
+        'type' => 'Type',
+        'custom_type_name' => 'Custom type name',
+        'custom_breed_name' => 'Custom breed name',
+        'breed_name' => 'Breed name',
+        'metis' => 'Metis',
+        'sterilised' => 'Sterilised',
+        'sex' => 'Sex',
+        'weight' => 'Weight',
+        'weight_unit' => 'Weight unit',
+        'birth_date' => 'Birth date',
+        'status' => 'Status',
+        'appeal' => 'Appeal',
     ],
 
     'placeholders' => [
@@ -60,6 +82,7 @@ return [
         'animals' => 'Animals',
         'events' => 'Events',
         'notes' => 'Notes',
+        'appeals' => 'Appeals',
     ],
 
     'nav_groups' => [
@@ -75,5 +98,21 @@ return [
     'roles' => [
         UserRoleEnum::Admin->value => 'Administrator',
         UserRoleEnum::Regular->value => 'Regular',
+    ],
+
+    'rating_statuses' => [
+        1 => 'Very bad',
+        2 => 'Bad',
+        3 => 'Normal',
+        4 => 'Good',
+        5 => 'Excellent'
+    ],
+
+    'appeals' => [
+        'statuses' => [
+            AppealStatusEnum::Pending->value => 'Pending',
+            AppealStatusEnum::InProgress->value => 'In progress',
+            AppealStatusEnum::Processed->value => 'Processed',
+        ]
     ],
 ];

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\AppealStatusEnum;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,12 +14,12 @@ return new class () extends Migration {
     {
         Schema::create('appeals', static function (Blueprint $table) {
             $table->id();
-            $table->uuid()->unique();
             $table->foreignIdFor(User::class)
                 ->constrained()
                 ->cascadeOnDelete();
             $table->text('message');
             $table->unsignedTinyInteger('rating')->nullable();
+            $table->string('status')->default(AppealStatusEnum::Pending->value);
             $table->timestamps();
         });
     }

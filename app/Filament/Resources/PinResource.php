@@ -4,12 +4,15 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PinResource\Pages;
 use App\Models\Pin;
+use App\Models\User;
+use DB;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Str;
 
 class PinResource extends Resource
 {
@@ -46,17 +49,51 @@ class PinResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->label(trans('admin.fields.user'))
-                    ->required()
-                    ->searchable()
-                    ->relationship('user', 'name'),
-                Forms\Components\Select::make('type_id')
-                    ->relationship('type', 'name'),
-                Forms\Components\TextInput::make('latitude')
-                    ->required(),
-                Forms\Components\TextInput::make('longitude')
-                    ->required(),
+                Forms\Components\Fieldset::make()
+                    ->schema([
+                        Forms\Components\Select::make('user_id')
+                            ->label(trans('admin.fields.user'))
+                            ->required()
+                            ->searchable()
+                            ->relationship('user', 'name')
+                            ->getSearchResultsUsing(function (string $search) {
+                                return User::query()
+                                    ->where(DB::raw('concat(first_name, " ", last_name)'), 'like', "%{$search}%")
+                                    ->orWhere('email', 'like', "%{$search}%")
+                                    ->selectRaw('*, concat(first_name, " ", last_name) as name')
+                                    ->limit(50)
+                                    ->pluck('name', 'id');
+                            })
+                            ->getOptionLabelUsing(fn ($value): ?string => User::find($value)?->name),
+                        Forms\Components\Select::make('type_id')
+                            ->label(trans('admin.fields.pin_type'))
+                            ->relationship('type', 'name'),
+                    ]),
+                Forms\Components\Fieldset::make()
+                    ->columns(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label(trans('admin.fields.title'))
+                            ->required(),
+                        Forms\Components\Textarea::make('description')
+                            ->label(trans('admin.fields.description')),
+                    ]),
+                Forms\Components\Fieldset::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('latitude')
+                            ->label(trans('admin.fields.latitude'))
+                            ->required(),
+                        Forms\Components\TextInput::make('longitude')
+                            ->label(trans('admin.fields.longitude'))
+                            ->required(),
+                    ]),
+                Forms\Components\Fieldset::make()
+                    ->schema([
+                        Forms\Components\Textarea::make('address')
+                            ->label(trans('admin.fields.address')),
+                        Forms\Components\Textarea::make('contact')
+                            ->label(trans('admin.fields.contact')),
+                    ])
             ]);
     }
 
@@ -64,10 +101,24 @@ class PinResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('type.name'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(trans('admin.fields.name'))
+                    ->formatStateUsing(fn ($state) => Str::limit($state, 30))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->searchable(query: function (Builder $query, string $search) {
+                        return $query->whereHas('user', function (Builder $query) use ($search) {
+                            $query
+                                ->where(DB::raw('concat(first_name, " ", last_name)'), 'like', "%{$search}%")
+                                ->orWhere('email', 'like', "%{$search}%");
+                        });
+                    }),
+                Tables\Columns\TextColumn::make('type.name')
+                    ->label(trans('admin.fields.pin_type'))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('coordinates')
-                    ->getStateUsing(fn(Pin $record) => "$record->latitude@$record->longitude"),
+                    ->label(trans('admin.fields.coordinates'))
+                    ->getStateUsing(fn (Pin $record) => "$record->latitude@$record->longitude"),
             ])
             ->filters([
                 Tables\Filters\Filter::make('position')
@@ -88,7 +139,7 @@ class PinResource extends Resource
                         return $query
                             ->when(
                                 $data['latitude'] && $data['longitude'] && $data['radius'],
-                                fn(Builder $query): Builder => $query->radius(
+                                fn (Builder $query): Builder => $query->radius(
                                     $data['latitude'],
                                     $data['longitude'],
                                     $data['radius']

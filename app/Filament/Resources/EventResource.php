@@ -2,14 +2,22 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\EventRepeatSchemeEnum;
 use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
+use App\Models\Animal;
+use App\Models\Category;
 use App\Models\Event;
+use App\Models\User;
+use DB;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class EventResource extends Resource
 {
@@ -46,26 +54,71 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('original_id'),
-                Forms\Components\Select::make('animal_id')
-                    ->relationship('animal', 'name')
-                    ->required(),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'id')
-                    ->required(),
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->maxLength(65535),
-                Forms\Components\DateTimePicker::make('starts_at'),
-                Forms\Components\DateTimePicker::make('ends_at'),
-                Forms\Components\TextInput::make('repeat_scheme')
-                    ->required(),
-                Forms\Components\Toggle::make('whole_day')
-                    ->required(),
-                Forms\Components\Toggle::make('processable')
-                    ->required(),
+                Forms\Components\Fieldset::make()
+                    ->schema([
+                        Forms\Components\Select::make('user_id')
+                            ->label(trans('admin.fields.user'))
+                            ->relationship('user', 'id')
+                            ->getSearchResultsUsing(function (string $search) {
+                                return User::query()
+                                    ->where(DB::raw('concat(first_name, " ", last_name)'), 'like', "%{$search}%")
+                                    ->orWhere('email', 'like', "%{$search}%")
+                                    ->selectRaw('*, concat(first_name, " ", last_name) as name')
+                                    ->limit(50)
+                                    ->pluck('name', 'id');
+                            })
+                            ->getOptionLabelUsing(fn ($value): ?string => User::find($value)?->name)
+                            ->reactive()
+                            ->searchable()
+                            ->required(),
+                        Forms\Components\Select::make('animal_id')
+                            ->label(trans('admin.fields.animal'))
+                            ->disabled(fn (callable $get) => !$get('user_id'))
+                            ->relationship('animal', 'name')
+                            ->options(fn (callable $get) => Animal::where(
+                                'user_id',
+                                $get('user_id')
+                            )->pluck('name', 'id'))
+                            ->reactive()
+                            ->required(),
+                    ]),
+                Forms\Components\Fieldset::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label(trans('admin.fields.title'))
+                            ->required()
+                            ->maxLength(191)
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('description')
+                            ->label(trans('admin.fields.description'))
+                            ->columnSpanFull()
+                            ->maxLength(65535),
+                    ]),
+                Forms\Components\Fieldset::make()
+                    ->schema([
+                        Forms\Components\DateTimePicker::make('starts_at')
+                            ->label(trans('admin.fields.starts_at')),
+                        Forms\Components\DateTimePicker::make('ends_at')
+                            ->label(trans('admin.fields.ends_at')),
+                        Forms\Components\Select::make('repeat_scheme')
+                            ->label(trans('admin.fields.repeat_scheme'))
+                            ->options(EventRepeatSchemeEnum::getNames())
+                            ->required(),
+                        Forms\Components\Select::make('original_id')
+                            ->label(trans('admin.fields.original_event'))
+                            ->disabled(fn (callable $get) => !$get('animal_id'))
+                            ->options(fn (callable $get, ?Model $record) => Event::query()
+                                ->where('animal_id', $get('animal_id'))
+                                ->where('id', '!=', $record?->id)
+                                ->pluck('title', 'id')),
+                        Forms\Components\Toggle::make('whole_day')
+                            ->columnSpanFull()
+                            ->label(trans('admin.fields.whole_day'))
+                            ->required(),
+                        Forms\Components\Toggle::make('processable')
+                            ->default(true)
+                            ->hidden(),
+                    ])
             ]);
     }
 
@@ -73,31 +126,57 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('original_id'),
-                Tables\Columns\TextColumn::make('animal.name'),
-                Tables\Columns\TextColumn::make('user.id'),
-                Tables\Columns\TextColumn::make('uuid'),
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label(trans('admin.fields.user'))
+                    ->searchable(query: function (Builder $query, string $search) {
+                        return $query->whereHas('user', function (Builder $query) use ($search) {
+                            $query
+                                ->where(DB::raw('concat(first_name, " ", last_name)'), 'like', "%{$search}%")
+                                ->orWhere('email', 'like', "%{$search}%");
+                        });
+                    }),
+                Tables\Columns\TextColumn::make('title')
+                    ->label(trans('admin.fields.title'))
+                    ->formatStateUsing(fn ($state) => Str::limit($state, 30)),
                 Tables\Columns\TextColumn::make('starts_at')
+                    ->label(trans('admin.fields.starts_at'))
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('ends_at')
+                    ->label(trans('admin.fields.ends_at'))
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('repeat_scheme'),
+                Tables\Columns\TextColumn::make('repeat_scheme')
+                    ->label(trans('admin.fields.repeat_scheme')),
                 Tables\Columns\IconColumn::make('whole_day')
+                    ->label(trans('admin.fields.whole_day'))
+                    ->alignCenter()
                     ->boolean(),
-                Tables\Columns\IconColumn::make('processable')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('categories')
+                    ->form([
+                        Forms\Components\Select::make('id')
+                            ->label(trans('admin.fields.category'))
+                            ->multiple()
+                            ->options(
+                                Category::whereRelatedModel(Event::class)->pluck('name', 'id')
+                            )
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['id'],
+                                fn (Builder $query): Builder => $query->whereHas(
+                                    'categories',
+                                    fn (Builder $builder) => $builder
+                                    ->whereIn('id', $data['id'])
+                                    ->orWhereIn('parent_id', $data['id'])
+                                ),
+                            );
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -107,7 +186,7 @@ class EventResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\CategoriesRelationManager::class,
         ];
     }
 

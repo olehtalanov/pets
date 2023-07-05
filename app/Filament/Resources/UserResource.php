@@ -47,37 +47,43 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('first_name')
-                    ->label(trans('admin.fields.first_name'))
-                    ->required()
-                    ->maxLength(50),
-                Forms\Components\TextInput::make('last_name')
-                    ->label(trans('admin.fields.last_name'))
-                    ->required()
-                    ->maxLength(50),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->maxLength(100),
-                Forms\Components\TextInput::make('phone')
-                    ->label(trans('admin.fields.phone'))
-                    ->tel(),
-                Forms\Components\DateTimePicker::make('email_verified_at')
-                    ->label(trans('admin.fields.email_verified_at')),
-                Forms\Components\Select::make('role')
-                    ->label(trans('admin.fields.role'))
-                    ->required()
-                    ->disablePlaceholderSelection()
-                    ->options(trans('admin.roles')),
-                Forms\Components\Select::make('provider')
-                    ->label(trans('admin.fields.provider'))
-                    ->reactive()
-                    ->options(
-                        collect(config('services.auth_providers'))
-                            ->mapWithKeys(fn(string $name) => [$name => ucfirst($name)])
-                    ),
-                Forms\Components\TextInput::make('provider_id')
-                    ->label(trans('admin.fields.provider_id'))
-                    ->hidden(fn(callable $get) => !$get('provider')),
+                Forms\Components\Fieldset::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('first_name')
+                            ->label(trans('admin.fields.first_name'))
+                            ->required()
+                            ->maxLength(50),
+                        Forms\Components\TextInput::make('last_name')
+                            ->label(trans('admin.fields.last_name'))
+                            ->required()
+                            ->maxLength(50),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->maxLength(100),
+                        Forms\Components\TextInput::make('phone')
+                            ->label(trans('admin.fields.phone'))
+                            ->tel(),
+                        Forms\Components\DateTimePicker::make('email_verified_at')
+                            ->label(trans('admin.fields.email_verified_at')),
+                        Forms\Components\Select::make('role')
+                            ->label(trans('admin.fields.role'))
+                            ->required()
+                            ->disablePlaceholderSelection()
+                            ->options(trans('admin.roles')),
+                    ]),
+                Forms\Components\Fieldset::make()
+                    ->schema([
+                        Forms\Components\Select::make('provider')
+                            ->label(trans('admin.fields.provider'))
+                            ->reactive()
+                            ->options(
+                                collect(config('services.auth_providers'))
+                                    ->mapWithKeys(fn (string $name) => [$name => ucfirst($name)])
+                            ),
+                        Forms\Components\TextInput::make('provider_id')
+                            ->label(trans('admin.fields.provider_id'))
+                            ->disabled(fn (callable $get) => !$get('provider')),
+                    ])
             ]);
     }
 
@@ -120,11 +126,11 @@ class UserResource extends Resource
                         return $query
                             ->when(
                                 $data['created_from'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
                             )
                             ->when(
                                 $data['created_until'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
                     }),
                 Tables\Filters\Filter::make('position')
@@ -145,7 +151,7 @@ class UserResource extends Resource
                         return $query
                             ->when(
                                 $data['latitude'] && $data['longitude'] && $data['radius'],
-                                fn(Builder $query): Builder => $query->radius(
+                                fn (Builder $query): Builder => $query->radius(
                                     $data['latitude'],
                                     $data['longitude'],
                                     $data['radius']
@@ -160,18 +166,18 @@ class UserResource extends Resource
                     ->options(
                         collect(config('services.auth_providers'))
                             ->prepend('email')
-                            ->mapWithKeys(fn(string $name) => [$name => ucfirst($name)])
+                            ->mapWithKeys(fn (string $name) => [$name => ucfirst($name)])
                     )
                     ->attribute('provider')
                     ->query(function (Builder $query, array $data) {
                         $query
                             ->when(
                                 $data['value'] === 'email',
-                                fn(Builder $query): Builder => $query->whereNull('provider')
+                                fn (Builder $query): Builder => $query->whereNull('provider')
                             )
                             ->when(
                                 $data['value'] && $data['value'] !== 'email',
-                                fn(Builder $query): Builder => $query->where('provider', $data['value'])
+                                fn (Builder $query): Builder => $query->where('provider', $data['value'])
                             );
                     })
             ])

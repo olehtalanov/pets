@@ -2,7 +2,7 @@
 
 namespace App\Actions\Event;
 
-use App\Enums\Animal\EventRepeatSchemeEnum;
+use App\Enums\EventRepeatSchemeEnum;
 use App\Models\Event;
 use Carbon\Carbon;
 use Closure;
@@ -17,7 +17,7 @@ abstract class Repeatable
     protected Collection $categories;
 
     public function __construct(
-        protected Event $event,
+        protected Event   $event,
         protected ?Carbon $fromDate = null
     ) {
         $this->diffInMinutes = $this->event->starts_at->diffInMinutes($this->event->ends_at);

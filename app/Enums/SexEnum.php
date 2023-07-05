@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Animal;
+namespace App\Enums;
 
 enum SexEnum: string
 {
@@ -9,6 +9,6 @@ enum SexEnum: string
 
     public function getName(): string
     {
-        return trans('common.sex.'.$this->value);
+        return trans('common.sex.' . $this->value);
     }
 }

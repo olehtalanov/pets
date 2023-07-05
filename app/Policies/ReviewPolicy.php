@@ -14,7 +14,7 @@ class ReviewPolicy
      */
     public function create(User $user, ?Pin $pin = null): Response
     {
-        if (app('router')->is('filament.*')) {
+        if ($user->canAccessFilament()) {
             return Response::allow();
         }
 
@@ -28,6 +28,10 @@ class ReviewPolicy
      */
     public function update(User $user, Review $review): Response
     {
+        if ($user->canAccessFilament()) {
+            return Response::allow();
+        }
+
         return $review->user_id === $user->id
             ? Response::allow()
             : Response::deny();
@@ -38,6 +42,10 @@ class ReviewPolicy
      */
     public function delete(User $user, Review $review): Response
     {
+        if ($user->canAccessFilament()) {
+            return Response::allow();
+        }
+
         return $review->user_id === $user->id
             ? Response::allow()
             : Response::deny();

@@ -25,13 +25,14 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $uuid
  * @property int $user_id
  * @property int|null $type_id
+ * @property string $name
+ * @property string|null $description
+ * @property string|null $address
+ * @property string|null $contact
  * @property float $latitude
  * @property float $longitude
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property string $name
- * @property string|null $address
- * @property string|null $contact
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
  * @property-read Collection<int, \App\Models\Review> $reviews
@@ -46,6 +47,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Pin whereAddress($value)
  * @method static Builder|Pin whereContact($value)
  * @method static Builder|Pin whereCreatedAt($value)
+ * @method static Builder|Pin whereDescription($value)
  * @method static Builder|Pin whereId($value)
  * @method static Builder|Pin whereLatitude($value)
  * @method static Builder|Pin whereLongitude($value)

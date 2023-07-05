@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\Animal\EventRepeatSchemeEnum;
+use App\Enums\EventRepeatSchemeEnum;
 use App\Models\Animal;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;

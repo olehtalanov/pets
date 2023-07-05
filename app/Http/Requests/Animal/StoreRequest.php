@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Animal;
 
-use App\Enums\Animal\SexEnum;
-use App\Enums\Animal\WeightUnitEnum;
+use App\Enums\SexEnum;
+use App\Enums\WeightUnitEnum;
 use Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;

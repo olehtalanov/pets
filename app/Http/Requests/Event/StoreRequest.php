@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Event;
 
-use App\Enums\Animal\EventRepeatSchemeEnum;
+use App\Enums\EventRepeatSchemeEnum;
 use Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;

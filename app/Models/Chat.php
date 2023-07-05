@@ -21,15 +21,14 @@ use Illuminate\Support\Carbon;
  * @property string $uuid
  * @property int|null $owner_id
  * @property int|null $recipient_id
- * @property int $is_archived
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read Message|null $lastMessage
- * @property-read Collection<int, Message> $messages
+ * @property-read \App\Models\Message|null $lastMessage
+ * @property-read Collection<int, \App\Models\Message> $messages
  * @property-read int|null $messages_count
- * @property-read User|null $owner
- * @property-read User|null $recipient
+ * @property-read \App\Models\User|null $owner
+ * @property-read \App\Models\User|null $recipient
  * @method static Builder|Chat current()
  * @method static Builder|Chat newModelQuery()
  * @method static Builder|Chat newQuery()
@@ -38,7 +37,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Chat whereCreatedAt($value)
  * @method static Builder|Chat whereDeletedAt($value)
  * @method static Builder|Chat whereId($value)
- * @method static Builder|Chat whereIsArchived($value)
  * @method static Builder|Chat whereOwnerId($value)
  * @method static Builder|Chat whereRecipientId($value)
  * @method static Builder|Chat whereUpdatedAt($value)

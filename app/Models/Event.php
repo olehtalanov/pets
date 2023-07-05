@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\Animal\EventRepeatSchemeEnum;
+use App\Enums\EventRepeatSchemeEnum;
 use App\Traits\HasUuid;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,9 +28,9 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $ends_at
  * @property EventRepeatSchemeEnum $repeat_scheme
  * @property bool $whole_day
+ * @property bool $processable
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property bool $processable
  * @property-read \App\Models\Animal $animal
  * @property-read Collection<int, \App\Models\Category> $categories
  * @property-read int|null $categories_count

@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Enums\Animal\EventRepeatSchemeEnum;
+use App\Enums\EventRepeatSchemeEnum;
 use App\Http\Resources\Dictionary\TypedResource;
 use App\Models\AnimalType;
 use App\Models\Category;

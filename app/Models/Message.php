@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
  * App\Models\Message
  *
  * @property int $id
+ * @property string $uuid
  * @property int $chat_id
  * @property int|null $user_id
  * @property string $message
@@ -21,7 +22,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $read_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property string $uuid
  * @property-read \App\Models\Chat $chat
  * @property-read \App\Models\User|null $user
  * @method static Builder|Message newModelQuery()

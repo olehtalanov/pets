@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\HasUuid;
+use App\Enums\AppealStatusEnum;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,12 +14,12 @@ use Illuminate\Support\Carbon;
  * App\Models\Appeal
  *
  * @property int $id
- * @property string $uuid
  * @property int $user_id
- * @property string|null $message
+ * @property string $message
  * @property int|null $rating
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property AppealStatusEnum $status
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\AppealFactory factory($count = null, $state = [])
  * @method static Builder|Appeal newModelQuery()
@@ -29,21 +29,25 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Appeal whereId($value)
  * @method static Builder|Appeal whereMessage($value)
  * @method static Builder|Appeal whereRating($value)
+ * @method static Builder|Appeal whereStatus($value)
  * @method static Builder|Appeal whereUpdatedAt($value)
  * @method static Builder|Appeal whereUserId($value)
- * @method static Builder|Appeal whereUuid($value)
  * @mixin Eloquent
  */
 class Appeal extends Model
 {
     use HasFactory;
-    use HasUuid;
 
     protected $fillable = [
         'message',
         'rating',
+        'status',
 
         'user_id',
+    ];
+
+    protected $casts = [
+        'status' => AppealStatusEnum::class,
     ];
 
     /* Relationships */
@@ -52,6 +56,4 @@ class Appeal extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    /* Scopes */
 }

@@ -1,7 +1,7 @@
 <?php
 
-use App\Enums\Animal\SexEnum;
-use App\Enums\Animal\WeightUnitEnum;
+use App\Enums\SexEnum;
+use App\Enums\WeightUnitEnum;
 use App\Models\AnimalType;
 use App\Models\Breed;
 use App\Models\User;
@@ -39,6 +39,7 @@ return new class () extends Migration {
             $table->string('custom_breed_name')->nullable();
             $table->string('breed_name')->nullable();
             $table->boolean('metis')->default(0);
+            $table->boolean('sterilised')->default(0);
 
             $table->double('weight');
             $table->enum('weight_unit', array_column(WeightUnitEnum::cases(), 'value'));

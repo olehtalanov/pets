@@ -22,7 +22,7 @@ class StatsOverview extends BaseWidget
                 ->descriptionIcon($totalRegistrations >= 0 ? 'heroicon-s-trending-up' : 'heroicon-s-trending-down')
                 ->chart($thisWeekRegistrations->map->aggregate->all())
                 ->color($totalRegistrations > 0 ? 'success' : 'warning'),
-            
+
             Card::make(trans('admin.placeholders.animals.weekly'), $thisWeekAnimals->sum->aggregate)
                 ->description(abs($totalAnimals) . ($totalAnimals >= 0 ? ' increase' : ' decrease'))
                 ->descriptionIcon($totalAnimals >= 0 ? 'heroicon-s-trending-up' : 'heroicon-s-trending-down')

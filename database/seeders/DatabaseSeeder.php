@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\User\UserRoleEnum;
+use App\Enums\UserRoleEnum;
 use App\Models\AnimalType;
 use App\Models\Breed;
 use App\Models\Category;

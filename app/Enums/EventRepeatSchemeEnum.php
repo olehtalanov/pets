@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Animal;
+namespace App\Enums;
 
 enum EventRepeatSchemeEnum: string
 {
@@ -19,6 +19,6 @@ enum EventRepeatSchemeEnum: string
 
     public function getName(): string
     {
-        return trans('common.repeatable.'.$this->value);
+        return trans('common.repeatable.' . $this->value);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Animal;
+namespace App\Enums;
 
 enum WeightUnitEnum: string
 {
@@ -9,6 +9,6 @@ enum WeightUnitEnum: string
 
     public function getName(): string
     {
-        return trans('common.weight.'.$this->value);
+        return trans('common.weight.' . $this->value);
     }
 }
