@@ -13,6 +13,10 @@ class LoginTest extends TestCase
             'email' => 'test@mail.com',
         ]);
 
+        $this->assertDatabaseHas('users', [
+            'email' => 'test@mail.com',
+        ]);
+
         $response->assertStatus(204);
     }
 
@@ -24,7 +28,8 @@ class LoginTest extends TestCase
             'device_name' => 'Test'
         ]);
 
-        $response->assertStatus(422)
+        $response
+            ->assertStatus(422)
             ->assertJsonValidationErrors([
                 'code',
             ]);
@@ -42,20 +47,21 @@ class LoginTest extends TestCase
             'device_name' => 'Test'
         ]);
 
-        $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'token',
-            'profile' => [
-                'uuid',
-                'name',
-                'first_name',
-                'last_name',
-                'email',
-                'avatar' => [
-                    'thumb',
-                    'full',
-                ]
-            ],
-        ]);
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'token',
+                'profile' => [
+                    'uuid',
+                    'name',
+                    'first_name',
+                    'last_name',
+                    'email',
+                    'avatar' => [
+                        'thumb',
+                        'full',
+                    ]
+                ],
+            ]);
     }
 }
