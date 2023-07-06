@@ -17,7 +17,8 @@ class LoginTest extends TestCase
             'email' => 'test@mail.com',
         ]);
 
-        $response->assertStatus(204);
+        $response->assertStatus(204)
+            ->assertNoContent();
     }
 
     public function test_user_cant_login_with_wrong_code(): void
@@ -57,6 +58,7 @@ class LoginTest extends TestCase
                     'first_name',
                     'last_name',
                     'email',
+                    'phone',
                     'avatar' => [
                         'thumb',
                         'full',

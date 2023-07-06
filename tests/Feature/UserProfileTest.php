@@ -28,6 +28,20 @@ class UserProfileTest extends TestCase
         $response->assertStatus(401);
     }
 
+    public function test_cant_update_profile_without_authentication(): void
+    {
+        $response = $this->patchJson('/api/v1/profile');
+
+        $response->assertStatus(401);
+    }
+
+    public function test_cant_update_avatar_without_authentication(): void
+    {
+        $response = $this->postJson('/api/v1/profile/avatar');
+
+        $response->assertStatus(401);
+    }
+
     public function test_user_has_access_to_his_profile(): void
     {
         $this->actingAs($this->user, 'sanctum');
@@ -43,6 +57,7 @@ class UserProfileTest extends TestCase
                 'first_name',
                 'last_name',
                 'email',
+                'phone',
                 'avatar' => [
                     'thumb',
                     'full',
@@ -70,6 +85,7 @@ class UserProfileTest extends TestCase
                 'first_name',
                 'last_name',
                 'email',
+                'phone',
                 'avatar' => [
                     'thumb',
                     'full',
@@ -79,15 +95,9 @@ class UserProfileTest extends TestCase
                 ->where('uuid', $this->user->uuid)
                 ->where('first_name', $firstName)
                 ->where('last_name', $lastName)
+                ->where('phone', $phone)
                 ->etc()
-            )
-            ->assertJsonMissing([
-                'phone'
-            ]);
-
-        $this->assertDatabaseHas('users', [
-            'phone' => substr($phone, 1), // remove + added by mutator
-        ]);
+            );
     }
 
     public function test_user_can_upload_avatar(): void
