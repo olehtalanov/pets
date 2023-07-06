@@ -27,7 +27,7 @@ return new class () extends Migration {
                 ->constrained()
                 ->cascadeOnDelete();
             $table->string('title')->index();
-            $table->text('description')->nullable()->fulltext();
+            $table->text('description')->nullable();
             $table->timestamp('starts_at')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->enum('repeat_scheme', array_column(EventRepeatSchemeEnum::cases(), 'value'))

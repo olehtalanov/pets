@@ -18,7 +18,7 @@ class ReviewPolicy
             return Response::allow();
         }
 
-        return $pin?->user_id !== $user->id && $pin?->reviews()->where('user_id', $user->id)->doesntExist()
+        return $pin?->reviews()->where('user_id', $user->id)->doesntExist()
             ? Response::allow()
             : Response::deny();
     }

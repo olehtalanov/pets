@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Data\User\PinData;
 use App\Models\Pin;
+use App\Models\Review;
 use App\Traits\MediaTrait;
 use Auth;
 use DB;
@@ -20,6 +21,13 @@ class PinRepository extends BaseRepository
         return Pin::query()
             ->with('type')
             ->withAvg('reviews', 'rating')
+            ->select([
+                'pins.*',
+                'own_review_id' => Review::query()
+                    ->whereColumn('pin_id', 'pins.id')
+                    ->where('user_id', Auth::id())
+                    ->select('uuid')
+            ])
             ->when($filters->has(['latitude', 'longitude', 'radius']), function (Builder $builder) use ($filters) {
                 $builder->radius(
                     $filters->get('latitude'),
@@ -39,6 +47,13 @@ class PinRepository extends BaseRepository
             ->pins()
             ->with('type')
             ->withAvg('reviews', 'rating')
+            ->select([
+                'pins.*',
+                'own_review_id' => Review::query()
+                    ->whereColumn('pin_id', 'pins.id')
+                    ->where('user_id', Auth::id())
+                    ->select('uuid')
+            ])
             ->latest()
             ->paginate(config('app.pagination.default'));
     }

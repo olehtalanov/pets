@@ -21,6 +21,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  *     @OA\Property(property="address", type="string"),
  *     @OA\Property(property="contact", type="string"),
  *     @OA\Property(property="rating", type="float"),
+ *     @OA\Property(property="own_review_exists", type="bool"),
  *     @OA\Property(property="gallery", type="array", @OA\Items(type="string")),
  * )
  */
@@ -43,7 +44,8 @@ class FullResource extends JsonResource
             'address' => $this->address,
             'contact' => $this->contact,
             'rating' => (float)$this->reviews_avg_rating,
-            'gallery' => $this->getMedia('gallery')->map(fn (Media $media) => $media->getFullUrl()),
+            'own_review_exists' => $this->own_review_id !== null,
+            'gallery' => $this->getMedia('gallery')->map(fn(Media $media) => $media->getFullUrl()),
         ];
     }
 }

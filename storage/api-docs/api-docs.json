@@ -2601,6 +2601,9 @@
                         "type": "number",
                         "format": "float"
                     },
+                    "own_review_exists": {
+                        "type": "boolean"
+                    },
                     "gallery": {
                         "type": "array",
                         "items": {
@@ -2661,6 +2664,9 @@
                     "rating": {
                         "type": "number",
                         "format": "float"
+                    },
+                    "own_review_exists": {
+                        "type": "boolean"
                     }
                 },
                 "type": "object"
