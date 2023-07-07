@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\User;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -8,7 +8,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-class UserProfileTest extends TestCase
+class ProfileTest extends TestCase
 {
     use WithFaker;
 
@@ -61,7 +61,7 @@ class UserProfileTest extends TestCase
                 'avatar' => [
                     'thumb',
                     'full',
-                ]
+                ],
             ]);
     }
 
@@ -89,9 +89,10 @@ class UserProfileTest extends TestCase
                 'avatar' => [
                     'thumb',
                     'full',
-                ]
+                ],
             ])
-            ->assertJson(fn(AssertableJson $json) => $json
+            ->assertJson(
+                fn (AssertableJson $json) => $json
                 ->where('uuid', $this->user->uuid)
                 ->where('first_name', $firstName)
                 ->where('last_name', $lastName)

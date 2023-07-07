@@ -45,7 +45,7 @@ class FullResource extends JsonResource
             'contact' => $this->contact,
             'rating' => (float)$this->reviews_avg_rating,
             'own_review_exists' => $this->own_review_id !== null,
-            'gallery' => $this->getMedia('gallery')->map(fn(Media $media) => $media->getFullUrl()),
+            'gallery' => $this->getMedia('gallery')->map(fn (Media $media) => $media->getFullUrl()),
         ];
     }
 }

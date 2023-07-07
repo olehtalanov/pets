@@ -2698,8 +2698,24 @@
                     "uuid": {
                         "type": "string"
                     },
-                    "name": {
+                    "email": {
                         "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string",
+                        "nullable": true
                     },
                     "avatar": {
                         "type": "array",

@@ -61,14 +61,14 @@ class AppealResource extends Resource
                             ->limit(50)
                             ->pluck('name', 'id');
                     })
-                    ->getOptionLabelUsing(fn($value): ?string => User::find($value)?->name)
+                    ->getOptionLabelUsing(fn ($value): ?string => User::find($value)?->name)
                     ->required(),
                 Forms\Components\Select::make('status')
                     ->label(trans('admin.fields.status'))
                     ->disablePlaceholderSelection()
                     ->options(
                         collect(AppealStatusEnum::cases())
-                            ->mapWithKeys(fn(AppealStatusEnum $enum) => [$enum->value => $enum->getName()])
+                            ->mapWithKeys(fn (AppealStatusEnum $enum) => [$enum->value => $enum->getName()])
                     ),
                 Forms\Components\Textarea::make('message')
                     ->required()
@@ -97,7 +97,7 @@ class AppealResource extends Resource
                     ->disablePlaceholderSelection()
                     ->options(
                         collect(AppealStatusEnum::cases())
-                            ->mapWithKeys(fn(AppealStatusEnum $enum) => [$enum->value => $enum->getName()])
+                            ->mapWithKeys(fn (AppealStatusEnum $enum) => [$enum->value => $enum->getName()])
                     ),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(trans('admin.fields.created_at'))
