@@ -40,7 +40,9 @@ class NoteRepository extends BaseRepository
             ->notes()
             ->create($data->except('category_ids')->toArray());
 
-        $note->categories()->attach($data->category_ids);
+        if ($data->category_ids) {
+            $note->categories()->attach($data->category_ids);
+        }
 
         return $this->one($note);
     }
@@ -49,9 +51,11 @@ class NoteRepository extends BaseRepository
     {
         tap($note)->update($data->except('category_ids')->toArray());
 
-        $note->categories()->sync(
-            array_values($data->only('category_ids')->toArray())
-        );
+        if ($data->category_ids) {
+            $note->categories()->sync(
+                array_values($data->only('category_ids')->toArray())
+            );
+        }
 
         return $this->one($note);
     }

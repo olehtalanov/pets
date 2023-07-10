@@ -14,18 +14,21 @@ class EventData extends Data
 {
     public function __construct(
         public string                $animal_id,
-        public array                 $category_ids,
         public string                $title,
         #[WithCast(EnumCast::class, EventRepeatSchemeEnum::class)]
         public EventRepeatSchemeEnum $repeat_scheme,
         public ?string               $description,
         public ?string               $starts_at,
         public ?string               $ends_at,
+        public ?array                $category_ids,
         public bool                  $whole_day = false,
     )
     {
         $this->animal_id = Animal::findUOrFail($animal_id)?->getKey();
-        $this->category_ids = Category::whereIn('uuid', $this->category_ids)->pluck('id')->toArray();
+
+        if ($category_ids) {
+            $this->category_ids = Category::whereIn('uuid', $this->category_ids)->pluck('id')->toArray();
+        }
 
         if ($this->whole_day) {
             $this->starts_at = $this->starts_at ? Carbon::parse($this->starts_at)->startOfDay() : today();

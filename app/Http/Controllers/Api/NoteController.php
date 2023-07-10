@@ -18,7 +18,8 @@ class NoteController extends Controller
 {
     public function __construct(
         private readonly NoteRepository $noteRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -81,7 +82,7 @@ class NoteController extends Controller
      *         )
      *     ),
      *
-     *     @OA\Response(response=200, description="Successful response",
+     *     @OA\Response(response=201, description="Successful response",
      *         @OA\JsonContent(ref="#/components/schemas/NoteFullResource")
      *     )
      * )
@@ -93,7 +94,8 @@ class NoteController extends Controller
                 $this->noteRepository->store(
                     NoteData::from($request->validated())
                 )
-            )
+            ),
+            201
         );
     }
 

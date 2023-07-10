@@ -66,7 +66,9 @@ class EventRepository extends BaseRepository
                     ->toArray()
             );
 
-        $event->categories()->attach($data->category_ids);
+        if ($data->category_ids) {
+            $event->categories()->attach($data->category_ids);
+        }
 
         dispatch(new RepeatEvent($event, $fromDate));
 
@@ -88,7 +90,9 @@ class EventRepository extends BaseRepository
                 ->toArray()
         );
 
-        $event->categories()->sync($data->category_ids);
+        if ($data->category_ids) {
+            $event->categories()->sync($data->category_ids);
+        }
 
         if ($state->generateChildren) {
             dispatch(new RepeatEvent($event));

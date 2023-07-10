@@ -62,7 +62,10 @@ abstract class Repeatable
             $event->original_id = $this->event->getKey();
 
             $event->saveQuietly();
-            $event->categories()->attach($this->categories);
+
+            if ($this->categories->count()) {
+                $event->categories()->attach($this->categories);
+            }
         };
     }
 

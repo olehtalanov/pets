@@ -13,7 +13,8 @@ class NoteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence,
+            'description' => implode("\n", $this->faker->sentences),
         ];
     }
 }
