@@ -3,28 +3,40 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\PersonalAccessCode;
+use App\Models\User;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
+    private User $user;
+
+    private PersonalAccessCode $code;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = User::factory()->create();
+
+        $this->code = $this->user->accessCode()->create();
+    }
+
     public function test_user_can_auth_with_email_and_receive_a_code(): void
     {
         $response = $this->postJson('/api/v1/auth/code', [
-            'email' => 'test@mail.com',
+            'email' => $this->user->email,
         ]);
 
-        $this->assertDatabaseHas('users', [
-            'email' => 'test@mail.com',
-        ]);
-
-        $response->assertStatus(204)
+        $response
+            ->assertStatus(204)
             ->assertNoContent();
     }
 
     public function test_user_cant_login_with_wrong_code(): void
     {
         $response = $this->postJson('/api/v1/auth/login', [
-            'email' => 'test@mail.com',
+            'email' => $this->user->email,
             'code' => "000000",
             'device_name' => 'Test'
         ]);
@@ -39,12 +51,8 @@ class LoginTest extends TestCase
     public function test_user_can_login_with_correct_code(): void
     {
         $response = $this->postJson('/api/v1/auth/login', [
-            'email' => 'test@mail.com',
-            'code' => PersonalAccessCode::query()
-                ->where('user_id', 1)
-                ->latest('id')
-                ->first()
-                ?->code,
+            'email' => $this->user->email,
+            'code' => $this->user->accessCode->code,
             'device_name' => 'Test'
         ]);
 
@@ -54,7 +62,6 @@ class LoginTest extends TestCase
                 'token',
                 'profile' => [
                     'uuid',
-                    'name',
                     'first_name',
                     'last_name',
                     'email',
@@ -64,6 +71,12 @@ class LoginTest extends TestCase
                         'full',
                     ]
                 ],
-            ]);
+            ])
+            ->assertJson(fn(AssertableJson $json) => $json
+                ->where('profile.email', $this->user->email)
+                ->where('profile.first_name', $this->user->first_name)
+                ->where('profile.last_name', $this->user->last_name)
+                ->etc()
+            );
     }
 }

@@ -18,7 +18,7 @@ class ProfileTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = User::first();
+        $this->user = User::factory()->create();
     }
 
     public function test_cant_view_profile_without_authentication(): void
@@ -53,7 +53,6 @@ class ProfileTest extends TestCase
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'uuid',
-                'name',
                 'first_name',
                 'last_name',
                 'email',
@@ -81,7 +80,6 @@ class ProfileTest extends TestCase
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'uuid',
-                'name',
                 'first_name',
                 'last_name',
                 'email',
@@ -92,12 +90,12 @@ class ProfileTest extends TestCase
                 ],
             ])
             ->assertJson(
-                fn (AssertableJson $json) => $json
-                ->where('uuid', $this->user->uuid)
-                ->where('first_name', $firstName)
-                ->where('last_name', $lastName)
-                ->where('phone', $phone)
-                ->etc()
+                fn(AssertableJson $json) => $json
+                    ->where('uuid', $this->user->uuid)
+                    ->where('first_name', $firstName)
+                    ->where('last_name', $lastName)
+                    ->where('phone', $phone)
+                    ->etc()
             );
     }
 

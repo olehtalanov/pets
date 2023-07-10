@@ -199,8 +199,7 @@ return [
 
         'repeat' => [
             'days' => 100,
-            'working_days' => 70,
-            'weekends' => 30,
+            'weeks' => 20,
             'months' => 12,
             'years' => 3,
         ],

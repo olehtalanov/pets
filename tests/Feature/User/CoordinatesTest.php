@@ -17,7 +17,7 @@ class CoordinatesTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = User::first();
+        $this->user = User::factory()->create();
     }
 
     public function test_user_can_read_his_coordinates(): void
@@ -46,9 +46,9 @@ class CoordinatesTest extends TestCase
         $response
             ->assertStatus(200)
             ->assertJson(
-                fn (AssertableJson $json) => $json
-                ->where('latitude', $latitude)
-                ->where('longitude', $longitude)
+                fn(AssertableJson $json) => $json
+                    ->where('latitude', $latitude)
+                    ->where('longitude', $longitude)
             );
     }
 

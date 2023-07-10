@@ -13,7 +13,7 @@ class ListTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = User::first();
+        $this->user = User::factory()->create();
     }
 
     public function test_can_get_list_without_authorization(): void
