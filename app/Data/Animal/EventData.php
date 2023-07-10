@@ -7,7 +7,6 @@ use App\Models\Animal;
 use App\Models\Category;
 use Carbon\Carbon;
 use Spatie\LaravelData\Attributes\WithCast;
-use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Casts\EnumCast;
 use Spatie\LaravelData\Data;
 
@@ -20,12 +19,11 @@ class EventData extends Data
         #[WithCast(EnumCast::class, EventRepeatSchemeEnum::class)]
         public EventRepeatSchemeEnum $repeat_scheme,
         public ?string               $description,
-        #[WithCast(DateTimeInterfaceCast::class)]
         public ?string               $starts_at,
-        #[WithCast(DateTimeInterfaceCast::class)]
         public ?string               $ends_at,
         public bool                  $whole_day = false,
-    ) {
+    )
+    {
         $this->animal_id = Animal::findUOrFail($animal_id)?->getKey();
         $this->category_ids = Category::whereIn('uuid', $this->category_ids)->pluck('id')->toArray();
 

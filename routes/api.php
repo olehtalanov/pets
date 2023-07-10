@@ -114,12 +114,6 @@ Route::group([
 
         /* Dictionaries */
 
-        Route::group([
-            'as' => 'dictionaries.',
-            'prefix' => 'dictionaries',
-        ], static function () {
-            Route::get('/', [DictionaryController::class, 'index'])->name('index');
-            Route::get('repeatable', [DictionaryController::class, 'repeatable'])->name('repeatable');
-        });
+        Route::get('/dictionaries', DictionaryController::class)->name('dictionaries.index');
     });
 });

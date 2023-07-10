@@ -464,45 +464,7 @@
                     "Dictionaries"
                 ],
                 "summary": "Get list of required dictionaries.",
-                "operationId": "4a30b48ff2d2b106c96f27a37c6c3db2",
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "properties": {
-                                            "types": {
-                                                "type": "array",
-                                                "items": {
-                                                    "$ref": "#/components/schemas/DictionaryTypedResource"
-                                                }
-                                            },
-                                            "pins": {
-                                                "type": "array",
-                                                "items": {
-                                                    "$ref": "#/components/schemas/DictionaryTypedResource"
-                                                }
-                                            }
-                                        },
-                                        "type": "object"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/dictionaries/repeatable": {
-            "get": {
-                "tags": [
-                    "Dictionaries"
-                ],
-                "summary": "Get list of event repeatable.",
-                "operationId": "76446be374c5abad9f85c69cf724dfaf",
+                "operationId": "18b82a1cce1ac6101a8513430c2491ce",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -510,33 +472,83 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "never": {
-                                            "type": "string",
-                                            "example": "Never"
+                                        "types": {
+                                            "properties": {
+                                                "animals": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/DictionaryTypedResource"
+                                                    }
+                                                },
+                                                "pins": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/DictionaryTypedResource"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
                                         },
-                                        "every_day": {
-                                            "type": "string",
-                                            "example": "Every day"
+                                        "categories": {
+                                            "properties": {
+                                                "events": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/DictionaryTypedResource"
+                                                    }
+                                                },
+                                                "notes": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/DictionaryTypedResource"
+                                                    }
+                                                },
+                                                "common": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/DictionaryTypedResource"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
                                         },
-                                        "every_working_day": {
-                                            "type": "string",
-                                            "example": "Every working day"
-                                        },
-                                        "every_weekend": {
-                                            "type": "string",
-                                            "example": "Every weekend"
-                                        },
-                                        "every_week": {
-                                            "type": "string",
-                                            "example": "Every week"
-                                        },
-                                        "every_month": {
-                                            "type": "string",
-                                            "example": "Every month"
-                                        },
-                                        "every_year": {
-                                            "type": "string",
-                                            "example": "Every year"
+                                        "repeatable": {
+                                            "properties": {
+                                                "events": {
+                                                    "properties": {
+                                                        "never": {
+                                                            "type": "string",
+                                                            "example": "Never"
+                                                        },
+                                                        "every_day": {
+                                                            "type": "string",
+                                                            "example": "Every day"
+                                                        },
+                                                        "every_working_day": {
+                                                            "type": "string",
+                                                            "example": "Every working day"
+                                                        },
+                                                        "every_weekend": {
+                                                            "type": "string",
+                                                            "example": "Every weekend"
+                                                        },
+                                                        "every_week": {
+                                                            "type": "string",
+                                                            "example": "Every week"
+                                                        },
+                                                        "every_month": {
+                                                            "type": "string",
+                                                            "example": "Every month"
+                                                        },
+                                                        "every_year": {
+                                                            "type": "string",
+                                                            "example": "Every year"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -560,10 +572,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/EventShortResource"
-                                    }
+                                    "$ref": "#/components/schemas/PaginatedResourceCollection"
                                 }
                             }
                         }
@@ -587,7 +596,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {
@@ -1233,7 +1242,7 @@
                     "Profile",
                     "Users"
                 ],
-                "summary": "Get user details.",
+                "summary": "Get auth user details.",
                 "operationId": "840711b2cfe9f9c00a12c154bfb21787",
                 "responses": {
                     "200": {
@@ -1253,7 +1262,7 @@
                     "Profile",
                     "Users"
                 ],
-                "summary": "Update user profile.",
+                "summary": "Update auth user profile.",
                 "operationId": "2416ea03dc2ac6a315f36e2de0dd8f71",
                 "requestBody": {
                     "required": true,
@@ -1285,7 +1294,7 @@
                     "Profile",
                     "Users"
                 ],
-                "summary": "Update user avatar.",
+                "summary": "Update auth user avatar.",
                 "operationId": "aab356471782aa4ab172229bb1e61fc6",
                 "requestBody": {
                     "content": {
@@ -2547,6 +2556,9 @@
                                 },
                                 {
                                     "$ref": "#/components/schemas/ChatRecentResource"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/EventShortResource"
                                 }
                             ]
                         }
@@ -2700,10 +2712,6 @@
                     },
                     "email": {
                         "type": "string"
-                    },
-                    "name": {
-                        "type": "string",
-                        "nullable": true
                     },
                     "first_name": {
                         "type": "string",

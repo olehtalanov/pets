@@ -7,6 +7,7 @@ use Akuechler\Geoly;
 use App\Enums\UserRoleEnum;
 use App\Traits\HasUuid;
 use App\Traits\UseMedia;
+use Database\Factories\UserFactory;
 use Eloquent;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Builder;
@@ -49,7 +50,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \App\Models\PersonalAccessCode|null $accessCodes
+ * @property-read \App\Models\PersonalAccessCode|null $accessCode
  * @property-read Collection<int, \App\Models\Animal> $animals
  * @property-read int|null $animals_count
  * @property-read Collection<int, \App\Models\Appeal> $appeals
@@ -166,7 +167,7 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
         return $this->hasMany(Appeal::class);
     }
 
-    public function accessCodes(): HasOne
+    public function accessCode(): HasOne
     {
         return $this->hasOne(PersonalAccessCode::class)->latestOfMany();
     }
@@ -196,15 +197,15 @@ final class User extends Authenticatable implements FilamentUser, HasMedia
     protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->first_name ? "$this->first_name $this->last_name" : null
+            get: fn() => $this->first_name ? "$this->first_name $this->last_name" : null
         );
     }
 
     protected function phone(): Attribute
     {
         return Attribute::make(
-            get: static fn ($value): ?string => $value ? "+$value" : null,
-            set: static fn ($value) => preg_replace('/\D/', '', $value)
+            get: static fn($value): ?string => $value ? "+$value" : null,
+            set: static fn($value) => preg_replace('/\D/', '', $value)
         );
     }
 

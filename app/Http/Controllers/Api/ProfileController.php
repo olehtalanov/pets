@@ -17,7 +17,8 @@ class ProfileController extends Controller
 {
     public function __construct(
         private readonly ProfileRepository $profileRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -25,7 +26,7 @@ class ProfileController extends Controller
      * @OA\Get(
      *     path="/api/v1/profile",
      *     tags={"Profile", "Users"},
-     *     summary="Get user details.",
+     *     summary="Get auth user details.",
      *
      *     @OA\Response(response=200, description="Successful response",
      *         @OA\JsonContent(
@@ -46,7 +47,7 @@ class ProfileController extends Controller
      * @OA\Patch(
      *     path="/api/v1/profile",
      *     tags={"Profile", "Users"},
-     *     summary="Update user profile.",
+     *     summary="Update auth user profile.",
      *
      *     @OA\RequestBody(
      *         required=true,
@@ -77,7 +78,7 @@ class ProfileController extends Controller
      * @OA\Post(
      *     path="/api/v1/profile/avatar",
      *     tags={"Profile", "Users"},
-     *     summary="Update user avatar.",
+     *     summary="Update auth user avatar.",
      *
      *     @OA\RequestBody(
      *         @OA\MediaType(

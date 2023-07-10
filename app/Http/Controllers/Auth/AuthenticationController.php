@@ -42,7 +42,7 @@ class AuthenticationController extends Controller
             'role' => UserRoleEnum::Regular,
         ]);
 
-        $code = $user->accessCodes()->create();
+        $code = $user->accessCode()->create();
 
         event(new LoggedIn($code));
 

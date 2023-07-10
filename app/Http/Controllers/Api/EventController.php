@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Data\Animal\EventData;
+use App\Exceptions\Common\ResourceNotSetException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Event\ListRequest;
 use App\Http\Requests\Event\StoreRequest;
 use App\Http\Resources\Event\FullResource;
 use App\Http\Resources\Event\ShortResource;
+use App\Http\Resources\PaginatedCollection;
 use App\Models\Event;
 use App\Repositories\EventRepository;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -19,7 +21,8 @@ class EventController extends Controller
 {
     public function __construct(
         private readonly EventRepository $eventRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -31,19 +34,21 @@ class EventController extends Controller
      *
      *     @OA\Response(response=200, description="Successful response",
      *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/EventShortResource"),
+     *             type="object",
+     *             ref="#/components/schemas/PaginatedResourceCollection",
      *         )
      *     )
      * )
+     * @throws ResourceNotSetException
      */
     public function index(ListRequest $request): JsonResponse
     {
         return Response::json(
-            ShortResource::collection(
+            new PaginatedCollection(
                 $this->eventRepository->list(
                     $request->safe()->collect()
-                )
+                ),
+                ShortResource::class
             )
         );
     }
@@ -88,7 +93,7 @@ class EventController extends Controller
      *         @OA\JsonContent(ref="#/components/schemas/EventStoreRequest")
      *     ),
      *
-     *     @OA\Response(response=200, description="Successful response",
+     *     @OA\Response(response=201, description="Successful response",
      *         @OA\JsonContent(ref="#/components/schemas/EventFullResource")
      *     )
      * )
@@ -100,7 +105,8 @@ class EventController extends Controller
                 $this->eventRepository->store(
                     EventData::from($request->validated())
                 )
-            )
+            ),
+            201
         );
     }
 

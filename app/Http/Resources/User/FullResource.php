@@ -13,7 +13,6 @@ use OpenApi\Annotations as OA;
  *
  *     @OA\Property(property="uuid", type="string"),
  *     @OA\Property(property="email", type="string"),
- *     @OA\Property(property="name", type="string", nullable=true),
  *     @OA\Property(property="first_name", type="string", nullable=true),
  *     @OA\Property(property="last_name", type="string", nullable=true),
  *     @OA\Property(property="phone", type="string", nullable=true),
@@ -37,7 +36,6 @@ class FullResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'email' => $this->email,
-            'name' => $this->name,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'phone' => $this->phone,

@@ -11,11 +11,12 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class EventRepository extends BaseRepository
 {
-    public function list(Collection $filters): Collection
+    public function list(Collection $filters): LengthAwarePaginator
     {
         return Auth::user()
             ->events()
@@ -40,7 +41,7 @@ class EventRepository extends BaseRepository
                     ->where('title', 'like', "%$value%")
                     ->orWhereFullText('description', $value);
             })
-            ->get();
+            ->paginate($filters->get('limit', config('app.pagination.search')));
     }
 
     public function one(Event $event): Event
@@ -50,8 +51,9 @@ class EventRepository extends BaseRepository
 
     public function store(
         EventData $data,
-        ?Carbon $fromDate = null
-    ): Event {
+        ?Carbon   $fromDate = null
+    ): Event
+    {
         /** @var Event $event */
         $event = Auth::user()
             ->events()
@@ -72,11 +74,12 @@ class EventRepository extends BaseRepository
     }
 
     public function update(
-        Event $event,
+        Event     $event,
         EventData $data,
-        bool $onlyThis,
-    ): Event {
-        $state = ChangeState::make($event, ! $onlyThis);
+        bool      $onlyThis,
+    ): Event
+    {
+        $state = ChangeState::make($event, !$onlyThis);
 
         tap($event)->update(
             $data

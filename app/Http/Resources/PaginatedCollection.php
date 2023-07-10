@@ -17,6 +17,7 @@ use OpenApi\Annotations as OA;
  *             @OA\Schema(ref="#/components/schemas/PinShortResource"),
  *             @OA\Schema(ref="#/components/schemas/UserSearchResource"),
  *             @OA\Schema(ref="#/components/schemas/ChatRecentResource"),
+ *             @OA\Schema(ref="#/components/schemas/EventShortResource"),
  *         }
  *     )),
  *     @OA\Property(property="meta", type="object",
@@ -34,7 +35,8 @@ class PaginatedCollection extends ResourceCollection
     public function __construct(
         $resource,
         protected string $paginatingResource
-    ) {
+    )
+    {
         parent::__construct($resource);
 
         if (!$paginatingResource) {

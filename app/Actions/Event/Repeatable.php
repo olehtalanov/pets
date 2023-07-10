@@ -19,7 +19,8 @@ abstract class Repeatable
     public function __construct(
         protected Event   $event,
         protected ?Carbon $fromDate = null
-    ) {
+    )
+    {
         $this->diffInMinutes = $this->event->starts_at->diffInMinutes($this->event->ends_at);
 
         $this->endDate = match ($this->event->repeat_scheme) {
@@ -27,18 +28,18 @@ abstract class Repeatable
             EventRepeatSchemeEnum::EveryDay => $this->event->starts_at->addDays(
                 config('app.events.repeat.days')
             ),
-            EventRepeatSchemeEnum::EveryWorkingDay => $this->event->starts_at->addDays(
-                config('app.events.repeat.working_days')
+            EventRepeatSchemeEnum::EveryWorkingDay,
+            EventRepeatSchemeEnum::EveryWeekend => $this->event->starts_at->addDays(
+                config('app.events.repeat.weeks') * 7
             ),
-            EventRepeatSchemeEnum::EveryWeekend,
-            EventRepeatSchemeEnum::EveryWeek => $this->event->starts_at->addDays(
-                config('app.events.repeat.weekends')
+            EventRepeatSchemeEnum::EveryWeek => $this->event->starts_at->addWeeks(
+                config('app.events.repeat.weeks')
             ),
             EventRepeatSchemeEnum::EveryMonth => $this->event->starts_at->addMonths(
                 config('app.events.repeat.months')
             ),
             EventRepeatSchemeEnum::EveryYear => $this->event->starts_at->addYears(
-                config('app.events.repeat.months')
+                config('app.events.repeat.years')
             ),
         };
 
