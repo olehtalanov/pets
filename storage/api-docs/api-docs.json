@@ -1013,36 +1013,6 @@
             }
         },
         "/api/v1/pins/{pin}/media": {
-            "get": {
-                "tags": [
-                    "Pins"
-                ],
-                "summary": "Get list of the user pin media.",
-                "operationId": "b6fb7ba593b5396b7587fdbac61fc81a",
-                "parameters": [
-                    {
-                        "name": "pin",
-                        "in": "path",
-                        "required": true,
-                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/MediaShortResource"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "Pins"
@@ -1228,7 +1198,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/ReviewFullResource"
+                                        "$ref": "#/components/schemas/ReviewShortResource"
                                     }
                                 }
                             }
@@ -1262,7 +1232,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {
@@ -1279,6 +1249,43 @@
             }
         },
         "/api/v1/pins/{pin}/reviews/{review}": {
+            "get": {
+                "tags": [
+                    "Pins",
+                    "Reviews"
+                ],
+                "summary": "Show review.",
+                "operationId": "82b407d40baebd6c9d76b3f358607ab7",
+                "parameters": [
+                    {
+                        "name": "pin",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
+                    },
+                    {
+                        "name": "review",
+                        "in": "path",
+                        "required": true,
+                        "example": "995037a6-60b3-4055-aa14-3513aa9824cb"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ReviewFullResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "delete": {
                 "tags": [
                     "Pins",
@@ -1355,47 +1362,11 @@
             }
         },
         "/api/v1/pins/{pin}/reviews/{review}/media": {
-            "get": {
-                "tags": [
-                    "Pins"
-                ],
-                "summary": "Get list of the review media.",
-                "operationId": "db9f3361a4ee275a2d8f48d84957f33a",
-                "parameters": [
-                    {
-                        "name": "pin",
-                        "in": "path",
-                        "required": true,
-                        "example": "995037a6-60b3-4055-aa14-3513aa9824ca"
-                    },
-                    {
-                        "name": "review",
-                        "in": "path",
-                        "required": true,
-                        "example": "995037a6-60b3-4055-aa14-3513aa9824cb"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/MediaShortResource"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "Pins"
                 ],
-                "summary": "Upload review media.",
+                "summary": "Upload the review media.",
                 "operationId": "8d279a513d9aa68ee9d0db3a7e0073da",
                 "parameters": [
                     {
@@ -1443,7 +1414,7 @@
                 "tags": [
                     "Pins"
                 ],
-                "summary": "Delete a pin.",
+                "summary": "Delete the review media.",
                 "operationId": "0796a867b71e417899e32f292a357ea3",
                 "parameters": [
                     {
@@ -2576,10 +2547,13 @@
                     "own_review_exists": {
                         "type": "boolean"
                     },
+                    "reviews_count": {
+                        "type": "integer"
+                    },
                     "gallery": {
                         "type": "array",
                         "items": {
-                            "type": "string"
+                            "$ref": "#/components/schemas/MediaShortResource"
                         }
                     }
                 },
@@ -2608,7 +2582,7 @@
                         "type": "number",
                         "format": "float"
                     },
-                    "reviewable": {
+                    "reviewer": {
                         "$ref": "#/components/schemas/UserShortResource"
                     }
                 },
@@ -2639,6 +2613,9 @@
                     },
                     "own_review_exists": {
                         "type": "boolean"
+                    },
+                    "reviews_count": {
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -2659,8 +2636,36 @@
                     "last_action_at": {
                         "type": "string"
                     },
-                    "pin": {
-                        "$ref": "#/components/schemas/PinReviewResource"
+                    "reviewer": {
+                        "$ref": "#/components/schemas/UserShortResource"
+                    },
+                    "gallery": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MediaShortResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ReviewShortResource": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "message": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "last_action_at": {
+                        "type": "string"
+                    },
+                    "reviewer": {
+                        "$ref": "#/components/schemas/UserShortResource"
                     }
                 },
                 "type": "object"
