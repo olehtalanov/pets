@@ -19,7 +19,8 @@ class AnimalController extends Controller
 {
     public function __construct(
         protected AnimalRepository $animalRepository,
-    ) {
+    )
+    {
         //
     }
 
@@ -75,24 +76,10 @@ class AnimalController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *
-     *         @OA\JsonContent(
-     *             required={"name","sex","birth_date","breed_name","weight","weight_unit"},
-     *             @OA\Property(property="name", type="string", example="Fluffy"),
-     *             @OA\Property(property="sex", type="string", enum={"male","female"}, example="male"),
-     *             @OA\Property(property="birth_date", type="string", example="2021-06-22"),
-     *             @OA\Property(property="animal_type", type="string", nullable=true, example="995037a6-5811-4ace-b1f7-4667517dd6e0"),
-     *             @OA\Property(property="custom_animal_type", type="string", nullable=true, example=null),
-     *             @OA\Property(property="breed", type="string", nullable=true, example=null),
-     *             @OA\Property(property="custom_breed_name", type="string", nullable=true),
-     *             @OA\Property(property="breed_name", type="string"),
-     *             @OA\Property(property="metis", type="boolean", example=false),
-     *             @OA\Property(property="weight", type="number", format="double", example="2.5"),
-     *             @OA\Property(property="weight_unit", type="string", example="kg"),
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/AnimalStoreRequest")
      *     ),
      *
-     *     @OA\Response(response=200, description="Successful response",
+     *     @OA\Response(response=201, description="Successful response",
      *         @OA\JsonContent(ref="#/components/schemas/AnimalFullResource")
      *     )
      * )
@@ -102,7 +89,8 @@ class AnimalController extends Controller
         return Response::json(
             $this->animalRepository->store(
                 AnimalData::from($request->validated())
-            )
+            ),
+            201
         );
     }
 
@@ -116,20 +104,7 @@ class AnimalController extends Controller
      *
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(
-     *             required={"name","sex","birth_date","breed_name","weight","weight_unit"},
-     *             @OA\Property(property="name", type="string", example="Fluffy"),
-     *             @OA\Property(property="sex", type="string", enum={"male","female"}, example="male"),
-     *             @OA\Property(property="birth_date", type="string", example="2021-06-22"),
-     *             @OA\Property(property="animal_type", type="string", nullable=true, example="995037a6-5811-4ace-b1f7-4667517dd6e0"),
-     *             @OA\Property(property="custom_animal_type", type="string", nullable=true, example=null),
-     *             @OA\Property(property="breed", type="string", nullable=true, example=null),
-     *             @OA\Property(property="custom_breed_name", type="string", nullable=true),
-     *             @OA\Property(property="breed_name", type="string"),
-     *             @OA\Property(property="metis", type="boolean", example=false),
-     *             @OA\Property(property="weight", type="number", format="double", example="2.5"),
-     *             @OA\Property(property="weight_unit", type="string", example="kg"),
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/AnimalStoreRequest")
      *     ),
      *
      *     @OA\Response(response=200, description="Successful response",

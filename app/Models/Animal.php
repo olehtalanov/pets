@@ -6,6 +6,7 @@ use App\Enums\SexEnum;
 use App\Enums\WeightUnitEnum;
 use App\Traits\HasUuid;
 use App\Traits\UseMedia;
+use Database\Factories\AnimalFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -40,16 +41,16 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int $sterilised
- * @property-read \App\Models\Breed|null $breed
- * @property-read Collection<int, \App\Models\Event> $events
+ * @property-read Breed|null $breed
+ * @property-read Collection<int, Event> $events
  * @property-read int|null $events_count
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read Collection<int, \App\Models\Note> $notes
+ * @property-read Collection<int, Note> $notes
  * @property-read int|null $notes_count
- * @property-read \App\Models\User $owner
- * @property-read \App\Models\AnimalType|null $type
- * @method static \Database\Factories\AnimalFactory factory($count = null, $state = [])
+ * @property-read User $owner
+ * @property-read AnimalType|null $type
+ * @method static AnimalFactory factory($count = null, $state = [])
  * @method static Builder|Animal newModelQuery()
  * @method static Builder|Animal newQuery()
  * @method static Builder|Animal query()
@@ -90,6 +91,7 @@ class Animal extends Model implements HasMedia
         'custom_breed_name',
         'breed_name',
         'metis',
+        'sterilised',
 
         'weight',
         'weight_unit',
@@ -140,21 +142,21 @@ class Animal extends Model implements HasMedia
     protected function breedName(): Attribute
     {
         return Attribute::make(
-            set: static fn (?string $value) => $value ? ucfirst($value) : null
+            set: static fn(?string $value) => $value ? str($value)->title() : null
         );
     }
 
     protected function customTypeName(): Attribute
     {
         return Attribute::make(
-            set: static fn (?string $value) => $value ? ucfirst($value) : null
+            set: static fn(?string $value) => $value ? str($value)->title() : null
         );
     }
 
     protected function customBreedName(): Attribute
     {
         return Attribute::make(
-            set: static fn (?string $value) => $value ? ucfirst($value) : null
+            set: static fn(?string $value) => $value ? str($value)->title() : null
         );
     }
 

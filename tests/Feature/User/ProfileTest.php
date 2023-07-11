@@ -49,7 +49,7 @@ class ProfileTest extends TestCase
         $response = $this->getJson('/api/v1/profile');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'uuid',
@@ -76,7 +76,7 @@ class ProfileTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'uuid',
@@ -110,7 +110,7 @@ class ProfileTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonStructure([
                 'thumb',
                 'full',

@@ -21,7 +21,8 @@ class PinController extends Controller
 {
     public function __construct(
         private readonly PinRepository $pinRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -73,8 +74,9 @@ class PinController extends Controller
     public function search(SearchRequest $request): JsonResponse
     {
         return Response::json(
-            ShortResource::collection(
-                $this->pinRepository->search($request->safe()->collect())
+            new PaginatedCollection(
+                $this->pinRepository->search($request->safe()->collect()),
+                ShortResource::class
             )
         );
     }
@@ -112,7 +114,7 @@ class PinController extends Controller
      *         @OA\JsonContent(ref="#/components/schemas/PinStoreRequest")
      *     ),
      *
-     *     @OA\Response(response=200, description="Successful response",
+     *     @OA\Response(response=201, description="Successful response",
      *         @OA\JsonContent(ref="#/components/schemas/PinFullResource")
      *     )
      * )
@@ -124,7 +126,8 @@ class PinController extends Controller
                 $this->pinRepository->store(
                     PinData::from($request->validated())
                 )
-            )
+            ),
+            201
         );
     }
 

@@ -40,12 +40,12 @@ class FullResource extends JsonResource
             'type' => $this->type->name,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
-            'description' => $this->address,
+            'description' => $this->description,
             'address' => $this->address,
             'contact' => $this->contact,
             'rating' => (float)$this->reviews_avg_rating,
             'own_review_exists' => $this->own_review_id !== null,
-            'gallery' => $this->getMedia('gallery')->map(fn (Media $media) => $media->getFullUrl()),
+            'gallery' => $this->getMedia('gallery')->map(fn(Media $media) => $media->getFullUrl()),
         ];
     }
 }

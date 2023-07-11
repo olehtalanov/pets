@@ -30,7 +30,7 @@ class ListTest extends TestCase
         $response = $this->getJson('/api/v1/users');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonStructure([
                 'items' => [
                     '*' => [
@@ -70,7 +70,7 @@ class ListTest extends TestCase
             ]));
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonPath('items.0.uuid', $this->user->uuid);
     }
 

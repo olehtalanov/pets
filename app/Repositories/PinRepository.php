@@ -25,7 +25,7 @@ class PinRepository extends BaseRepository
                 'pins.*',
                 'own_review_id' => Review::query()
                     ->whereColumn('pin_id', 'pins.id')
-                    ->where('user_id', Auth::id())
+                    ->whereRaw('user_id = ' . Auth::id())
                     ->select('uuid')
             ])
             ->when($filters->has(['latitude', 'longitude', 'radius']), function (Builder $builder) use ($filters) {
@@ -51,7 +51,7 @@ class PinRepository extends BaseRepository
                 'pins.*',
                 'own_review_id' => Review::query()
                     ->whereColumn('pin_id', 'pins.id')
-                    ->where('user_id', Auth::id())
+                    ->whereRaw('user_id = ' . Auth::id())
                     ->select('uuid')
             ])
             ->latest()

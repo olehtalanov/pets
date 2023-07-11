@@ -15,7 +15,7 @@ class RepeatSchemeTest extends BaseTestCase
         $response = $this->getJson('/api/v1/events');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonCount(1, 'items');
     }
 
@@ -28,7 +28,7 @@ class RepeatSchemeTest extends BaseTestCase
         $response = $this->getJson('/api/v1/events');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonCount(config('app.events.repeat.days'), 'items');
     }
 
@@ -41,7 +41,7 @@ class RepeatSchemeTest extends BaseTestCase
         $response = $this->getJson('/api/v1/events');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonCount(config('app.events.repeat.weeks') * 5, 'items');
     }
 
@@ -54,7 +54,7 @@ class RepeatSchemeTest extends BaseTestCase
         $response = $this->getJson('/api/v1/events');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonCount(config('app.events.repeat.weeks') * 2, 'items');
     }
 
@@ -67,7 +67,7 @@ class RepeatSchemeTest extends BaseTestCase
         $response = $this->getJson('/api/v1/events');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonCount(config('app.events.repeat.weeks') + 1, 'items');
     }
 
@@ -80,7 +80,7 @@ class RepeatSchemeTest extends BaseTestCase
         $response = $this->getJson('/api/v1/events');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonCount(config('app.events.repeat.months') + 1, 'items');
     }
 
@@ -93,7 +93,7 @@ class RepeatSchemeTest extends BaseTestCase
         $response = $this->getJson('/api/v1/events');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonCount(config('app.events.repeat.years') + 1, 'items');
     }
 }

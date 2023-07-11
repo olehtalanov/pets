@@ -57,7 +57,7 @@ class LoginTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonStructure([
                 'token',
                 'profile' => [

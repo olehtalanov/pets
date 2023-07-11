@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Pin;
+use App\Models\PinType;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pin>
+ * @extends Factory<Pin>
  */
 class PinFactory extends Factory
 {
@@ -17,7 +20,14 @@ class PinFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->sentence,
+            'description' => implode("\n", $this->faker->sentences),
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude,
+            'address' => $this->faker->address,
+            'contact' => $this->faker->email,
+            'user_id' => User::factory()->create(),
+            'type_id' => PinType::factory()->create()
         ];
     }
 }

@@ -27,7 +27,7 @@ class CoordinatesTest extends TestCase
         $response = $this->getJson('/api/v1/users/coordinates');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonStructure([
                 'latitude',
                 'longitude',
@@ -44,7 +44,7 @@ class CoordinatesTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJson(
                 fn(AssertableJson $json) => $json
                     ->where('latitude', $latitude)

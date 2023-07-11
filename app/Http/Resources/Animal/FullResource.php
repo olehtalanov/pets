@@ -16,13 +16,16 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="birth_date", type="string", example="2010-10-02"),
  *     @OA\Property(property="type", type="string", example="Type"),
  *     @OA\Property(property="breed", type="string", example="Breed"),
+ *     @OA\Property(property="breed_name", type="string", example="Max"),
  *     @OA\Property(property="sex", type="string", example="Male"),
+ *     @OA\Property(property="metis", type="string", example=false),
+ *     @OA\Property(property="sterilised", type="string", example=false),
  *     @OA\Property(property="weight", type="string", example=5),
  *     @OA\Property(property="avatar", type="array", @OA\Items(
  *         @OA\Property(property="thumb", type="string", nullable=true, example=null),
  *         @OA\Property(property="full", type="string", nullable=true, example=null),
  *     )),
- *     @OA\Property(property="activiry", type="array", @OA\Items(
+ *     @OA\Property(property="activity", type="array", @OA\Items(
  *         @OA\Property(property="notes", type="integer", example=2),
  *         @OA\Property(property="events", type="integer", example=12),
  *     )),
@@ -37,9 +40,12 @@ class FullResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
+            'metis' => $this->metis,
+            'sterilised' => $this->sterilised,
             'birth_date' => $this->birth_date->toDateString(),
             'type' => $this->type->name,
             'breed' => $this->breed->name,
+            'breed_name' => $this->breed_name,
             'sex' => $this->sex->getName(),
             'weight' => "$this->weight {$this->weight_unit->getName()}",
             'avatar' => [

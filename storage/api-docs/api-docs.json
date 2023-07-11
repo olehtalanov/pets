@@ -39,74 +39,13 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name",
-                                    "sex",
-                                    "birth_date",
-                                    "breed_name",
-                                    "weight",
-                                    "weight_unit"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Fluffy"
-                                    },
-                                    "sex": {
-                                        "type": "string",
-                                        "enum": [
-                                            "male",
-                                            "female"
-                                        ],
-                                        "example": "male"
-                                    },
-                                    "birth_date": {
-                                        "type": "string",
-                                        "example": "2021-06-22"
-                                    },
-                                    "animal_type": {
-                                        "type": "string",
-                                        "example": "995037a6-5811-4ace-b1f7-4667517dd6e0",
-                                        "nullable": true
-                                    },
-                                    "custom_animal_type": {
-                                        "type": "string",
-                                        "example": null,
-                                        "nullable": true
-                                    },
-                                    "breed": {
-                                        "type": "string",
-                                        "example": null,
-                                        "nullable": true
-                                    },
-                                    "custom_breed_name": {
-                                        "type": "string",
-                                        "nullable": true
-                                    },
-                                    "breed_name": {
-                                        "type": "string"
-                                    },
-                                    "metis": {
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "weight": {
-                                        "type": "number",
-                                        "format": "double",
-                                        "example": "2.5"
-                                    },
-                                    "weight_unit": {
-                                        "type": "string",
-                                        "example": "kg"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/AnimalStoreRequest"
                             }
                         }
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {
@@ -186,68 +125,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name",
-                                    "sex",
-                                    "birth_date",
-                                    "breed_name",
-                                    "weight",
-                                    "weight_unit"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Fluffy"
-                                    },
-                                    "sex": {
-                                        "type": "string",
-                                        "enum": [
-                                            "male",
-                                            "female"
-                                        ],
-                                        "example": "male"
-                                    },
-                                    "birth_date": {
-                                        "type": "string",
-                                        "example": "2021-06-22"
-                                    },
-                                    "animal_type": {
-                                        "type": "string",
-                                        "example": "995037a6-5811-4ace-b1f7-4667517dd6e0",
-                                        "nullable": true
-                                    },
-                                    "custom_animal_type": {
-                                        "type": "string",
-                                        "example": null,
-                                        "nullable": true
-                                    },
-                                    "breed": {
-                                        "type": "string",
-                                        "example": null,
-                                        "nullable": true
-                                    },
-                                    "custom_breed_name": {
-                                        "type": "string",
-                                        "nullable": true
-                                    },
-                                    "breed_name": {
-                                        "type": "string"
-                                    },
-                                    "metis": {
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "weight": {
-                                        "type": "number",
-                                        "format": "double",
-                                        "example": "2.5"
-                                    },
-                                    "weight_unit": {
-                                        "type": "string",
-                                        "example": "kg"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/AnimalStoreRequest"
                             }
                         }
                     }
@@ -988,7 +866,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {
@@ -1211,7 +1089,7 @@
                 "tags": [
                     "Pins"
                 ],
-                "summary": "Delete a pin.",
+                "summary": "Delete a pin media.",
                 "operationId": "3322d0ad8d3ce0106835281f109e83ba",
                 "parameters": [
                     {
@@ -1885,6 +1763,74 @@
     },
     "components": {
         "schemas": {
+            "AnimalStoreRequest": {
+                "required": [
+                    "name",
+                    "sex",
+                    "birth_date",
+                    "breed_name",
+                    "weight",
+                    "weight_unit"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Fluffy"
+                    },
+                    "sex": {
+                        "type": "string",
+                        "enum": [
+                            "male",
+                            "female"
+                        ],
+                        "example": "male"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "example": "2021-06-22"
+                    },
+                    "animal_type": {
+                        "type": "string",
+                        "example": "995037a6-5811-4ace-b1f7-4667517dd6e0",
+                        "nullable": true
+                    },
+                    "breed": {
+                        "type": "string",
+                        "example": null,
+                        "nullable": true
+                    },
+                    "custom_type_name": {
+                        "type": "string",
+                        "example": null,
+                        "nullable": true
+                    },
+                    "custom_breed_name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "breed_name": {
+                        "type": "string"
+                    },
+                    "metis": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "sterilised": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "weight": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "2.5"
+                    },
+                    "weight_unit": {
+                        "type": "string",
+                        "example": "kg"
+                    }
+                },
+                "type": "object"
+            },
             "ChatMessageReadRequest": {
                 "required": [
                     "ids"
@@ -2169,9 +2115,21 @@
                         "type": "string",
                         "example": "Breed"
                     },
+                    "breed_name": {
+                        "type": "string",
+                        "example": "Max"
+                    },
                     "sex": {
                         "type": "string",
                         "example": "Male"
+                    },
+                    "metis": {
+                        "type": "string",
+                        "example": false
+                    },
+                    "sterilised": {
+                        "type": "string",
+                        "example": false
                     },
                     "weight": {
                         "type": "string",
@@ -2195,7 +2153,7 @@
                             "type": "object"
                         }
                     },
-                    "activiry": {
+                    "activity": {
                         "type": "array",
                         "items": {
                             "properties": {

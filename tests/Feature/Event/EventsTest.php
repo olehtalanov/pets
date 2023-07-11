@@ -7,6 +7,7 @@ use App\Models\Animal;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\User;
+use Illuminate\Support\Fluent;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 class EventsTest extends BaseTestCase
@@ -47,14 +48,12 @@ class EventsTest extends BaseTestCase
         ]
     ];
 
-    public function test_user_cant_interact_events_without_authentication(): void
+    public function test_user_cant_interact_without_authentication(): void
     {
         $response = $this->getJson('/api/v1/events');
-
         $response->assertStatus(401);
 
         $response = $this->postJson('/api/v1/events');
-
         $response->assertStatus(401);
     }
 
@@ -67,7 +66,7 @@ class EventsTest extends BaseTestCase
         $response = $this->getJson('/api/v1/events');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonStructure([
                 'items' => [
                     '*' => [
@@ -84,7 +83,11 @@ class EventsTest extends BaseTestCase
                         'categories',
                     ]
                 ],
-                'meta',
+                'meta' => [
+                    'total',
+                    'current',
+                    'nextLink',
+                ],
             ]);
     }
 
@@ -97,7 +100,7 @@ class EventsTest extends BaseTestCase
         $response = $this->getJson('/api/v1/events/' . $decoded['uuid']);
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonStructure($this->fullStructure);
     }
 
@@ -111,23 +114,25 @@ class EventsTest extends BaseTestCase
 
         $categories = Category::onlyChildren(Event::class)->take(random_int(1, 5))->pluck('uuid');
 
-        $response = $this->postJson('/api/v1/events', [
+        $attributes = new Fluent([
             'repeat_scheme' => EventRepeatSchemeEnum::Never->value,
             'title' => $this->faker->sentence,
             'whole_day' => false,
             'category_ids' => $categories,
             'animal_id' => $animal->uuid,
-            'starts_at' => $start = now()->addDay()->toDateTimeString(),
-            'ends_at' => $end = now()->addDays(3)->toDateTimeString(),
+            'starts_at' => now()->addDay()->toDateTimeString(),
+            'ends_at' => now()->addDays(3)->toDateTimeString(),
         ]);
 
+        $response = $this->postJson('/api/v1/events', $attributes->toArray());
+
         $response
-            ->assertStatus(201)
+            ->assertCreated()
             ->assertJson(fn(AssertableJson $json) => $json
                 ->where('repeat.scheme', EventRepeatSchemeEnum::Never->value)
                 ->where('whole_day', false)
-                ->where('starts_at', $start)
-                ->where('ends_at', $end)
+                ->where('starts_at', $attributes->get('starts_at'))
+                ->where('ends_at', $attributes->get('ends_at'))
                 ->where('animal.uuid', $animal->uuid)
                 ->has('categories', $categories->count())
                 ->has('animal')
@@ -144,22 +149,25 @@ class EventsTest extends BaseTestCase
             'user_id' => $this->user->getKey(),
         ]);
 
-        $response = $this->postJson('/api/v1/events', [
+        $attributes = new Fluent([
             'repeat_scheme' => EventRepeatSchemeEnum::Never->value,
             'title' => $this->faker->sentence,
             'whole_day' => false,
             'animal_id' => $animal->uuid,
-            'starts_at' => $start = now()->addDay()->toDateTimeString(),
-            'ends_at' => $end = now()->addDays(3)->toDateTimeString(),
+            'starts_at' => now()->addDay()->toDateTimeString(),
+            'ends_at' => now()->addDays(3)->toDateTimeString(),
         ]);
 
+        $response = $this->postJson('/api/v1/events', $attributes->toArray());
+
         $response
-            ->assertStatus(201)
+            ->assertCreated()
             ->assertJson(fn(AssertableJson $json) => $json
+                ->where('title', $attributes->get('title'))
                 ->where('repeat.scheme', EventRepeatSchemeEnum::Never->value)
                 ->where('whole_day', false)
-                ->where('starts_at', $start)
-                ->where('ends_at', $end)
+                ->where('starts_at', $attributes->get('starts_at'))
+                ->where('ends_at', $attributes->get('ends_at'))
                 ->where('animal.uuid', $animal->uuid)
                 ->has('categories', 0)
                 ->has('animal')
@@ -180,21 +188,23 @@ class EventsTest extends BaseTestCase
 
         $decoded = $this->createEvent(EventRepeatSchemeEnum::Never)->decodeResponseJson();
 
-        $response = $this->patchJson('/api/v1/events/' . $decoded['uuid'], [
+        $attributes = new Fluent([
             'repeat_scheme' => EventRepeatSchemeEnum::Never->value,
-            'title' => $title = $this->faker->sentence,
+            'title' => $this->faker->sentence,
             'category_ids' => $categories,
             'starts_at' => now()->addDay()->toDateTimeString(),
             'ends_at' => now()->addDays(3)->toDateTimeString(),
             'animal_id' => $animal->uuid,
         ]);
 
+        $response = $this->patchJson('/api/v1/events/' . $decoded['uuid'], $attributes->toArray());
+
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJson(fn(AssertableJson $json) => $json
-                ->where('title', $title)
-                ->where('starts_at', now()->addDay()->toDateTimeString())
-                ->where('ends_at', now()->addDays(3)->toDateTimeString())
+                ->where('title', $attributes->get('title'))
+                ->where('starts_at', $attributes->get('starts_at'))
+                ->where('ends_at', $attributes->get('ends_at'))
                 ->where('animal.uuid', $animal->uuid)
                 ->has('categories', $categories->count())
                 ->has('animal')
@@ -247,7 +257,7 @@ class EventsTest extends BaseTestCase
         ]);
 
         $response
-            ->assertStatus(201)
+            ->assertCreated()
             ->assertJson(fn(AssertableJson $json) => $json
                 ->where('whole_day', true)
                 ->where('starts_at', now()

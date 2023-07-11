@@ -17,7 +17,8 @@ class PinMediaController extends Controller
 {
     public function __construct(
         protected PinRepository $pinRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -36,13 +37,9 @@ class PinMediaController extends Controller
      *         )
      *     )
      * )
-     *
-     * @throws AuthorizationException
      */
     public function index(Pin $pin): JsonResponse
     {
-        $this->authorize('upload', $pin);
-
         return Response::json(
             ShortResource::collection(
                 $this->pinRepository->media($pin)
@@ -91,7 +88,7 @@ class PinMediaController extends Controller
      * @OA\Delete(
      *     path="/api/v1/pins/{pin}/media/{media}",
      *     tags={"Pins"},
-     *     summary="Delete a pin.",
+     *     summary="Delete a pin media.",
      *
      *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path", description="UUID of pin."),
      *     @OA\Parameter(name="media", required=true, example="995037a6-60b3-4055-aa14-3513aa9824cb", in="path", description="UUID of media which should be removed."),

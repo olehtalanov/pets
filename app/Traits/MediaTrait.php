@@ -32,7 +32,7 @@ trait MediaTrait
         $media->delete();
     }
 
-    public function getCollectionName(): string
+    protected function getCollectionName(): string
     {
         return $this->collectionName;
     }

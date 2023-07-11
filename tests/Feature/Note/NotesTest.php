@@ -32,14 +32,12 @@ class NotesTest extends TestCase
         ]);
     }
 
-    public function test_user_cant_interact_notes_without_authentication(): void
+    public function test_user_cant_interact_without_authentication(): void
     {
         $response = $this->getJson('/api/v1/notes');
-
         $response->assertStatus(401);
 
         $response = $this->postJson('/api/v1/notes');
-
         $response->assertStatus(401);
     }
 
@@ -59,7 +57,7 @@ class NotesTest extends TestCase
         $response = $this->getJson('/api/v1/notes');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonIsArray()
             ->assertJsonStructure([
                 '*' => [
@@ -89,7 +87,7 @@ class NotesTest extends TestCase
         $response = $this->getJson('/api/v1/notes/' . $note->uuid);
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'uuid',
@@ -119,7 +117,7 @@ class NotesTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(201)
+            ->assertCreated()
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'uuid',
@@ -168,7 +166,7 @@ class NotesTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(201)
+            ->assertCreated()
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'uuid',
@@ -222,7 +220,7 @@ class NotesTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'uuid',

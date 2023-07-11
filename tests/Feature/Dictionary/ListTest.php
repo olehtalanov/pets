@@ -21,7 +21,7 @@ class ListTest extends TestCase
         $response = $this->getJson('/api/v1/dictionaries');
 
         $response
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'types' => [

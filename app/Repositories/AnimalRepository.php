@@ -24,7 +24,7 @@ class AnimalRepository extends BaseRepository
                 ->with(['type', 'breed'])
                 ->withCount([
                     'notes',
-                    'events' => fn (Builder $query) => $query->actual(),
+                    'events' => fn(Builder $query) => $query->actual(),
                 ])
                 ->get()
         );
