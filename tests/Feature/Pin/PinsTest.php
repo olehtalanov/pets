@@ -75,7 +75,10 @@ class PinsTest extends BaseTestCase
                 'own_review_exists',
                 'description',
                 'address',
-                'gallery',
+                'gallery' => [
+                    'uuid',
+                    'url',
+                ],
             ]);
     }
 

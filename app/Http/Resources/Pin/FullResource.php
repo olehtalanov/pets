@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources\Pin;
 
+use App\Http\Resources\Media\ShortResource as MediaShortResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Annotations as OA;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * @OA\Schema(
@@ -22,7 +22,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  *     @OA\Property(property="contact", type="string"),
  *     @OA\Property(property="rating", type="float"),
  *     @OA\Property(property="own_review_exists", type="bool"),
- *     @OA\Property(property="gallery", type="array", @OA\Items(type="string")),
+ *     @OA\Property(property="reviews_count", type="int"),
+ *     @OA\Property(property="gallery", type="array", @OA\Items(ref="#/components/schemas/MediaShortResource")),
  * )
  */
 class FullResource extends JsonResource
@@ -45,7 +46,8 @@ class FullResource extends JsonResource
             'contact' => $this->contact,
             'rating' => (float)$this->reviews_avg_rating,
             'own_review_exists' => $this->own_review_id !== null,
-            'gallery' => $this->getMedia('gallery')->map(fn(Media $media) => $media->getFullUrl()),
+            'reviews_count' => $this->reviews_count,
+            'gallery' => MediaShortResource::collection($this->getMedia('gallery')),
         ];
     }
 }

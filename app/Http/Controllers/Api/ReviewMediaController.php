@@ -18,45 +18,16 @@ class ReviewMediaController extends Controller
 {
     public function __construct(
         protected ReviewRepository $reviewRepository
-    ) {
-        //
-    }
-
-    /**
-     * @OA\Get(
-     *     path="/api/v1/pins/{pin}/reviews/{review}/media",
-     *     tags={"Pins"},
-     *     summary="Get list of the review media.",
-     *
-     *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
-     *     @OA\Parameter(name="review", required=true, example="995037a6-60b3-4055-aa14-3513aa9824cb", in="path"),
-     *
-     *     @OA\Response(response=200, description="Successful response",
-     *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/MediaShortResource"),
-     *         )
-     *     )
-     * )
-     *
-     * @throws AuthorizationException
-     */
-    public function index(Pin $pin, Review $review): JsonResponse
+    )
     {
-        $this->authorize('upload', $review);
-
-        return Response::json(
-            ShortResource::collection(
-                $this->reviewRepository->media($review)
-            )
-        );
+        //
     }
 
     /**
      * @OA\Post(
      *     path="/api/v1/pins/{pin}/reviews/{review}/media",
      *     tags={"Pins"},
-     *     summary="Upload review media.",
+     *     summary="Upload the review media.",
      *
      *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
      *     @OA\Parameter(name="review", required=true, example="995037a6-60b3-4055-aa14-3513aa9824cb", in="path"),
@@ -95,7 +66,7 @@ class ReviewMediaController extends Controller
      * @OA\Delete(
      *     path="/api/v1/pins/{pin}/reviews/{review}/media/{media}",
      *     tags={"Pins"},
-     *     summary="Delete a pin.",
+     *     summary="Delete the review media.",
      *
      *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path", description="UUID of pin."),
      *     @OA\Parameter(name="review", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path", description="UUID of pin."),
@@ -106,9 +77,9 @@ class ReviewMediaController extends Controller
      *
      * @throws AuthorizationException
      */
-    public function destroy(Pin $pin, Media $media): JsonResponse
+    public function destroy(Pin $pin, Review $review, Media $media): JsonResponse
     {
-        $this->authorize('deleteMedia', $pin);
+        $this->authorize('delete', $review);
 
         $this->reviewRepository->destroyMedia($media);
 

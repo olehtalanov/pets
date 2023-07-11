@@ -18,6 +18,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="longitude", type="float"),
  *     @OA\Property(property="rating", type="float"),
  *     @OA\Property(property="own_review_exists", type="bool"),
+ *     @OA\Property(property="reviews_count", type="int"),
  * )
  */
 class ShortResource extends JsonResource
@@ -37,6 +38,7 @@ class ShortResource extends JsonResource
             'longitude' => $this->longitude,
             'rating' => (float)$this->reviews_avg_rating,
             'own_review_exists' => $this->own_review_id !== null,
+            'reviews_count' => $this->reviews_count,
         ];
     }
 }

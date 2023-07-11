@@ -18,7 +18,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="latitude", type="float"),
  *     @OA\Property(property="longitude", type="float"),
  *     @OA\Property(property="rating", type="float"),
- *     @OA\Property(property="reviewable", type="object", ref="#/components/schemas/UserShortResource"),
+ *     @OA\Property(property="reviewer", type="object", ref="#/components/schemas/UserShortResource"),
  * )
  */
 class ReviewResource extends JsonResource
@@ -37,7 +37,7 @@ class ReviewResource extends JsonResource
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'rating' => (float)$this->reviews_avg_rating,
-            'reviewable' => new UserShortResource($this->user)
+            'reviewer' => new UserShortResource($this->user)
         ];
     }
 }

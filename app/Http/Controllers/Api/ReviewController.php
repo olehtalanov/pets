@@ -6,6 +6,7 @@ use App\Data\User\ReviewData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Review\StoreRequest;
 use App\Http\Resources\Review\FullResource;
+use App\Http\Resources\Review\ShortResource;
 use App\Models\Pin;
 use App\Models\Review;
 use App\Repositories\ReviewRepository;
@@ -18,7 +19,8 @@ class ReviewController extends Controller
 {
     public function __construct(
         protected ReviewRepository $reviewRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -31,7 +33,7 @@ class ReviewController extends Controller
      *     @OA\Response(response=200, description="Successful response",
      *         @OA\JsonContent(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/ReviewFullResource"),
+     *             @OA\Items(ref="#/components/schemas/ReviewShortResource"),
      *         )
      *     )
      * )
@@ -39,8 +41,34 @@ class ReviewController extends Controller
     public function index(Pin $pin): JsonResponse
     {
         return Response::json(
-            FullResource::collection(
+            ShortResource::collection(
                 $this->reviewRepository->list($pin)
+            )
+        );
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/pins/{pin}/reviews/{review}",
+     *     tags={"Pins", "Reviews"},
+     *     summary="Show review.",
+     *
+     *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
+     *     @OA\Parameter(name="review", required=true, example="995037a6-60b3-4055-aa14-3513aa9824cb", in="path"),
+     *
+     *     @OA\Response(response=200, description="Successful response",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/ReviewFullResource"),
+     *         )
+     *     )
+     * )
+     */
+    public function show(Pin $pin, Review $review): JsonResponse
+    {
+        return Response::json(
+            new FullResource(
+                $this->reviewRepository->one($review)
             )
         );
     }
@@ -62,8 +90,7 @@ class ReviewController extends Controller
      *         )
      *     ),
      *
-     *     @OA\Response(response=200, description="Successful response",
-     *
+     *     @OA\Response(response=201, description="Successful response",
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/ReviewFullResource"),
@@ -83,7 +110,8 @@ class ReviewController extends Controller
                     $pin,
                     ReviewData::from($request->validated())
                 )
-            )
+            ),
+            201
         );
     }
 

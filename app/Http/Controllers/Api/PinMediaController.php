@@ -23,31 +23,6 @@ class PinMediaController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/v1/pins/{pin}/media",
-     *     tags={"Pins"},
-     *     summary="Get list of the user pin media.",
-     *
-     *     @OA\Parameter(name="pin", required=true, example="995037a6-60b3-4055-aa14-3513aa9824ca", in="path"),
-     *
-     *     @OA\Response(response=200, description="Successful response",
-     *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/MediaShortResource"),
-     *         )
-     *     )
-     * )
-     */
-    public function index(Pin $pin): JsonResponse
-    {
-        return Response::json(
-            ShortResource::collection(
-                $this->pinRepository->media($pin)
-            )
-        );
-    }
-
-    /**
      * @OA\Post(
      *     path="/api/v1/pins/{pin}/media",
      *     tags={"Pins"},

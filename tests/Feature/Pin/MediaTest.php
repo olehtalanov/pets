@@ -31,48 +31,24 @@ class MediaTest extends BaseTestCase
         $response->assertJsonValidationErrors('files.0');
     }
 
-    public function test_pin_images_available(): void
-    {
-        $this->actingAs($this->user, 'sanctum');
-
-        $decoded = $this->uploadImages()->decodeResponseJson();
-
-        $response = $this->getJson('/api/v1/pins/' . $decoded['uuid'] . '/media');
-
-        $response
-            ->assertOk()
-            ->assertJsonIsArray()
-            ->assertJsonCount(2)
-            ->assertJsonStructure([
-                '*' => [
-                    'uuid',
-                    'url',
-                ]
-            ]);
-
-        Storage::fake('public');
-    }
-
     public function test_user_can_delete_image(): void
     {
         $this->actingAs($this->user, 'sanctum');
 
         $decoded = $this->uploadImages()->decodeResponseJson();
 
-        $response = $this->getJson('/api/v1/pins/' . $decoded['uuid'] . '/media');
+        $response = $this->getJson('/api/v1/pins/' . $decoded['uuid']);
         $response
             ->assertOk()
-            ->assertJsonIsArray()
-            ->assertJsonCount(2);
+            ->assertJsonCount(2, 'gallery');
 
-        $response = $this->deleteJson('/api/v1/pins/' . $decoded['uuid'] . '/media/' . $response->decodeResponseJson()[0]['uuid']);
+        $response = $this->deleteJson('/api/v1/pins/' . $decoded['uuid'] . '/media/' . $response->decodeResponseJson()['gallery'][0]['uuid']);
         $response->assertNoContent();
 
-        $response = $this->getJson('/api/v1/pins/' . $decoded['uuid'] . '/media');
+        $response = $this->getJson('/api/v1/pins/' . $decoded['uuid']);
         $response
             ->assertOk()
-            ->assertJsonIsArray()
-            ->assertJsonCount(1);
+            ->assertJsonCount(1, 'gallery');
     }
 
     public function test_another_user_cant_delete_image(): void
@@ -81,22 +57,20 @@ class MediaTest extends BaseTestCase
 
         $decoded = $this->uploadImages()->decodeResponseJson();
 
-        $response = $this->getJson('/api/v1/pins/' . $decoded['uuid'] . '/media');
+        $response = $this->getJson('/api/v1/pins/' . $decoded['uuid']);
         $response
             ->assertOk()
-            ->assertJsonIsArray()
-            ->assertJsonCount(2);
+            ->assertJsonCount(2, 'gallery');
 
         $this->actingAs(User::factory()->create());
 
-        $response = $this->deleteJson('/api/v1/pins/' . $decoded['uuid'] . '/media/' . $response->decodeResponseJson()[0]['uuid']);
+        $response = $this->deleteJson('/api/v1/pins/' . $decoded['uuid'] . '/media/' . $response->decodeResponseJson()['gallery'][0]['uuid']);
         $response->assertStatus(403);
 
-        $response = $this->getJson('/api/v1/pins/' . $decoded['uuid'] . '/media');
+        $response = $this->getJson('/api/v1/pins/' . $decoded['uuid']);
         $response
             ->assertOk()
-            ->assertJsonIsArray()
-            ->assertJsonCount(2);
+            ->assertJsonCount(2, 'gallery');
     }
 
     private function uploadImages(): TestResponse

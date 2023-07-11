@@ -48,7 +48,6 @@ Route::group([
                 'as' => 'media.',
                 'prefix' => '{pin}/media'
             ], static function () {
-                Route::get('/', [PinMediaController::class, 'index'])->name('index');
                 Route::post('/', [PinMediaController::class, 'store'])->name('store');
                 Route::delete('{media:uuid}', [PinMediaController::class, 'destroy'])->name('destroy');
             });
@@ -57,13 +56,12 @@ Route::group([
                 'as' => 'reviews.media.',
                 'prefix' => '{pin}/reviews/{review}/media'
             ], static function () {
-                Route::get('/', [ReviewMediaController::class, 'index'])->name('index');
                 Route::post('/', [ReviewMediaController::class, 'store'])->name('store');
                 Route::delete('{media:uuid}', [ReviewMediaController::class, 'destroy'])->name('destroy');
             });
         });
 
-        Route::apiResource('pins.reviews', ReviewController::class)->except('show');
+        Route::apiResource('pins.reviews', ReviewController::class);
         Route::apiResource('pins', PinController::class);
 
         /* Users */

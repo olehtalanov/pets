@@ -47,6 +47,7 @@ class PinRepository extends BaseRepository
             ->pins()
             ->with('type')
             ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
             ->select([
                 'pins.*',
                 'own_review_id' => Review::query()
@@ -60,7 +61,7 @@ class PinRepository extends BaseRepository
 
     public function one(Pin $pin): Pin
     {
-        return $pin->load('type');
+        return $pin->load('type')->loadCount('reviews');
     }
 
     public function store(PinData $data): Pin
