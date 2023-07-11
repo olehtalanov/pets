@@ -2559,35 +2559,6 @@
                 },
                 "type": "object"
             },
-            "PinReviewResource": {
-                "properties": {
-                    "uuid": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "latitude": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "longitude": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "rating": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "reviewer": {
-                        "$ref": "#/components/schemas/UserShortResource"
-                    }
-                },
-                "type": "object"
-            },
             "PinShortResource": {
                 "properties": {
                     "uuid": {

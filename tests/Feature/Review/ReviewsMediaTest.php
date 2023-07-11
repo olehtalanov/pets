@@ -1,11 +1,12 @@
 <?php
 
-namespace Tests\Feature\Pin;
+namespace Tests\Feature\Review;
 
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Fluent;
 use Storage;
+use Tests\Feature\Pin\BaseTestCase;
 
 class ReviewsMediaTest extends BaseTestCase
 {

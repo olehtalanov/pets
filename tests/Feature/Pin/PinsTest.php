@@ -76,8 +76,10 @@ class PinsTest extends BaseTestCase
                 'description',
                 'address',
                 'gallery' => [
-                    'uuid',
-                    'url',
+                    '*' => [
+                        'uuid',
+                        'url',
+                    ]
                 ],
             ]);
     }

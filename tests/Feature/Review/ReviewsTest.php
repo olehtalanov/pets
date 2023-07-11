@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\Feature\Pin;
+namespace Tests\Feature\Review;
 
 use App\Models\User;
 use Illuminate\Support\Fluent;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Tests\Feature\Pin\BaseTestCase;
 
 class ReviewsTest extends BaseTestCase
 {
@@ -39,8 +40,10 @@ class ReviewsTest extends BaseTestCase
                     'avatar',
                 ],
                 'gallery' => [
-                    'uuid',
-                    'url',
+                    '*' => [
+                        'uuid',
+                        'url',
+                    ]
                 ]
             ]);
     }
